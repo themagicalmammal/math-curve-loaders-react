@@ -1,25 +1,20 @@
 {
-  "name": "math-curve-loaders-react",
+  "name": "math-curve-loaders-react-monorepo",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "A collection of mathematical curve loading animations as reusable React components",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "dev": "pnpm --filter @math-curve-loaders/react dev",
+    "build:lib": "pnpm --filter @math-curve-loaders/react build",
+    "dev:gallery": "pnpm --filter @math-curve-loaders/gallery dev",
+    "build:gallery": "pnpm --filter @math-curve-loaders/gallery build",
+    "dev:all": "concurrently \"pnpm --filter @math-curve-loaders/react dev\" \"pnpm --filter @math-curve-loaders/gallery dev\"",
+    "lint": "oxlint"
   },
   "devDependencies": {
-    "@types/node": "^24.13.2",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "oxlint": "^1.71.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "pnpm": ">=8.0.0"
   }
 }

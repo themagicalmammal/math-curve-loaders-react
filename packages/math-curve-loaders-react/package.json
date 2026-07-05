@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Paidax01/math-curve-loaders"
+    "url": "https://github.com/themagicalmammal/math-curve-loaders-react"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

@@ -502,12 +502,8 @@ function formatNum(v: number): string {
   return Number(v.toFixed(1)).toString();
 }
 
-function buildConfig(curve: CurveDef, values: Record<string, number>): Partial<CurveConfig> {
-  const out: Record<string, number> = {};
-  for (const [key, val] of Object.entries(values)) {
-    out[key] = val;
-  }
-  return out;
+function buildConfig(_curve: CurveDef, values: Record<string, number>): Record<string, number> {
+  return { ...values };
 }
 
 function generateCode(curve: CurveDef, values: Record<string, number>): string {

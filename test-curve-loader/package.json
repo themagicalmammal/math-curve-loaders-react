@@ -10,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@math-curve-loaders/react": "^1.0.1",
-    "build": "^0.1.4",
+    "@math-curve-loaders/react": "^1.0.0",
     "katex": "^0.17.0",
     "prism-react-renderer": "^2.4.1",
     "prismjs": "^1.30.0",

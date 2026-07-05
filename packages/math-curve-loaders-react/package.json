@@ -1,6 +1,6 @@
 {
   "name": "@math-curve-loaders/react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Mathematical curve loading animations as reusable React components",
   "keywords": [
@@ -29,6 +29,11 @@
     "type": "git",
     "url": "https://github.com/themagicalmammal/math-curve-loaders-react"
   },
+  "homepage": "https://github.com/themagicalmammal/math-curve-loaders-react",
+  "bugs": {
+    "url": "https://github.com/Paidax01/math-curve-loaders-react/issues"
+  },
+  "sideEffects": false,
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -39,7 +44,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rm -rf dist && vite build && tsc",
     "dev": "vite build --watch"

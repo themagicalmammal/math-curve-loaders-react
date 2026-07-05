@@ -1,32 +1,95 @@
-# React + TypeScript + Vite
+# test-curve-loader
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A playground / test app for **@math-curve-loaders/react** — a collection of mathematically-driven loading animations built as reusable React components.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+# Install dependencies
+npm install
 
-## React Compiler
+# Start the dev server
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
 
-## Expanding the Oxlint configuration
+```bash
+npm install @math-curve-loaders/react
+```
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Importing curves
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+Each curve is a standalone React component. Import what you need:
+
+```tsx
+import {
+  OriginalThinking,
+  RoseCurve,
+  ButterflyPhase,
+  CardioidGlow,
+  HeartWave,
+  SpiralSearch,
+  FourierFlow,
+  // ... all other curves
+} from '@math-curve-loaders/react';
+```
+
+Each component accepts `CurveConfig` props for customization:
+
+```tsx
+<OriginalThinking
+  style={{ width: 120, height: 120, color: '#6366f1' }}
+  baseRadius={7}
+  detailAmplitude={3}
+  petalCount={7}
+  particleCount={64}
+  trailSpan={0.38}
+  durationMs={4600}
+  pulseDurationMs={4200}
+  rotationDurationMs={28000}
+  strokeWidth={5.5}
+/>
+```
+
+### Available curves
+
+| Component | Tag | Description |
+|-----------|-----|-------------|
+| `OriginalThinking` | Custom Rose Trail | Base circle carved by a sevenfold cosine term |
+| `ThinkingFive` | Custom Rose Trail | Fivefold term, cleaner petal rhythm |
+| `ThinkingNine` | Custom Rose Trail | Ninefold term, denser inner turns |
+| `RoseOrbit` | r = cos(kθ) | Radius expands/contracts with cos(7t) |
+| `RoseCurve` | r = a cos(kθ) | Five evenly spaced lobes with breathing modulation |
+| `RoseTwo` | r = a cos(kθ) | Rose curve variant |
+| `RoseThree` | r = a cos(kθ) | Rose curve variant |
+| `RoseFour` | r = a cos(kθ) | Rose curve variant |
+| `LissajousDrift` | Lissajous curve | Drifting Lissajous pattern |
+| `LemniscateBloom` | Lemniscate | Blooming lemniscate of Bernoulli |
+| `HypotrochoidLoop` | Hypotrochoid | Spirograph-style looping |
+| `ThreePetalSpiral` | 3-petal | Three-petal spiral |
+| `FourPetalSpiral` | 4-petal | Four-petal spiral |
+| `FivePetalSpiral` | 5-petal | Five-petal spiral |
+| `SixPetalSpiral` | 6-petal | Six-petal spiral |
+| `ButterflyPhase` | Butterfly curve | Butterfly curve with phase modulation |
+| `CardioidGlow` | r = a(1 − cos t) | Glowing cardioid |
+| `CardioidHeart` | r = a(1 + cos t) | Heart-shaped cardioid |
+| `HeartWave` | Heart wave | Heart wave parametric curve |
+| `SpiralSearch` | Spiral search | Expanding spiral search pattern |
+| `FourierFlow` | Fourier series | Fourier series approximation |
+
+### Minimal usage
+
+```tsx
+import { OriginalThinking } from '@math-curve-loaders/react';
+
+function App() {
+  return (
+    <div className="loading-container">
+      <OriginalThinking style={{ width: 80, height: 80, color: '#6366f1' }} />
+    </div>
+  );
 }
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+All components use Tailwind-compatible sizing via `style`. Default values produce a clean, animated curve loop.

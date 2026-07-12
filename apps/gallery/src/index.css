@@ -137,26 +137,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Gallery Title ─── */
-
-h1 {
-  text-align: center;
-  padding: 2rem 1rem 0.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitle {
-  text-align: center;
-  padding: 0.5rem 1rem 2rem;
-  color: var(--fg-muted);
-  font-size: 0.95rem;
-}
-
 /* ─── Focus ─── */
 
 button:focus-visible {

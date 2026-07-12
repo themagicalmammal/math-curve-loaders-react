@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { Highlight, themes } from 'prism-react-renderer';
-import { CURVE_CONFIGS, type CurvePlaygroundConfig, generateCode } from './CurvesConfig';
+import { CURVE_CONFIGS, type CurvePlaygroundConfig, generateCode, formatNum } from './CurvesConfig';
 
 const { vsDark } = themes;
 const { github: githubTheme } = themes;
@@ -12,77 +12,77 @@ const { github: githubTheme } = themes;
 interface Props {
   curveConfig: CurvePlaygroundConfig;
   onBack: () => void;
+  onCurveChange: (name: string) => void;
+}
+
+interface SliderProps {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  onChange: (value: number) => void;
+  color: string;
+  description?: string;
 }
 
 /* ─── Helpers ─── */
 
-function toPascal(name: string): string {
-  return name.replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\s/g, '');
-}
-
-function formatNum(v: number): string {
-  if (Number.isInteger(v)) return String(v);
-  if (Math.abs(v) < 10) return Number(v.toFixed(2)).toString();
-  return Number(v.toFixed(1)).toString();
-}
-
-function buildConfig(_curve: CurvePlaygroundConfig, values: Record<string, number>): Record<string, number> {
-  return { ...values };
-}
-
-function formatFormulaValue(val: number): string {
-  return Number.isInteger(val) ? val.toString() : val.toFixed(1).replace(/\.0$/, '').replace(/(\.\d)0$/, '$1');
+function formatFormulaValue(value: number): string {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1).replace(/\.0$/, '').replace(/(\.\d)0$/, '$1');
 }
 
 function substituteFormula(formula: string, values: Record<string, number>, defaults: Record<string, number>): string {
-  let tex = formula;
-  tex = tex.replace(/\\text\{(\w+)\}/g, (_match: string, varName: string) => {
-    const val = values[varName];
-    if (val !== undefined && Math.abs(val - (defaults[varName] ?? 0)) > 1e-6) {
-      return formatFormulaValue(val);
+  return formula.replace(/\\text\{(\w+)\}/g, (_match: string, variableName: string) => {
+    const value = values[variableName];
+    if (value !== undefined && Math.abs(value - (defaults[variableName] ?? 0)) > 1e-6) {
+      return formatFormulaValue(value);
     }
     return _match;
   });
-  return tex;
 }
 
 /* ─── Slider ─── */
 
-function Slider({ label, value, min, max, step, onChange, color, description }: {
-  label: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; color: string; description?: string;
-}) {
+function Slider({ label, value, min, max, step, onChange, color, description }: SliderProps) {
   const percentage = ((value - min) / (max - min)) * 100;
   const trackRef = useRef<HTMLDivElement>(null);
-  const [thumbPos, setThumbPos] = useState(percentage);
-  const [active, setActive] = useState(false);
-  const [nameHovered, setNameHovered] = useState(false);
+  const [thumbPosition, setThumbPosition] = useState(percentage);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    setThumbPos(percentage);
+    setThumbPosition(percentage);
   }, [percentage]);
 
-  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    setActive(true);
-    handleInput(e);
-    const onMove = (ev: PointerEvent) => handleInput(ev as unknown as React.PointerEvent<HTMLDivElement>);
-    const onUp = () => { setActive(false); document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerup', onUp); };
+  const handlePointerDown = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    handleInput(event);
+    const onMove = (pointerEvent: PointerEvent) => handleInput(pointerEvent as unknown as React.PointerEvent<HTMLDivElement>);
+    const onUp = () => {
+      setIsDragging(false);
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+    };
     document.addEventListener('pointermove', onMove);
     document.addEventListener('pointerup', onUp);
   }, [min, max, step, onChange]);
 
-  const handleInput = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+  const handleInput = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track) {
+      return;
+    }
     const rect = track.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const ratio = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
     const raw = min + ratio * (max - min);
     const stepped = Math.round(raw / step) * step;
     onChange(stepped);
-    setThumbPos(ratio * 100);
+    setThumbPosition(ratio * 100);
   }, [min, max, step, onChange]);
 
-  const showThumb = active || nameHovered;
-  const showGlow = active || nameHovered;
+  const showThumb = isDragging || isHovered;
+  const showGlow = isDragging || isHovered;
 
   return (
     <div className="slider-row">
@@ -91,8 +91,8 @@ function Slider({ label, value, min, max, step, onChange, color, description }: 
           <>
             <div
               className="slider-label-wrapper"
-              onMouseEnter={() => setNameHovered(true)}
-              onMouseLeave={() => setNameHovered(false)}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
               <span className="slider-label">
                 <span className="slider-label--desc">{label}<span className="slider-label--hint">i</span></span>
@@ -113,18 +113,18 @@ function Slider({ label, value, min, max, step, onChange, color, description }: 
         style={{ '--slider-color': color } as React.CSSProperties}
         onPointerDown={handlePointerDown}
       >
-        <div className="slider-fill" style={{ width: `${thumbPos}%` }} />
+        <div className="slider-fill" style={{ width: `${thumbPosition}%` }} />
         <input
           type="range" min={min} max={max} step={step}
-          value={value} onChange={e => onChange(Number(e.target.value))}
+          value={value} onChange={(event) => onChange(Number(event.target.value))}
           aria-label={label}
         />
         {showThumb && (
           <div
             className="slider-thumb"
-            data-dragging={active}
+            data-dragging={isDragging}
             style={{
-              left: `${thumbPos}%`,
+              left: `${thumbPosition}%`,
               '--slider-color': color,
             } as React.CSSProperties}
           />
@@ -133,7 +133,7 @@ function Slider({ label, value, min, max, step, onChange, color, description }: 
           <div
             className="slider-glow"
             style={{
-              left: `${thumbPos}%`,
+              left: `${thumbPosition}%`,
               '--slider-color': color,
             } as React.CSSProperties}
           />
@@ -145,18 +145,23 @@ function Slider({ label, value, min, max, step, onChange, color, description }: 
 
 /* ─── Code Block ─── */
 
-function CodeBlock({ code, theme }: { code: string; theme: 'dark' | 'light' }) {
+interface CodeBlockProps {
+  code: string;
+  theme: 'dark' | 'light';
+}
+
+function CodeBlock({ code, theme }: CodeBlockProps) {
   const prismTheme = theme === 'dark' ? vsDark : githubTheme;
 
   return (
     <div className="code-block" style={{ borderRadius: '0 0 8px 8px', overflow: 'hidden', border: '1px solid var(--border-subtle)', borderTop: 'none' }}>
       <Highlight theme={prismTheme} code={code} language="tsx">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={`prism-code ${className}`} style={{ ...style, padding: 14, fontSize: 12, lineHeight: 1.6, overflowX: 'auto', fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: 'transparent', margin: 0 }}>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })} style={{ paddingLeft: i === 0 ? 0 : 2 }}>
-                {line.map((token, j) => (
-                  <span key={j} {...getTokenProps({ token })} />
+        {({ className: prismClassName, style: prismStyle, tokens, getLineProps, getTokenProps }) => (
+          <pre className={`prism-code ${prismClassName}`} style={{ ...prismStyle, padding: 14, fontSize: 12, lineHeight: 1.6, overflowX: 'auto', fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: 'transparent', margin: 0 }}>
+            {tokens.map((line, lineIndex) => (
+              <div key={lineIndex} {...getLineProps({ line })} style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}>
+                {line.map((token, tokenIndex) => (
+                  <span key={tokenIndex} {...getTokenProps({ token })} />
                 ))}
               </div>
             ))}
@@ -169,7 +174,13 @@ function CodeBlock({ code, theme }: { code: string; theme: 'dark' | 'light' }) {
 
 /* ─── Formula Renderer ─── */
 
-function MathFormula({ formula, values, defaults }: { formula: string; values: Record<string, number>; defaults: Record<string, number> }) {
+interface MathFormulaProps {
+  formula: string;
+  values: Record<string, number>;
+  defaults: Record<string, number>;
+}
+
+function MathFormula({ formula, values, defaults }: MathFormulaProps) {
   const rendered = substituteFormula(formula, values, defaults);
   return (
     <div
@@ -187,12 +198,13 @@ function MathFormula({ formula, values, defaults }: { formula: string; values: R
 
 /* ─── Playground ─── */
 
-export default function CurvePlayground({ curveConfig, onBack }: Props) {
-  const [selected, setSelected] = useState(curveConfig.name);
+export default function CurvePlayground({ curveConfig, onBack, onCurveChange }: Props) {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof document !== 'undefined') {
-      const val = document.documentElement.getAttribute('data-theme');
-      if (val === 'light') return 'light';
+      const storedTheme = document.documentElement.getAttribute('data-theme');
+      if (storedTheme === 'light') {
+        return 'light';
+      }
     }
     return 'dark';
   });
@@ -202,32 +214,29 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
   });
 
   const [showCode, setShowCode] = useState(true);
-  const [copied, setCopied] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
-  const curve = CURVE_CONFIGS.find((c) => c.name === selected) ?? curveConfig;
-  const config = buildConfig(curve, values);
+  const config = useMemo(() => ({ ...values }), [values]);
 
-  const handleValue = useCallback((key: string, val: number) => {
-    setValues(prev => ({ ...prev, [key]: val }));
+  const handleValueChange = useCallback((key: string, value: number) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
   }, []);
 
   const handleReset = useCallback(() => {
-    setValues({ ...curve.defaults });
-  }, [curve]);
+    setValues({ ...curveConfig.defaults });
+  }, [curveConfig]);
 
-  const code = useMemo(() => generateCode(curve, values), [curve, values]);
+  const code = useMemo(() => generateCode(curveConfig, values), [curveConfig, values]);
 
   const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
   }, [code]);
 
-  const handleCurveSelect = useCallback((name: string) => {
-    setSelected(name);
-    const c = CURVE_CONFIGS.find((x) => x.name === name);
-    if (c) setValues({ ...c.defaults });
-  }, []);
+  const handleCurveSelect = useCallback((curveName: string) => {
+    onCurveChange(curveName);
+  }, [onCurveChange]);
 
   /* Apply theme to document */
   useEffect(() => {
@@ -239,7 +248,7 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
       {/* ─── Theme Toggle ─── */}
       <button
         className="theme-toggle"
-        onClick={() => setTheme(t => (t === 'dark' ? 'light' : 'dark'))}
+        onClick={() => setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))}
         title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
       >
         {theme === 'dark' ? (
@@ -257,15 +266,15 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
       {/* ─── Curve Selector Sidebar ─── */}
       <nav className="sidebar">
         <div className="sidebar-header">Curves</div>
-        {CURVE_CONFIGS.map((c) => (
+        {CURVE_CONFIGS.map((curve) => (
           <button
-            key={c.name}
-            className={`curve-btn ${c.name === selected ? 'active' : ''}`}
-            style={{ '--active-color': c.color } as React.CSSProperties}
-            onClick={() => handleCurveSelect(c.name)}
+            key={curve.name}
+            className={`curve-btn ${curve.name === curveConfig.name ? 'active' : ''}`}
+            style={{ '--active-color': curve.color } as React.CSSProperties}
+            onClick={() => handleCurveSelect(curve.name)}
           >
-            <span className="curve-dot" style={{ background: c.color }} />
-            <span className="curve-name">{c.name}</span>
+            <span className="curve-dot" style={{ background: curve.color }} />
+            <span className="curve-name">{curve.name}</span>
           </button>
         ))}
       </nav>
@@ -275,18 +284,18 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
         <div className="main-inner">
           {/* Header */}
           <div className="header">
-            <h1 className="title">{curve.name}</h1>
-            <span className="tag">{curve.tag}</span>
+            <h1 className="title">{curveConfig.name}</h1>
+            <span className="tag">{curveConfig.tag}</span>
           </div>
 
           {/* Curve Info */}
-          <div className="curve-info">{curve.description}</div>
+          <div className="curve-info">{curveConfig.description}</div>
 
           {/* Preview */}
           <div className="preview-wrap">
-            <curve.component
+            <curveConfig.component
               config={config}
-              style={{ width: 200, height: 200, color: curve.color }}
+              style={{ width: 200, height: 200, color: curveConfig.color }}
             />
           </div>
 
@@ -297,17 +306,17 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
               <button className="reset-btn" onClick={handleReset}>Reset Defaults</button>
             </div>
             <div className="controls-grid">
-              {curve.controls.map((ctrl) => (
+              {curveConfig.controls.map((control) => (
                 <Slider
-                  key={ctrl.key}
-                  label={ctrl.label}
-                  value={values[ctrl.key] ?? curve.defaults[ctrl.key]}
-                  min={ctrl.min}
-                  max={ctrl.max}
-                  step={ctrl.step}
-                  onChange={(v) => handleValue(ctrl.key, v)}
-                  color={curve.color}
-                  description={ctrl.description}
+                  key={control.key}
+                  label={control.label}
+                  value={values[control.key] ?? curveConfig.defaults[control.key]}
+                  min={control.min}
+                  max={control.max}
+                  step={control.step}
+                  onChange={(value) => handleValueChange(control.key, value)}
+                  color={curveConfig.color}
+                  description={control.description}
                 />
               ))}
             </div>
@@ -320,7 +329,7 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
                 <span className="code-label">Formula</span>
               </div>
               <div style={{ padding: '16px 14px', background: 'var(--code-bg)', maxWidth: '100%' }}>
-                <MathFormula formula={curve.formula} values={values} defaults={curve.defaults} />
+                <MathFormula formula={curveConfig.formula} values={values} defaults={curveConfig.defaults} />
               </div>
             </div>
           </div>
@@ -332,8 +341,8 @@ export default function CurvePlayground({ curveConfig, onBack }: Props) {
                 <span className="code-label">JSX</span>
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button className="copy-btn" onClick={() => setShowCode(false)}>Hide</button>
-                  <button className="copy-btn" onClick={handleCopy} data-copied={copied}>
-                    {copied ? '✓ Copied' : 'Copy'}
+                  <button className="copy-btn" onClick={handleCopy} data-copied={isCopied}>
+                    {isCopied ? '✓ Copied' : 'Copy'}
                   </button>
                 </div>
               </div>

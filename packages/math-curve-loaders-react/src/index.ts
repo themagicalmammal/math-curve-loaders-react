@@ -20,4 +20,4 @@ export { default as HeartWave } from './Curves/HeartWave';
 export { default as SpiralSearch } from './Curves/SpiralSearch';
 export { default as FourierFlow } from './Curves/FourierFlow';
 export type { CurveConfig } from './data/curves';
-export { curves } from './data/curves';
+export { curves, mergeConfig } from './data/curves';

@@ -12,6 +12,7 @@
     "@math-curve-loaders/react": "workspace:*",
     "@types/katex": "^0.16.8",
     "katex": "^0.17.0",
+    "prism-react-renderer": "^2.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

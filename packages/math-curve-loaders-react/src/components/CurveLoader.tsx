@@ -121,7 +121,7 @@ export default function CurveLoader({
     let animFrame: number;
     let running = true;
 
-    function tick(now: number) {
+    function tick(now: number, p: SVGPathElement, g: SVGGElement) {
       if (!running) return;
 
       const time = now - startTimeRef.current;
@@ -133,31 +133,31 @@ export default function CurveLoader({
       const rotation = getRotation(time, c.rotate, c.rotationDurationMs, phase);
 
       // Update path
-      path!.setAttribute("d", buildPath(c, detailScale));
+      p.setAttribute("d", buildPath(c, detailScale));
 
       // Update rotation
       if (c.rotate) {
-        group!.setAttribute("transform", `rotate(${rotation} 50 50)`);
+        g.setAttribute("transform", `rotate(${rotation} 50 50)`);
       }
 
       // Update particles
       const currentCircles = particleElementsRef.current;
       const currentCount = propParticlesRef.current ?? c.particleCount;
       for (let i = 0; i < currentCount; i++) {
-        const p = getParticle(c, i, progress, detailScale);
+        const pth = getParticle(c, i, progress, detailScale);
         const circle = currentCircles[i];
         if (circle) {
-          circle.setAttribute("cx", p.x.toFixed(2));
-          circle.setAttribute("cy", p.y.toFixed(2));
-          circle.setAttribute("r", p.radius.toFixed(2));
-          circle.setAttribute("opacity", p.opacity.toFixed(3));
+          circle.setAttribute("cx", pth.x.toFixed(2));
+          circle.setAttribute("cy", pth.y.toFixed(2));
+          circle.setAttribute("r", pth.radius.toFixed(2));
+          circle.setAttribute("opacity", pth.opacity.toFixed(3));
         }
       }
 
-      animFrame = requestAnimationFrame(tick);
+      animFrame = requestAnimationFrame((now: number) => tick(now, p, g));
     }
 
-    animFrame = requestAnimationFrame(tick);
+    animFrame = requestAnimationFrame((now: number) => tick(now, path, group));
 
     return () => {
       running = false;

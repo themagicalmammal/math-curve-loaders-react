@@ -1,11 +1,9 @@
 // @ts-nocheck — curves.ts defines inline arrow functions that access
 // optional numeric fields (safe at runtime since each curve defines
 // exactly the fields its functions reference).
-//
-// Inline type to avoid Vite 8 / rolldown pure-type-module issue.
-// Numeric fields are optional — each curve only defines the ones it uses.
-// Inside point()/formula(), we cast to Required since every curve sets
-// exactly the fields its functions reference.
+// The CurveConfig interface declares all possible optional fields.
+// Inside point()/formula(), we access exactly the fields each curve sets.
+
 export interface CurveConfig {
   name: string;
   tag: string;
@@ -78,6 +76,14 @@ export interface CurveConfig {
   formula(config: CurveConfig): string;
 }
 
+/** Merge a base CurveConfig with optional overrides, producing a fully-typed CurveConfig. */
+export function mergeConfig(
+  base: CurveConfig,
+  overrides?: Partial<CurveConfig>
+): CurveConfig {
+  return { ...base, ...overrides } as CurveConfig;
+}
+
 export const curves: CurveConfig[] = [
   // ─── 1. Original Thinking ───
   {
@@ -96,14 +102,14 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 5.5,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const petals = Math.round(config.petalCount);
       const x = config.baseRadius * Math.cos(t) - config.detailAmplitude * detailScale * Math.cos(petals * t);
       const y = config.baseRadius * Math.sin(t) - config.detailAmplitude * detailScale * Math.sin(petals * t);
       return { x: 50 + x * config.curveScale, y: 50 + y * config.curveScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `x(t) = 50 + (${c.baseRadius.toFixed(1)} cos t - ${c.detailAmplitude.toFixed(1)}s cos ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
         `y(t) = 50 + (${c.baseRadius.toFixed(1)} sin t - ${c.detailAmplitude.toFixed(1)}s sin ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
@@ -128,14 +134,14 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 5.5,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const petals = Math.round(config.petalCount);
       const x = config.baseRadius * Math.cos(t) - config.detailAmplitude * detailScale * Math.cos(petals * t);
       const y = config.baseRadius * Math.sin(t) - config.detailAmplitude * detailScale * Math.sin(petals * t);
       return { x: 50 + x * config.curveScale, y: 50 + y * config.curveScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `x(t) = 50 + (${c.baseRadius.toFixed(1)} cos t - ${c.detailAmplitude.toFixed(1)}s cos ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
         `y(t) = 50 + (${c.baseRadius.toFixed(1)} sin t - ${c.detailAmplitude.toFixed(1)}s sin ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
@@ -160,14 +166,14 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 30000,
     pulseDurationMs: 4200,
     strokeWidth: 5.5,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const petals = Math.round(config.petalCount);
       const x = config.baseRadius * Math.cos(t) - config.detailAmplitude * detailScale * Math.cos(petals * t);
       const y = config.baseRadius * Math.sin(t) - config.detailAmplitude * detailScale * Math.sin(petals * t);
       return { x: 50 + x * config.curveScale, y: 50 + y * config.curveScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `x(t) = 50 + (${c.baseRadius.toFixed(1)} cos t - ${c.detailAmplitude.toFixed(1)}s cos ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
         `y(t) = 50 + (${c.baseRadius.toFixed(1)} sin t - ${c.detailAmplitude.toFixed(1)}s sin ${Math.round(c.petalCount)}t) * ${c.curveScale.toFixed(1)}`,
@@ -192,13 +198,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4600,
     strokeWidth: 5.2,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const k = Math.round(config.petalCount);
       const r = config.orbitRadius - config.detailAmplitude * detailScale * Math.cos(k * t);
       return { x: 50 + Math.cos(t) * r * config.curveScale, y: 50 + Math.sin(t) * r * config.curveScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `r(t) = ${c.orbitRadius.toFixed(1)} - ${c.detailAmplitude.toFixed(1)}s cos(${Math.round(c.petalCount)}t)`,
         `x(t) = 50 + cos t · r(t) · ${c.curveScale.toFixed(1)}`,
@@ -225,14 +231,14 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4600,
     strokeWidth: 4.5,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.roseA + detailScale * config.roseABoost;
       const k = Math.round(config.roseK);
       const r = a * (config.roseBreathBase + detailScale * config.roseBreathBoost) * Math.cos(k * t);
       return { x: 50 + Math.cos(t) * r * config.roseScale, y: 50 + Math.sin(t) * r * config.roseScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `r(t) = (${c.roseA.toFixed(1)} + ${c.roseABoost.toFixed(2)}s)(${c.roseBreathBase.toFixed(2)} + ${c.roseBreathBoost.toFixed(2)}s) cos(${Math.round(c.roseK)}t)`,
         `x(t) = 50 + cos t · r(t) · ${c.roseScale.toFixed(2)}`,
@@ -258,13 +264,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4300,
     strokeWidth: 4.6,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.roseA + detailScale * config.roseABoost;
       const r = a * (config.roseBreathBase + detailScale * config.roseBreathBoost) * Math.cos(2 * t);
       return { x: 50 + Math.cos(t) * r * config.roseScale, y: 50 + Math.sin(t) * r * config.roseScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `r(t) = (${c.roseA.toFixed(1)} + ${c.roseABoost.toFixed(2)}s)(${c.roseBreathBase.toFixed(2)} + ${c.roseBreathBoost.toFixed(2)}s) cos(2t)`,
         `x(t) = 50 + cos t · r(t) · ${c.roseScale.toFixed(2)}`,
@@ -290,13 +296,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4400,
     strokeWidth: 4.6,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.roseA + detailScale * config.roseABoost;
       const r = a * (config.roseBreathBase + detailScale * config.roseBreathBoost) * Math.cos(3 * t);
       return { x: 50 + Math.cos(t) * r * config.roseScale, y: 50 + Math.sin(t) * r * config.roseScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `r(t) = (${c.roseA.toFixed(1)} + ${c.roseABoost.toFixed(2)}s)(${c.roseBreathBase.toFixed(2)} + ${c.roseBreathBoost.toFixed(2)}s) cos(3t)`,
         `x(t) = 50 + cos t · r(t) · ${c.roseScale.toFixed(2)}`,
@@ -322,13 +328,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4500,
     strokeWidth: 4.6,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.roseA + detailScale * config.roseABoost;
       const r = a * (config.roseBreathBase + detailScale * config.roseBreathBoost) * Math.cos(4 * t);
       return { x: 50 + Math.cos(t) * r * config.roseScale, y: 50 + Math.sin(t) * r * config.roseScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `r(t) = (${c.roseA.toFixed(1)} + ${c.roseABoost.toFixed(2)}s)(${c.roseBreathBase.toFixed(2)} + ${c.roseBreathBoost.toFixed(2)}s) cos(4t)`,
         `x(t) = 50 + cos t · r(t) · ${c.roseScale.toFixed(2)}`,
@@ -355,7 +361,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 36000,
     pulseDurationMs: 5400,
     strokeWidth: 4.7,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const amp = config.lissajousAmp + detailScale * config.lissajousAmpBoost;
       return {
@@ -363,7 +369,7 @@ export const curves: CurveConfig[] = [
         y: 50 + Math.sin(Math.round(config.lissajousBY) * t) * (amp * config.lissajousYScale),
       };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `A = ${c.lissajousAmp.toFixed(1)} + ${c.lissajousAmpBoost.toFixed(1)}s`,
         `x(t) = 50 + sin(${Math.round(c.lissajousAX)}t + ${c.lissajousPhase.toFixed(2)}) · A`,
@@ -386,7 +392,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 34000,
     pulseDurationMs: 5000,
     strokeWidth: 4.8,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const scale = config.lemniscateA + detailScale * config.lemniscateBoost;
       const denom = 1 + Math.sin(t) ** 2;
@@ -395,7 +401,7 @@ export const curves: CurveConfig[] = [
         y: 50 + (scale * Math.sin(t) * Math.cos(t)) / denom,
       };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `a = ${c.lemniscateA.toFixed(1)} + ${c.lemniscateBoost.toFixed(1)}s`,
         "x(t) = 50 + a cos t / (1 + sin² t)",
@@ -422,7 +428,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 42000,
     pulseDurationMs: 6200,
     strokeWidth: 4.6,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const r = config.spiror + detailScale * config.spirorBoost;
       const d = config.spirod + detailScale * config.spirodBoost;
@@ -430,7 +436,7 @@ export const curves: CurveConfig[] = [
       const y = (config.spiroR - r) * Math.sin(t) - d * Math.sin(((config.spiroR - r) / r) * t);
       return { x: 50 + x * config.spiroScale, y: 50 + y * config.spiroScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `x(t) = 50 + ((R-r) cos t + d cos((R-r)t/r)) · ${c.spiroScale.toFixed(2)}`,
         `y(t) = 50 + ((R-r) sin t - d sin((R-r)t/r)) · ${c.spiroScale.toFixed(2)}`,
@@ -456,7 +462,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 4.4,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const d = config.spirald + detailScale * 0.25;
       const baseX = (config.spiralR - config.spiralr) * Math.cos(t) + d * Math.cos(((config.spiralR - config.spiralr) / config.spiralr) * t);
@@ -464,7 +470,7 @@ export const curves: CurveConfig[] = [
       const scale = config.spiralScale + detailScale * config.spiralBreath;
       return { x: 50 + baseX * scale, y: 50 + baseY * scale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         "u(t) = ((R-r) cos t + d cos((R-r)t/r), (R-r) sin t - d sin((R-r)t/r))",
         `m(t) = ${c.spiralScale.toFixed(2)} + ${c.spiralBreath.toFixed(2)}s`,
@@ -491,7 +497,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 4.4,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const d = config.spirald + detailScale * 0.25;
       const baseX = (config.spiralR - config.spiralr) * Math.cos(t) + d * Math.cos(((config.spiralR - config.spiralr) / config.spiralr) * t);
@@ -499,7 +505,7 @@ export const curves: CurveConfig[] = [
       const scale = config.spiralScale + detailScale * config.spiralBreath;
       return { x: 50 + baseX * scale, y: 50 + baseY * scale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         "u(t) = ((R-r) cos t + d cos((R-r)t/r), (R-r) sin t - d sin((R-r)t/r))",
         `m(t) = ${c.spiralScale.toFixed(2)} + ${c.spiralBreath.toFixed(2)}s`,
@@ -526,7 +532,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 4.4,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const d = config.spirald + detailScale * 0.25;
       const baseX = (config.spiralR - config.spiralr) * Math.cos(t) + d * Math.cos(((config.spiralR - config.spiralr) / config.spiralr) * t);
@@ -534,7 +540,7 @@ export const curves: CurveConfig[] = [
       const scale = config.spiralScale + detailScale * config.spiralBreath;
       return { x: 50 + baseX * scale, y: 50 + baseY * scale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         "u(t) = ((R-r) cos t + d cos((R-r)t/r), (R-r) sin t - d sin((R-r)t/r))",
         `m(t) = ${c.spiralScale.toFixed(2)} + ${c.spiralBreath.toFixed(2)}s`,
@@ -561,7 +567,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 28000,
     pulseDurationMs: 4200,
     strokeWidth: 4.4,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const d = config.spirald + detailScale * 0.25;
       const baseX = (config.spiralR - config.spiralr) * Math.cos(t) + d * Math.cos(((config.spiralR - config.spiralr) / config.spiralr) * t);
@@ -569,7 +575,7 @@ export const curves: CurveConfig[] = [
       const scale = config.spiralScale + detailScale * config.spiralBreath;
       return { x: 50 + baseX * scale, y: 50 + baseY * scale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         "u(t) = ((R-r) cos t + d cos((R-r)t/r), (R-r) sin t - d sin((R-r)t/r))",
         `m(t) = ${c.spiralScale.toFixed(2)} + ${c.spiralBreath.toFixed(2)}s`,
@@ -596,7 +602,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 50000,
     pulseDurationMs: 7000,
     strokeWidth: 4.4,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * config.butterflyTurns;
       const s =
         Math.exp(Math.cos(t)) -
@@ -605,7 +611,7 @@ export const curves: CurveConfig[] = [
       const scale = config.butterflyScale + detailScale * config.butterflyPulse;
       return { x: 50 + Math.sin(t) * s * scale, y: 50 + Math.cos(t) * s * scale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `u = ${c.butterflyTurns.toFixed(1)}t`,
         `B(u) = e^{cos u} - ${c.butterflyCosWeight.toFixed(2)} cos 4u - sin^${Math.round(c.butterflyPower)}(u/12)`,
@@ -630,13 +636,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 36000,
     pulseDurationMs: 5200,
     strokeWidth: 4.9,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.cardioidA + detailScale * config.cardioidPulse;
       const r = a * (1 - Math.cos(t));
       return { x: 50 + Math.cos(t) * r * config.cardioidScale, y: 50 + Math.sin(t) * r * config.cardioidScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `a = ${c.cardioidA.toFixed(1)} + ${c.cardioidPulse.toFixed(2)}s`,
         "r(t) = a(1 - cos t)",
@@ -661,7 +667,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 36000,
     pulseDurationMs: 5200,
     strokeWidth: 4.9,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const a = config.cardioidA + detailScale * config.cardioidPulse;
       const r = a * (1 + Math.cos(t));
@@ -669,7 +675,7 @@ export const curves: CurveConfig[] = [
       const baseY = Math.sin(t) * r;
       return { x: 50 - baseY * config.cardioidScale, y: 50 - baseX * config.cardioidScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `a = ${c.cardioidA.toFixed(1)} + ${c.cardioidPulse.toFixed(2)}s`,
         "r(t) = a(1 + cos t)",
@@ -696,7 +702,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 22000,
     pulseDurationMs: 5600,
     strokeWidth: 3.9,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const xLimit = Math.sqrt(config.heartWaveRoot);
       const x = -xLimit + progress * xLimit * 2;
       const safeRoot = Math.max(0, config.heartWaveRoot - x * x);
@@ -706,7 +712,7 @@ export const curves: CurveConfig[] = [
       const scaleY = config.heartWaveScaleY + detailScale * 1.5;
       return { x: 50 + x * config.heartWaveScaleX, y: 18 + (1.75 - y) * scaleY };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `f(x) = |x|^(2/3) + ${c.heartWaveAmp.toFixed(2)}√(${c.heartWaveRoot.toFixed(2)} - x²) sin(${c.heartWaveB.toFixed(1)}πx)`,
         `screenX = 50 + x · ${c.heartWaveScaleX.toFixed(1)}`,
@@ -732,13 +738,13 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 44000,
     pulseDurationMs: 6800,
     strokeWidth: 4.3,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const angle = t * config.searchTurns;
       const radius = config.searchBaseRadius + (1 - Math.cos(t)) * (config.searchRadiusAmp + detailScale * config.searchPulse);
       return { x: 50 + Math.cos(angle) * radius * config.searchScale, y: 50 + Math.sin(angle) * radius * config.searchScale };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `θ(t) = ${c.searchTurns.toFixed(1)}t`,
         `r(t) = ${c.searchBaseRadius.toFixed(1)} + (1 - cos t)(${c.searchRadiusAmp.toFixed(1)} + ${c.searchPulse.toFixed(1)}s)`,
@@ -768,7 +774,7 @@ export const curves: CurveConfig[] = [
     rotationDurationMs: 44000,
     pulseDurationMs: 6800,
     strokeWidth: 4.2,
-    point(progress, detailScale, config) {
+    point(progress: number, detailScale: number, config: CurveConfig) {
       const t = progress * Math.PI * 2;
       const mix = config.fourierMixBase + detailScale * config.fourierMixPulse;
       const x =
@@ -781,7 +787,7 @@ export const curves: CurveConfig[] = [
         config.fourierY4 * Math.cos(4 * t - 0.5 * mix);
       return { x: 50 + x, y: 50 + y };
     },
-    formula(c) {
+    formula(c: CurveConfig) {
       return [
         `x(t) = 50 + ${c.fourierX1.toFixed(1)} cos t + ${c.fourierX3.toFixed(1)} cos(3t + 0.6m) + ${c.fourierX5.toFixed(1)} sin(5t - 0.4)`,
         `y(t) = 50 + ${c.fourierY1.toFixed(1)} sin t + ${c.fourierY2.toFixed(1)} sin(2t + 0.25) - ${c.fourierY4.toFixed(1)} cos(4t - 0.5m)`,

@@ -1,5 +1,5 @@
 import CurveLoader from '../components/CurveLoader';
-import { curves } from '../data/curves';
+import { curves, mergeConfig } from '../data/curves';
 import type { CurveConfig } from '../data/curves';
 
 const config = curves[4];
@@ -20,7 +20,7 @@ export default function RoseCurve({
 }: RoseCurveProps) {
   return (
     <CurveLoader
-      config={{ ...config, ...overrideConfig } as CurveConfig}
+      config={mergeConfig(config, overrideConfig)}
       className={className}
       style={style}
     />

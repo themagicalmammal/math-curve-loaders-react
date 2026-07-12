@@ -508,26 +508,21 @@ mix = fourierMixBase + fourierMixPulse × sin(pulseTime)`,
 
 /* ─── Helpers ─── */
 
-function toPascal(name: string): string {
+export function toPascal(name: string): string {
   return name.replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\s/g, '');
 }
 
-function formatNum(v: number): string {
+export function formatNum(v: number): string {
   if (Number.isInteger(v)) return String(v);
   if (Math.abs(v) < 10) return Number(v.toFixed(2)).toString();
   return Number(v.toFixed(1)).toString();
 }
 
-function buildConfig(_curve: CurvePlaygroundConfig, values: Record<string, number>): Record<string, number> {
-  return { ...values };
-}
-
 export function generateCode(curve: CurvePlaygroundConfig, values: Record<string, number>): string {
   const name = toPascal(curve.name);
-  const config = buildConfig(curve, values);
-  const keys = Object.keys(config);
+  const keys = Object.keys(values);
   const configStr = '  config={\n' +
-    keys.map((k) => `    ${k}: ${formatNum(config[k] as number)},`).join('\n') +
+    keys.map((key) => `    ${key}: ${formatNum(values[key])},`).join('\n') +
     '\n  }';
   return `<${name}\n  ${configStr}\n  style={{ width: 120, height: 120, color: '${curve.color}' }}\n/>`;
 }

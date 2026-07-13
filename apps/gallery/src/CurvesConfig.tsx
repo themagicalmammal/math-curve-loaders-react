@@ -114,9 +114,9 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 5.2,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\text{orbitRadius} + \\text{detailAmplitude} \\times \\cos(\\text{petalCount} \\times t) \\\\
-  x(t) &= r(t) \\times \\cos t \\times \\text{curveScale} + 50 \\\\
-  y(t) &= r(t) \\times \\sin t \\times \\text{curveScale} + 50
+  r(t) &= \\mathit{orbitRadius} + \\mathit{detailAmplitude} \\times \\cos(\\mathit{petalCount} \\times t) \\\\
+  x(t) &= r(t) \\times \\cos t \\times \\mathit{curveScale} + 50 \\\\
+  y(t) &= r(t) \\times \\sin t \\times \\mathit{curveScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'orbitRadius', label: 'Base radius', description: 'Base radius of the orbiting rose curve.', min: 4, max: 10, step: 0.1 },
@@ -136,9 +136,9 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 4.5,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\left(\\text{roseA} + \\text{roseABoost} \\times \\sin t\\right) \\times \\cos(\\text{roseK} \\times t) \\times \\left(\\text{roseBreathBase} + \\text{roseBreathBoost} \\times \\sin(\\text{pulseTime})\\right) \\\\
-  x(t) &= r(t) \\times \\cos t \\times \\text{roseScale} + 50 \\\\
-  y(t) &= r(t) \\times \\sin t \\times \\text{roseScale} + 50
+  r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(\\mathit{roseK} \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
+  x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
+  y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
@@ -160,9 +160,9 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 4300, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\left(\\text{roseA} + \\text{roseABoost} \\times \\sin t\\right) \\times \\cos(2 \\times t) \\times \\left(\\text{roseBreathBase} + \\text{roseBreathBoost} \\times \\sin(\\text{pulseTime})\\right) \\\\
-  x(t) &= r(t) \\times \\cos t \\times \\text{roseScale} + 50 \\\\
-  y(t) &= r(t) \\times \\sin t \\times \\text{roseScale} + 50
+  r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(2 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
+  x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
+  y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
@@ -183,9 +183,9 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 4400, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\left(\\text{roseA} + \\text{roseABoost} \\times \\sin t\\right) \\times \\cos(3 \\times t) \\times \\left(\\text{roseBreathBase} + \\text{roseBreathBoost} \\times \\sin(\\text{pulseTime})\\right) \\\\
-  x(t) &= r(t) \\times \\cos t \\times \\text{roseScale} + 50 \\\\
-  y(t) &= r(t) \\times \\sin t \\times \\text{roseScale} + 50
+  r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(3 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
+  x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
+  y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
@@ -206,9 +206,9 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 4500, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\left(\\text{roseA} + \\text{roseABoost} \\times \\sin t\\right) \\times \\cos(4 \\times t) \\times \\left(\\text{roseBreathBase} + \\text{roseBreathBoost} \\times \\sin(\\text{pulseTime})\\right) \\\\
-  x(t) &= r(t) \\times \\cos t \\times \\text{roseScale} + 50 \\\\
-  y(t) &= r(t) \\times \\sin t \\times \\text{roseScale} + 50
+  r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(4 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
+  x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
+  y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
@@ -229,8 +229,8 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 5400, rotationDurationMs: 36000, strokeWidth: 4.7,
     },
     formula: `\\begin{aligned}
-  x(t) &= \\left(\\text{lissajousAmp} + \\text{lissajousAmpBoost} \\times \\sin(\\text{pulseTime})\\right) \\times \\sin(\\text{lissajousAX} \\times t + \\text{lissajousPhase}) + 50 \\\\
-  y(t) &= x(t) \\times \\frac{\\text{lissajousYScale}}{\\text{lissajousYScale}} \\times \\sin(\\text{lissajousBY} \\times t) + 50
+  x(t) &= \\left(\\mathit{lissajousAmp} + \\mathit{lissajousAmpBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\times \\sin(\\mathit{lissajousAX} \\times t + \\mathit{lissajousPhase}) + 50 \\\\
+  y(t) &= x(t) \\times \\frac{\\mathit{lissajousYScale}}{\\mathit{lissajousYScale}} \\times \\sin(\\mathit{lissajousBY} \\times t) + 50
 \\end{aligned}`,
     controls: [
       { key: 'lissajousAmp', label: 'Amplitude', description: 'Base amplitude of the Lissajous curve — controls the overall size.', min: 8, max: 36, step: 0.5 },
@@ -251,7 +251,7 @@ s = \\varepsilon(t)`,
       pulseDurationMs: 5000, rotationDurationMs: 34000, strokeWidth: 4.8,
     },
     formula: `\\begin{aligned}
-  r(t) &= \\frac{\\text{lemniscateA} \\times \\cos t}{1 + \\sin^{2} t} + \\text{lemniscateBoost} \\times \\sin(\\text{pulseTime}) \\\\
+  r(t) &= \\frac{\\mathit{lemniscateA} \\times \\cos t}{1 + \\sin^{2} t} + \\mathit{lemniscateBoost} \\times \\sin(\\mathit{pulseTime}) \\\\
   x(t) &= r(t) \\times \\cos t + 50 \\\\
   y(t) &= r(t) \\times \\sin t + 50
 \\end{aligned}`,
@@ -273,8 +273,8 @@ s = \\varepsilon(t)`,
     formula: `\\begin{aligned}
   x(t) &= (spiroR - spiror) \\times \\cos t + spirod \\times \\cos\\!\\left(\\frac{spiroR - spiror}{spiror} \\, t\\right) \\\\
   y(t) &= (spiroR - spiror) \\times \\sin t - spirod \\times \\sin\\!\\left(\\frac{spiroR - spiror}{spiror} \\, t\\right) \\\\
-  x' &= (x + spirodBoost \\times \\sin(\\text{pulseTime})) \\times \\text{spiroScale} + 50 \\\\
-  y' &= (y + spirodBoost \\times \\sin(\\text{pulseTime})) \\times \\text{spiroScale} + 50
+  x' &= (x + spirodBoost \\times \\sin(\\mathit{pulseTime})) \\times \\mathit{spiroScale} + 50 \\\\
+  y' &= (y + spirodBoost \\times \\sin(\\mathit{pulseTime})) \\times \\mathit{spiroScale} + 50
 \\end{aligned}`,
     controls: [
       { key: 'spiroR', label: 'R', description: 'Radius of the fixed outer circle in the rolling-circle spirograph.', min: 4, max: 12, step: 0.1 },
@@ -295,7 +295,7 @@ s = \\varepsilon(t)`,
     },
     formula: `\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
-  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\text{pulseTime})\\right) \\\\
+  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
 \\end{aligned}`,
@@ -319,7 +319,7 @@ s = \\varepsilon(t)`,
     },
     formula: `\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
-  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\text{pulseTime})\\right) \\\\
+  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
 \\end{aligned}`,
@@ -343,7 +343,7 @@ s = \\varepsilon(t)`,
     },
     formula: `\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
-  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\text{pulseTime})\\right) \\\\
+  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
 \\end{aligned}`,
@@ -367,7 +367,7 @@ s = \\varepsilon(t)`,
     },
     formula: `\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
-  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\text{pulseTime})\\right) \\\\
+  y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
 \\end{aligned}`,

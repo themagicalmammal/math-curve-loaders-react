@@ -18,12 +18,20 @@ export default function RoseTwo({
   className,
   style,
 }: RoseTwoProps) {
+  const merged = mergeConfig(config, overrideConfig);
   return (
-    <CurveLoader
-      config={mergeConfig(config, overrideConfig)}
-      className={className}
-      style={style}
-    />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#888', marginBottom: 4, whiteSpace: 'pre-wrap' }}>
+        {`import { RoseTwo } from '@math-curve-loaders/react';`}
+        {'\n'}
+        {merged.formula(merged)}
+      </div>
+      <CurveLoader
+        config={merged}
+        className={className}
+        style={style}
+      />
+    </div>
   );
 }
 

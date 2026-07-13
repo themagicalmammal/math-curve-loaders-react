@@ -49,12 +49,12 @@ export const CURVE_CONFIGS: CurvePlaygroundConfig[] = [
     description: 'The base circle is carved by a sevenfold cosine term, so the trail blooms into a rotating seven-petal ring.',
     component: OriginalThinking, color: '#6366f1',
     defaults: {
-      baseRadius: 7, detailAmplitude: 3, petalCount: 7, curveScale: 3.9,
+      baseRadius: 8, detailAmplitude: 4, petalCount: 7, curveScale: 3.5,
       particleCount: 64, trailSpan: 0.38, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 5.5,
     },
-    formula: `x(t) = 50 + (7.0 cos(t) - 3.0 s × cos(7t)) × 3.9
-y(t) = 50 + (7.0 sin(t) - 3.0 s × sin(7t)) × 3.9
+    formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(7t)) × 3.5
+y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(7t)) × 3.5
 s = ε(t)`,
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1 },
@@ -69,12 +69,12 @@ s = ε(t)`,
     description: 'Replacing the sevenfold term with a fivefold term reduces the inner loops, giving the curve a cleaner five-petal rhythm.',
     component: ThinkingFive, color: '#8b5cf6',
     defaults: {
-      baseRadius: 7, detailAmplitude: 3, petalCount: 5, curveScale: 3.9,
+      baseRadius: 8, detailAmplitude: 4, petalCount: 5, curveScale: 3.5,
       particleCount: 62, trailSpan: 0.38, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 5.5,
     },
-    formula: `x(t) = 50 + (7.0 cos(t) - 3.0 s × cos(5t)) × 3.9
-y(t) = 50 + (7.0 sin(t) - 3.0 s × sin(5t)) × 3.9
+    formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(5t)) × 3.5
+y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(5t)) × 3.5
 s = ε(t)`,
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1 },
@@ -89,12 +89,12 @@ s = ε(t)`,
     description: 'A ninefold term packs more inner turns into the same orbit, so the floral ring feels denser and more finely braided.',
     component: ThinkingNine, color: '#a855f7',
     defaults: {
-      baseRadius: 7, detailAmplitude: 3, petalCount: 9, curveScale: 3.9,
+      baseRadius: 8, detailAmplitude: 4, petalCount: 9, curveScale: 3.5,
       particleCount: 68, trailSpan: 0.39, durationMs: 4700,
       pulseDurationMs: 4200, rotationDurationMs: 30000, strokeWidth: 5.5,
     },
-    formula: `x(t) = 50 + (7.0 cos(t) - 3.0 s × cos(9t)) × 3.9
-y(t) = 50 + (7.0 sin(t) - 3.0 s × sin(9t)) × 3.9
+    formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(9t)) × 3.5
+y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(9t)) × 3.5
 s = ε(t)`,
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1 },
@@ -109,13 +109,13 @@ s = ε(t)`,
     description: 'The radius expands and contracts with cos(7t), so the orbit breathes as it spins.',
     component: RoseOrbit, color: '#d946ef',
     defaults: {
-      orbitRadius: 7, detailAmplitude: 2.7, petalCount: 7, curveScale: 3.9,
+      orbitRadius: 8, detailAmplitude: 3.5, petalCount: 7, curveScale: 3.3,
       particleCount: 72, trailSpan: 0.42, durationMs: 5200,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 5.2,
     },
-    formula: `r(t) = orbitRadius + detailAmplitude × cos(petalCount × t)
-x(t) = r(t) × cos(t) × curveScale + 50
-y(t) = r(t) × sin(t) × curveScale + 50`,
+    formula: `r(t) = 8.0 + 3.5 × cos(7 × t)
+x(t) = r(t) × cos(t) × 3.3 + 50
+y(t) = r(t) × sin(t) × 3.3 + 50`,
     controls: [
       { key: 'orbitRadius', label: 'Base radius', description: 'Base radius of the orbiting rose curve.', min: 4, max: 10, step: 0.1 },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the modulating cosine that creates the petal shape.', min: 1, max: 5, step: 0.1 },
@@ -129,7 +129,7 @@ y(t) = r(t) × sin(t) × curveScale + 50`,
     description: 'Using r = a cos(5t) creates five evenly spaced lobes, the breathing modulation gives them a living pulse.',
     component: RoseCurve, color: '#ec4899',
     defaults: {
-      roseA: 9.2, roseABoost: 0.6, roseBreathBase: 0.72, roseBreathBoost: 0.28, roseK: 5, roseScale: 3.25,
+      roseA: 10.5, roseABoost: 0.9, roseBreathBase: 0.68, roseBreathBoost: 0.42, roseK: 5, roseScale: 3.0,
       particleCount: 78, trailSpan: 0.32, durationMs: 5400,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 4.5,
     },
@@ -151,7 +151,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     description: 'With k = 2, the cosine radius forms broad opposing petals, the breathing adds life.',
     component: RoseTwo, color: '#f43f5e',
     defaults: {
-      roseA: 9.2, roseABoost: 0.6, roseBreathBase: 0.72, roseBreathBoost: 0.28, roseScale: 3.25,
+      roseA: 10.5, roseABoost: 0.9, roseBreathBase: 0.68, roseBreathBoost: 0.42, roseScale: 3.0,
       particleCount: 74, trailSpan: 0.3, durationMs: 5200,
       pulseDurationMs: 4300, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
@@ -172,7 +172,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     description: 'With k = 3, the curve resolves into three rotating petals, the breathing modulation gives a living pulse.',
     component: RoseThree, color: '#ef4444',
     defaults: {
-      roseA: 9.2, roseABoost: 0.6, roseBreathBase: 0.72, roseBreathBoost: 0.28, roseScale: 3.25,
+      roseA: 10.5, roseABoost: 0.9, roseBreathBase: 0.68, roseBreathBoost: 0.42, roseScale: 3.0,
       particleCount: 76, trailSpan: 0.31, durationMs: 5300,
       pulseDurationMs: 4400, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
@@ -193,7 +193,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     description: 'With k = 4, the petals settle into a balanced cross-like rose, the breathing gives it life.',
     component: RoseFour, color: '#f97316',
     defaults: {
-      roseA: 9.2, roseABoost: 0.6, roseBreathBase: 0.72, roseBreathBoost: 0.28, roseScale: 3.25,
+      roseA: 10.5, roseABoost: 0.9, roseBreathBase: 0.68, roseBreathBoost: 0.42, roseScale: 3.0,
       particleCount: 78, trailSpan: 0.32, durationMs: 5400,
       pulseDurationMs: 4500, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
@@ -214,7 +214,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     description: 'Different sine frequencies on x and y make the path cross itself, creating drift patterns.',
     component: LissajousDrift, color: '#f59e0b',
     defaults: {
-      lissajousAmp: 24, lissajousAmpBoost: 6, lissajousAX: 3, lissajousBY: 4, lissajousPhase: 1.57, lissajousYScale: 0.92,
+      lissajousAmp: 28, lissajousAmpBoost: 8, lissajousAX: 3, lissajousBY: 4, lissajousPhase: 1.57, lissajousYScale: 0.85,
       particleCount: 68, trailSpan: 0.34, durationMs: 6000,
       pulseDurationMs: 5400, rotationDurationMs: 36000, strokeWidth: 4.7,
     },
@@ -234,7 +234,7 @@ y(t) = x(t) × sin(lissajousBY × t) + 50`,
     description: 'The 1 + sin²t denominator pinches the center while preserving the figure-eight shape, creating a blooming infinity symbol.',
     component: LemniscateBloom, color: '#eab308',
     defaults: {
-      lemniscateA: 20, lemniscateBoost: 7,
+      lemniscateA: 24, lemniscateBoost: 9,
       particleCount: 70, trailSpan: 0.4, durationMs: 5600,
       pulseDurationMs: 5000, rotationDurationMs: 34000, strokeWidth: 4.8,
     },
@@ -252,7 +252,7 @@ y(t) = r(t) × sin(t) + 50`,
     description: 'The rolling-circle terms create nested turns and offsets, so the trail draws spirograph-style loops.',
     component: HypotrochoidLoop, color: '#84cc16',
     defaults: {
-      spiroR: 8.2, spiror: 2.7, spirorBoost: 0.45, spirod: 4.8, spirodBoost: 1.2, spiroScale: 3.05,
+      spiroR: 8.5, spiror: 2.3, spirorBoost: 0.55, spirod: 5.5, spirodBoost: 1.5, spiroScale: 2.85,
       particleCount: 82, trailSpan: 0.46, durationMs: 7600,
       pulseDurationMs: 6200, rotationDurationMs: 42000, strokeWidth: 4.6,
     },
@@ -273,7 +273,7 @@ y' = (y + spirodBoost × sin(pulseTime)) × spiroScale + 50`,
     description: 'This rolling-circle setup resolves into three large looping petals, the breathing adds a gentle pulse.',
     component: ThreePetalSpiral, color: '#22c55e',
     defaults: {
-      spiralR: 3, spiralr: 1, spirald: 3, spiralScale: 2.2, spiralBreath: 0.45,
+      spiralR: 3, spiralr: 1, spirald: 3, spiralScale: 2.4, spiralBreath: 0.55,
       particleCount: 82, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
@@ -295,7 +295,7 @@ y' = y × spiralScale + 50`,
     description: 'Four-lobe spirograph pattern from R=4, r=1, d=3 — the breathing adds life to each petal.',
     component: FourPetalSpiral, color: '#10b981',
     defaults: {
-      spiralR: 4, spiralr: 1, spirald: 3, spiralScale: 2.2, spiralBreath: 0.45,
+      spiralR: 4.5, spiralr: 1, spirald: 3, spiralScale: 2.4, spiralBreath: 0.55,
       particleCount: 84, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
@@ -317,7 +317,7 @@ y' = y × spiralScale + 50`,
     description: 'Five-fold spirograph spiral — the breathing modulation gives each petal a living pulse.',
     component: FivePetalSpiral, color: '#14b8a6',
     defaults: {
-      spiralR: 5, spiralr: 1, spirald: 3, spiralScale: 2.2, spiralBreath: 0.45,
+      spiralR: 5.5, spiralr: 1, spirald: 3, spiralScale: 2.4, spiralBreath: 0.55,
       particleCount: 85, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
@@ -339,7 +339,7 @@ y' = y × spiralScale + 50`,
     description: 'Six-fold spirograph spiral — dense, symmetrical, with breathing modulation.',
     component: SixPetalSpiral, color: '#06b6d4',
     defaults: {
-      spiralR: 6, spiralr: 1, spirald: 3, spiralScale: 2.2, spiralBreath: 0.45,
+      spiralR: 6.5, spiralr: 1, spirald: 3, spiralScale: 2.4, spiralBreath: 0.55,
       particleCount: 86, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
@@ -361,7 +361,7 @@ y' = y × spiralScale + 50`,
     description: 'A rich butterfly curve with exponential decay creating delicate wings — phase animation adds depth.',
     component: ButterflyPhase, color: '#0ea5e9',
     defaults: {
-      butterflyTurns: 12, butterflyScale: 4.6, butterflyPulse: 0.45, butterflyCosWeight: 2, butterflyPower: 5,
+      butterflyTurns: 14, butterflyScale: 4.2, butterflyPulse: 0.55, butterflyCosWeight: 2.5, butterflyPower: 4,
       particleCount: 88, trailSpan: 0.32, durationMs: 9000,
       pulseDurationMs: 7000, rotationDurationMs: 50000, strokeWidth: 4.4,
     },
@@ -383,7 +383,7 @@ pulse = 1 + butterflyPulse × sin(pulseTime)`,
     description: 'A heart-shaped cardioid curve with breathing glow — the pulse modulation gives it life.',
     component: CardioidGlow, color: '#3b82f6',
     defaults: {
-      cardioidA: 8.4, cardioidPulse: 0.8, cardioidScale: 2.15,
+      cardioidA: 9.2, cardioidPulse: 1.0, cardioidScale: 2.0,
       particleCount: 72, trailSpan: 0.36, durationMs: 6200,
       pulseDurationMs: 5200, rotationDurationMs: 36000, strokeWidth: 4.9,
     },
@@ -402,7 +402,7 @@ y(t) = r(t) × sin t × cardioidScale + 50`,
     description: 'The classic cardioid heart shape — the breathing adds a gentle pulse.',
     component: CardioidHeart, color: '#7c3aed',
     defaults: {
-      cardioidA: 8.8, cardioidPulse: 0.8, cardioidScale: 2.15,
+      cardioidA: 9.2, cardioidPulse: 1.0, cardioidScale: 2.0,
       particleCount: 74, trailSpan: 0.36, durationMs: 6200,
       pulseDurationMs: 5200, rotationDurationMs: 36000, strokeWidth: 4.9,
     },
@@ -421,7 +421,7 @@ y(t) = r(t) × sin t × cardioidScale + 50`,
     description: 'A wavy heart-shaped curve drawn by a parametric function — the wave amplitude adds organic motion.',
     component: HeartWave, color: '#e11d48',
     defaults: {
-      heartWaveB: 6.4, heartWaveRoot: 3.3, heartWaveAmp: 0.9, heartWaveScaleX: 23.2, heartWaveScaleY: 24.5,
+      heartWaveB: 8.0, heartWaveRoot: 3.6, heartWaveAmp: 0.7, heartWaveScaleX: 21.5, heartWaveScaleY: 22.8,
       particleCount: 104, trailSpan: 0.18, durationMs: 8400,
       pulseDurationMs: 5600, rotationDurationMs: 22000, strokeWidth: 3.9,
     },
@@ -441,7 +441,7 @@ y(t) = (heartWaveB × cos(t) - heartWaveB × sin(t) - 2 × cos(t) - √(|cos(t)|
     description: 'An expanding Archimedean spiral that sweeps outward — the pulse adds breathing motion to the turns.',
     component: SpiralSearch, color: '#6d28d8',
     defaults: {
-      searchTurns: 4, searchBaseRadius: 8, searchRadiusAmp: 8.5, searchPulse: 2.4, searchScale: 1,
+      searchTurns: 5, searchBaseRadius: 10, searchRadiusAmp: 7.0, searchPulse: 2.8, searchScale: 1.1,
       particleCount: 86, trailSpan: 0.28, durationMs: 7800,
       pulseDurationMs: 6800, rotationDurationMs: 44000, strokeWidth: 4.3,
     },
@@ -462,7 +462,7 @@ y(t) = r(t) × sin(t) × searchScale + 50`,
     description: 'A sum of sine and cosine terms creating a complex flowing shape — the mix pulse modulates the phase.',
     component: FourierFlow, color: '#4f46e5',
     defaults: {
-      fourierX1: 17, fourierX3: 7.5, fourierX5: 3.2, fourierY1: 15, fourierY2: 8.2, fourierY4: 4.2, fourierMixBase: 1, fourierMixPulse: 0.16,
+      fourierX1: 18, fourierX3: 6.5, fourierX5: 2.8, fourierY1: 16, fourierY2: 7.5, fourierY4: 3.8, fourierMixBase: 1.1, fourierMixPulse: 0.2,
       particleCount: 92, trailSpan: 0.31, durationMs: 8400,
       pulseDurationMs: 6800, rotationDurationMs: 44000, strokeWidth: 4.2,
     },

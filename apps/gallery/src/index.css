@@ -520,7 +520,7 @@ body::before {
 }
 
 .modal-left {
-  flex: 0 0 40%;
+  flex: 0 0 45%;
   overflow-y: auto;
   min-width: 320px;
   padding: 0 24px 20px;
@@ -528,7 +528,7 @@ body::before {
 }
 
 .modal-right {
-  flex: 0 0 60%;
+  flex: 0 0 55%;
   overflow-y: auto;
   min-width: 0;
   border-left: 1px solid var(--border-subtle);

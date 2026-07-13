@@ -499,24 +499,13 @@ body::before {
 /* ─── Description ─── */
 
 .modal-description {
-  margin: 0 28px;
-  padding: 8px 0 18px;
+  margin: 0;
+  padding: 16px 28px 20px;
   font-size: 14px;
   line-height: 1.6;
   color: var(--fg-subtle);
   border-bottom: 1px solid var(--border-subtle);
   flex-shrink: 0;
-  max-width: calc(100% - 56px);
-  letter-spacing: 0.005em;
-}
-
-/* ─── Modal body description (inside columns) ─── */
-
-.modal-body-description {
-  margin: 0 0 20px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--fg-subtle);
   letter-spacing: 0.005em;
 }
 
@@ -621,7 +610,7 @@ body::before {
 
 .params-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
@@ -966,6 +955,7 @@ body::before {
   .gallery-grid { grid-template-columns: repeat(3, 1fr); padding: 32px 24px 48px; }
 }
 
+
 @media (max-width: 960px) {
   .modal { max-width: 98vw; }
   .modal-body { flex-direction: column; }
@@ -974,6 +964,9 @@ body::before {
   .params-grid { grid-template-columns: repeat(2, 1fr); }
   .modal-header { padding: 20px 20px 12px; }
   .modal-description { margin: 0 20px; padding: 8px 0 16px; }
+  .modal-code-header { flex-wrap: wrap; gap: 6px; }
+  .modal-code-wrap { max-height: 320px; }
+  .modal-code-wrap { max-height: 320px !important; }
 }
 
 @media (max-width: 768px) {

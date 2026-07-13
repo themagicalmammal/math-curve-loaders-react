@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
 import { Highlight, themes } from 'prism-react-renderer';
+import * as katex from 'katex';
 import {
   OriginalThinking, ThinkingFive, ThinkingNine, RoseOrbit,
   RoseCurve, RoseTwo, RoseThree, RoseFour, LissajousDrift,
@@ -59,20 +58,6 @@ const CURVES: CurveCardDef[] = [
 ];
 
 /* ─── Helpers ─── */
-
-function formatFormulaValue(value: number): string {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1).replace(/\.0$/, '').replace(/(\.\d)0$/, '$1');
-}
-
-function substituteFormula(formula: string, values: Record<string, number>, defaults: Record<string, number>): string {
-  return formula.replace(/\\(?:text|mathrm)\{(\w+)\}/g, (_match: string, variableName: string) => {
-    const value = values[variableName];
-    if (value !== undefined && Math.abs(value - (defaults[variableName] ?? 0)) > 1e-6) {
-      return formatFormulaValue(value);
-    }
-    return _match;
-  });
-}
 
 /* ─── Slider ─── */
 
@@ -204,27 +189,28 @@ function CodeBlock({ code, theme }: { code: string; theme: 'dark' | 'light' }) {
   );
 }
 
-/* ─── Math Formula ─── */
+/* ─── Math Formula — KaTeX ─── */
 
 function MathFormula({ formula }: { formula: string }) {
-  // Plain italic variable names render correctly in KaTeX across all environments.
-  // Dynamic value substitution is shown via the slider values below instead.
-  try {
-    return (
-      <div
-        className="math-formula"
-        dangerouslySetInnerHTML={{
-          __html: katex.renderToString(formula, {
-            displayMode: true,
-            throwOnError: true,
-          }),
-        }}
-      />
-    );
-  } catch {
-    // Fallback: show raw formula as plain text
-    return <code className="math-formula">{formula}</code>;
-  }
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.innerHTML = '';
+
+    try {
+      katex.render(formula, el, {
+        throwOnError: true,
+        displayMode: true,
+        strict: false,
+      });
+    } catch {
+      el.textContent = formula;
+    }
+  }, [formula]);
+
+  return <div ref={ref} className="math-formula" data-katex-rendered />;
 }
 
 /* ─── Curve Modal ─── */
@@ -319,20 +305,50 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                 <h3>Parameters</h3>
                 <button className="modal-reset" onClick={handleReset}>Reset</button>
               </div>
-              <div className="modal-controls-grid">
-                {curveConfig.controls.map((ctrl) => (
-                  <Slider
-                    key={ctrl.key}
-                    label={ctrl.label}
-                    value={values[ctrl.key] ?? curveConfig.defaults[ctrl.key]}
-                    min={ctrl.min}
-                    max={ctrl.max}
-                    step={ctrl.step}
-                    onChange={(value) => handleValueChange(ctrl.key, value)}
-                    color={curveConfig.color}
-                    description={ctrl.description}
-                  />
-                ))}
+              <div className="modal-controls-list">
+                {curveConfig.controls.map((ctrl) => {
+                  const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                  const percentage = ((val - ctrl.min) / (ctrl.max - ctrl.min)) * 100;
+                  return (
+                    <div
+                      key={ctrl.key}
+                      className="control-row"
+                      style={{ '--card-color': curveConfig.color } as React.CSSProperties}
+                    >
+                      <div className="control-row-header">
+                        <span className="control-row-label">{ctrl.label}</span>
+                        <div className="control-row-value">
+                          <button
+                            className="control-btn-step"
+                            onClick={() => handleValueChange(ctrl.key, val - ctrl.step)}
+                          >−</button>
+                          <span className="control-row-value-num" style={{ '--card-color': curveConfig.color }}>{formatNum(val)}</span>
+                          <button
+                            className="control-btn-step"
+                            onClick={() => handleValueChange(ctrl.key, val + ctrl.step)}
+                          >+</button>
+                        </div>
+                      </div>
+                      <div className="control-row-slider">
+                        <div className="control-track">
+                          <div className="control-fill" style={{ width: `${percentage}%` }} />
+                        </div>
+                        <input
+                          type="range"
+                          min={ctrl.min}
+                          max={ctrl.max}
+                          step={ctrl.step}
+                          value={val}
+                          onChange={(e) => handleValueChange(ctrl.key, Number(e.target.value))}
+                          aria-label={ctrl.label}
+                        />
+                      </div>
+                      {ctrl.description && (
+                        <div className="control-row-desc" title={ctrl.description}>{ctrl.description}</div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -343,7 +359,7 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
             <div className="modal-section">
               <div className="modal-section-label">Formula</div>
               <div className="modal-formula-wrap">
-                <MathFormula formula={curveConfig.formula} values={values} defaults={curveConfig.defaults} />
+                <MathFormula formula={curveConfig.formula} />
               </div>
             </div>
 

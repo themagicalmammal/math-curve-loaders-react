@@ -113,11 +113,11 @@ s = \\varepsilon(t)`,
       particleCount: 72, trailSpan: 0.42, durationMs: 5200,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 5.2,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\mathit{orbitRadius} + \\mathit{detailAmplitude} \\times \\cos(\\mathit{petalCount} \\times t) \\\\
   x(t) &= r(t) \\times \\cos t \\times \\mathit{curveScale} + 50 \\\\
   y(t) &= r(t) \\times \\sin t \\times \\mathit{curveScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'orbitRadius', label: 'Base radius', description: 'Base radius of the orbiting rose curve.', min: 4, max: 10, step: 0.1 },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the modulating cosine that creates the petal shape.', min: 1, max: 5, step: 0.1 },
@@ -135,11 +135,11 @@ s = \\varepsilon(t)`,
       particleCount: 78, trailSpan: 0.32, durationMs: 5400,
       pulseDurationMs: 4600, rotationDurationMs: 28000, strokeWidth: 4.5,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(\\mathit{roseK} \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
   y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05 },
@@ -159,11 +159,11 @@ s = \\varepsilon(t)`,
       particleCount: 74, trailSpan: 0.3, durationMs: 5200,
       pulseDurationMs: 4300, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(2 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
   y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05 },
@@ -182,11 +182,11 @@ s = \\varepsilon(t)`,
       particleCount: 76, trailSpan: 0.31, durationMs: 5300,
       pulseDurationMs: 4400, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(3 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
   y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05 },
@@ -205,11 +205,11 @@ s = \\varepsilon(t)`,
       particleCount: 78, trailSpan: 0.32, durationMs: 5400,
       pulseDurationMs: 4500, rotationDurationMs: 28000, strokeWidth: 4.6,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\left(\\mathit{roseA} + \\mathit{roseABoost} \\times \\sin t\\right) \\times \\cos(4 \\times t) \\times \\left(\\mathit{roseBreathBase} + \\mathit{roseBreathBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x(t) &= r(t) \\times \\cos t \\times \\mathit{roseScale} + 50 \\\\
   y(t) &= r(t) \\times \\sin t \\times \\mathit{roseScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1 },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05 },
@@ -228,10 +228,10 @@ s = \\varepsilon(t)`,
       particleCount: 68, trailSpan: 0.34, durationMs: 6000,
       pulseDurationMs: 5400, rotationDurationMs: 36000, strokeWidth: 4.7,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= \\left(\\mathit{lissajousAmp} + \\mathit{lissajousAmpBoost} \\times \\sin(\\mathit{pulseTime})\\right) \\times \\sin(\\mathit{lissajousAX} \\times t + \\mathit{lissajousPhase}) + 50 \\\\
   y(t) &= x(t) \\times \\frac{\\mathit{lissajousYScale}}{\\mathit{lissajousYScale}} \\times \\sin(\\mathit{lissajousBY} \\times t) + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'lissajousAmp', label: 'Amplitude', description: 'Base amplitude of the Lissajous curve — controls the overall size.', min: 8, max: 36, step: 0.5 },
       { key: 'lissajousAmpBoost', label: 'Amp pulse', description: 'Pulsing modulation on the amplitude — adds a breathing effect.', min: 0, max: 12, step: 0.1 },
@@ -250,11 +250,11 @@ s = \\varepsilon(t)`,
       particleCount: 70, trailSpan: 0.4, durationMs: 5600,
       pulseDurationMs: 5000, rotationDurationMs: 34000, strokeWidth: 4.8,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   r(t) &= \\frac{\\mathit{lemniscateA} \\times \\cos t}{1 + \\sin^{2} t} + \\mathit{lemniscateBoost} \\times \\sin(\\mathit{pulseTime}) \\\\
   x(t) &= r(t) \\times \\cos t + 50 \\\\
   y(t) &= r(t) \\times \\sin t + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'lemniscateA', label: 'a', description: 'The "a" parameter of the Bernoulli lemniscate — sets the size of the figure-eight.', min: 8, max: 30, step: 0.5 },
       { key: 'lemniscateBoost', label: 'Pulse', description: 'Sinusoidal pulse added to the radius — creates the blooming animation.', min: 0, max: 12, step: 0.1 },
@@ -270,12 +270,12 @@ s = \\varepsilon(t)`,
       particleCount: 82, trailSpan: 0.46, durationMs: 7600,
       pulseDurationMs: 6200, rotationDurationMs: 42000, strokeWidth: 4.6,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= (spiroR - spiror) \\times \\cos t + spirod \\times \\cos\\!\\left(\\frac{spiroR - spiror}{spiror} \\, t\\right) \\\\
   y(t) &= (spiroR - spiror) \\times \\sin t - spirod \\times \\sin\\!\\left(\\frac{spiroR - spiror}{spiror} \\, t\\right) \\\\
   x' &= (x + spirodBoost \\times \\sin(\\mathit{pulseTime})) \\times \\mathit{spiroScale} + 50 \\\\
   y' &= (y + spirodBoost \\times \\sin(\\mathit{pulseTime})) \\times \\mathit{spiroScale} + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'spiroR', label: 'R', description: 'Radius of the fixed outer circle in the rolling-circle spirograph.', min: 4, max: 12, step: 0.1 },
       { key: 'spiror', label: 'r', description: 'Radius of the rolling inner circle — together with R determines the pattern.', min: 1, max: 5, step: 0.1 },
@@ -293,12 +293,12 @@ s = \\varepsilon(t)`,
       particleCount: 82, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
   y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1 },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1 },
@@ -317,12 +317,12 @@ s = \\varepsilon(t)`,
       particleCount: 84, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
   y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1 },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1 },
@@ -341,12 +341,12 @@ s = \\varepsilon(t)`,
       particleCount: 85, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
   y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1 },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1 },
@@ -365,12 +365,12 @@ s = \\varepsilon(t)`,
       particleCount: 86, trailSpan: 0.34, durationMs: 4600,
       pulseDurationMs: 4200, rotationDurationMs: 28000, strokeWidth: 4.4,
     },
-    formula: `\\begin{aligned}
+    formula: `$$\\begin{aligned}
   x(t) &= (spiralR - spiralr) \\times \\cos t + spirald \\times \\cos\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\\\
   y(t) &= (spiralR - spiralr) \\times \\sin t - spirald \\times \\sin\\!\\left(\\frac{spiralR - spiralr}{spiralr} \\, t\\right) \\times \\left(1 + spiralBreath \\times \\sin(\\mathit{pulseTime})\\right) \\\\
   x' &= x \\times spiralScale + 50 \\\\
   y' &= y \\times spiralScale + 50
-\\end{aligned}`,
+\\end{aligned}$$`,
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1 },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1 },

@@ -103,6 +103,61 @@ function MathFormula({ formula }: { formula: string }) {
   return <div ref={ref} className="math-formula" data-katex-rendered />;
 }
 
+/* ─── Param Control Card ─── */
+
+interface ParamControlProps {
+  ctrl: ControlDef;
+  value: number;
+  curveColor: string;
+  onChange: (key: string, value: number) => void;
+}
+
+function ParamControl({ ctrl, value, curveColor, onChange }: ParamControlProps) {
+  const percentage = ((value - ctrl.min) / (ctrl.max - ctrl.min)) * 100;
+  return (
+    <div
+      className="param-card"
+      style={{ '--card-color': curveColor } as React.CSSProperties}
+    >
+      <div className="param-card-header">
+        <span className="param-card-label">{ctrl.label}</span>
+        <div className="param-card-value">
+          <button
+            className="param-card-btn"
+            onClick={() => onChange(ctrl.key, value - ctrl.step)}
+          >−</button>
+          <span className="param-card-value-num" style={{ '--card-color': curveColor }}>
+            {formatNum(value)}
+          </span>
+          <button
+            className="param-card-btn"
+            onClick={() => onChange(ctrl.key, value + ctrl.step)}
+          >+</button>
+        </div>
+      </div>
+      <div className="param-card-slider">
+        <div className="param-card-track">
+          <div className="param-card-fill" style={{ width: `${percentage}%` }} />
+        </div>
+        <input
+          type="range"
+          min={ctrl.min}
+          max={ctrl.max}
+          step={ctrl.step}
+          value={value}
+          onChange={(e) => onChange(ctrl.key, Number(e.target.value))}
+          aria-label={ctrl.label}
+        />
+      </div>
+      {ctrl.description && (
+        <div className="param-card-desc" title={ctrl.description}>
+          {ctrl.description}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ─── Curve Modal ─── */
 
 export interface CurveModalProps {
@@ -177,104 +232,66 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
         {/* ─── Description ─── */}
         <p className="modal-description">{curveConfig.description}</p>
 
-        {/* ─── Two-Column Body ─── */}
-        <div className="modal-columns">
-          {/* ─── Left: Preview + Parameters ─── */}
-          <div className="modal-column-left">
-            {/* Animation Preview */}
-            <div className="modal-preview">
-              <curveConfig.component
-                config={values}
-                style={{ width: 200, height: 200, color: curveConfig.color }}
-              />
-            </div>
+        {/* ─── Preview ─── */}
+        <div className="modal-preview">
+          <curveConfig.component
+            config={values}
+            style={{ width: 200, height: 200, color: curveConfig.color }}
+          />
+        </div>
 
-            {/* Controls */}
-            <div className="modal-controls">
-              <div className="modal-controls-header">
-                <h3>Parameters</h3>
-                <button className="modal-reset" onClick={handleReset}>Reset</button>
-              </div>
-              <div className="modal-controls-list">
-                {curveConfig.controls.map((ctrl) => {
-                  const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                  const percentage = ((val - ctrl.min) / (ctrl.max - ctrl.min)) * 100;
-                  return (
-                    <div
-                      key={ctrl.key}
-                      className="control-row"
-                      style={{ '--card-color': curveConfig.color } as React.CSSProperties}
-                    >
-                      <div className="control-row-header">
-                        <span className="control-row-label">{ctrl.label}</span>
-                        <div className="control-row-value">
-                          <button
-                            className="control-btn-step"
-                            onClick={() => handleValueChange(ctrl.key, val - ctrl.step)}
-                          >−</button>
-                          <span className="control-row-value-num" style={{ '--card-color': curveConfig.color }}>{formatNum(val)}</span>
-                          <button
-                            className="control-btn-step"
-                            onClick={() => handleValueChange(ctrl.key, val + ctrl.step)}
-                          >+</button>
-                        </div>
-                      </div>
-                      <div className="control-row-slider">
-                        <div className="control-track">
-                          <div className="control-fill" style={{ width: `${percentage}%` }} />
-                        </div>
-                        <input
-                          type="range"
-                          min={ctrl.min}
-                          max={ctrl.max}
-                          step={ctrl.step}
-                          value={val}
-                          onChange={(e) => handleValueChange(ctrl.key, Number(e.target.value))}
-                          aria-label={ctrl.label}
-                        />
-                      </div>
-                      {ctrl.description && (
-                        <div className="control-row-desc" title={ctrl.description}>{ctrl.description}</div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+        {/* ─── Params Grid ─── */}
+        <div className="modal-body">
+          <div className="modal-controls">
+            <div className="modal-controls-header">
+              <h3>Parameters</h3>
+              <button className="modal-reset" onClick={handleReset}>Reset</button>
+            </div>
+            <div className="params-grid">
+              {curveConfig.controls.map((ctrl) => {
+                const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                return (
+                  <ParamControl
+                    key={ctrl.key}
+                    ctrl={ctrl}
+                    value={val}
+                    curveColor={curveColor}
+                    onChange={handleValueChange}
+                  />
+                );
+              })}
             </div>
           </div>
+        </div>
 
-          {/* ─── Right: Formula + Component ─── */}
-          <div className="modal-column-right">
-            {/* Formula */}
-            <div className="modal-section">
-              <div className="modal-section-label">Formula</div>
-              <div className="modal-formula-wrap">
-                <MathFormula formula={curveConfig.formula} />
+        {/* ─── Formula + Code ─── */}
+        <div className="modal-formula-section">
+          <div className="modal-section">
+            <div className="modal-section-label">Formula</div>
+            <div className="modal-formula-wrap">
+              <MathFormula formula={curveConfig.formula} />
+            </div>
+          </div>
+          <div className="modal-section">
+            <div className="modal-code-header">
+              <span className="modal-section-label">Component</span>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {showCode && (
+                  <button className="modal-code-btn" onClick={() => setShowCode(false)}>Hide</button>
+                )}
+                <button
+                  className="modal-code-btn"
+                  onClick={handleCopy}
+                  data-copied={isCopied}
+                >
+                  {isCopied ? '✓ Copied' : 'Copy'}
+                </button>
+                {!showCode && (
+                  <button className="modal-code-btn" onClick={() => setShowCode(true)}>Show</button>
+                )}
               </div>
             </div>
-
-            {/* Component Code */}
-            <div className="modal-section">
-              <div className="modal-code-header">
-                <span className="modal-section-label">Component</span>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  {showCode && (
-                    <button className="modal-code-btn" onClick={() => setShowCode(false)}>Hide</button>
-                  )}
-                  <button
-                    className="modal-code-btn"
-                    onClick={handleCopy}
-                    data-copied={isCopied}
-                  >
-                    {isCopied ? '✓ Copied' : 'Copy'}
-                  </button>
-                  {!showCode && (
-                    <button className="modal-code-btn" onClick={() => setShowCode(true)}>Show</button>
-                  )}
-                </div>
-              </div>
-              {showCode && <CodeBlock code={code} theme={theme} />}
-            </div>
+            {showCode && <CodeBlock code={code} theme={theme} />}
           </div>
         </div>
       </div>

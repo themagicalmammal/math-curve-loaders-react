@@ -510,24 +510,36 @@ body::before {
   letter-spacing: 0.005em;
 }
 
-/* ─── Modal body (scrollable) ─── */
+/* ─── Modal body (two-column layout) ─── */
 
 .modal-body {
+  display: flex;
   flex: 1;
+  gap: 24px;
+  overflow: hidden;
+}
+
+.modal-left {
+  flex: 1 1 0;
   overflow-y: auto;
+  min-width: 0;
   padding: 0 24px 20px;
   scrollbar-color: var(--scrollbar) transparent;
 }
 
-/* ─── Formula + Code section ─── */
+.modal-right {
+  flex: 0 0 320px;
+  overflow-y: auto;
+  min-width: 280px;
+  border-left: 1px solid var(--border-subtle);
+  padding: 0 24px 20px;
+  scrollbar-color: var(--scrollbar) transparent;
+}
 
-.modal-formula-section {
-  padding: 0 24px 24px;
-  border-top: 1px solid var(--border-subtle);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+/* ─── Preview wrapper ─── */
+
+.modal-preview-wrap {
+  margin-bottom: 24px;
 }
 
 /* ─── Preview ─── */
@@ -535,7 +547,7 @@ body::before {
 .modal-preview {
   display: flex;
   justify-content: center;
-  padding: 40px 24px 28px;
+  padding: 32px 24px;
   border-radius: 12px;
   background:
     radial-gradient(
@@ -545,7 +557,8 @@ body::before {
     ),
     var(--code-bg);
   border: 1px solid var(--border);
-  margin-bottom: 24px;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
 }
 
 /* ─── Controls Section ─── */
@@ -921,32 +934,19 @@ body::before {
 [data-theme="light"] .prism-code .token.regex,
 [data-theme="light"] .prism-code .token.important { color: #d1242f !important; }
 
-/* ─── KaTeX rendering ─── */
+/* ─── Math Formula — plain text ─── */
 
 .math-formula {
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
   color: var(--fg);
-  min-height: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  white-space: pre;
+  word-wrap: normal;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 0;
+  padding: 8px 0;
 }
-
-.math-formula .katex { color: var(--fg) !important; }
-.math-formula .katex * { color: inherit; }
-.math-formula .katex .mord,
-.math-formula .katex .mbin,
-.math-formula .katex .mrel,
-.math-formula .katex .minner,
-.math-formula .katex .mopen,
-.math-formula .katex .mclose,
-.math-formula .katex .mpunct,
-.math-formula .katex .msup-sub { color: inherit; }
-.math-formula .katex .mord.text,
-.math-formula .katex .mord .mord { color: inherit; }
-.math-formula .katex .mord .normal { color: var(--fg) !important; }
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
@@ -958,8 +958,9 @@ body::before {
 
 @media (max-width: 960px) {
   .modal { max-width: 98vw; }
-  .modal-body { padding: 0 20px 16px; }
-  .modal-formula-section { padding: 0 20px 20px; }
+  .modal-body { flex-direction: column; }
+  .modal-right { flex: none; border-left: none; border-top: 1px solid var(--border-subtle); padding: 0 20px 16px; }
+  .modal-left { padding: 0 20px 16px; }
   .params-grid { grid-template-columns: repeat(2, 1fr); }
   .modal-header { padding: 20px 20px 12px; }
   .modal-description { margin: 0 20px; padding: 8px 0 16px; }
@@ -980,10 +981,12 @@ body::before {
     border-radius: 16px 16px 0 0;
     max-height: 92vh;
   }
-  .modal-body { padding: 0 16px 16px; }
-  .modal-formula-section { padding: 0 16px 16px; }
+  .modal-body { flex-direction: column; }
+  .modal-right { flex: none; border-left: none; border-top: 1px solid var(--border-subtle); padding: 0 16px 16px; }
+  .modal-left { padding: 0 16px 16px; }
   .modal-header { padding: 16px; }
   .modal-description { margin: 0 16px; padding: 8px 0 12px; }
+  .params-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -995,4 +998,23 @@ body::before {
     grid-template-columns: repeat(2, 1fr);
     padding: 24px 16px 32px;
   }
+}
+
+/* Capture page for GIF generation */
+.c-page {
+  background: #000;
+  min-height: 100vh;
+  padding: 80px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.c-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
 }

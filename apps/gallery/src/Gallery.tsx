@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
-import * as katex from 'katex';
 import {
   OriginalThinking, ThinkingFive, ThinkingNine, RoseOrbit,
   RoseCurve, RoseTwo, RoseThree, RoseFour, LissajousDrift,
@@ -79,28 +78,10 @@ function CodeBlock({ code, theme }: { code: string; theme: 'dark' | 'light' }) {
   );
 }
 
-/* ─── Math Formula — KaTeX ─── */
+/* ─── Math Formula — plain text ─── */
 
 function MathFormula({ formula }: { formula: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.innerHTML = '';
-
-    try {
-      katex.render(formula, el, {
-        throwOnError: true,
-        displayMode: true,
-        strict: false,
-      });
-    } catch {
-      el.textContent = formula;
-    }
-  }, [formula]);
-
-  return <div ref={ref} className="math-formula" data-katex-rendered />;
+  return <div className="math-formula">{formula}</div>;
 }
 
 /* ─── Param Control Card ─── */
@@ -177,6 +158,17 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
   const [values, setValues] = useState<Record<string, number>>(() => ({ ...curveConfig.defaults }));
   const [showCode, setShowCode] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+
+  // Trigger preview entrance animation on mount
+  useEffect(() => {
+    const timer = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setShowPreview(true);
+      });
+    });
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -232,66 +224,75 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
         {/* ─── Description ─── */}
         <p className="modal-description">{curveConfig.description}</p>
 
-        {/* ─── Preview ─── */}
-        <div className="modal-preview">
-          <curveConfig.component
-            config={values}
-            style={{ width: 200, height: 200, color: curveConfig.color }}
-          />
-        </div>
-
-        {/* ─── Params Grid ─── */}
+        {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
-          <div className="modal-controls">
-            <div className="modal-controls-header">
-              <h3>Parameters</h3>
-              <button className="modal-reset" onClick={handleReset}>Reset</button>
-            </div>
-            <div className="params-grid">
-              {curveConfig.controls.map((ctrl) => {
-                const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                return (
-                  <ParamControl
-                    key={ctrl.key}
-                    ctrl={ctrl}
-                    value={val}
-                    curveColor={curveColor}
-                    onChange={handleValueChange}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* ─── Formula + Code ─── */}
-        <div className="modal-formula-section">
-          <div className="modal-section">
-            <div className="modal-section-label">Formula</div>
-            <div className="modal-formula-wrap">
-              <MathFormula formula={curveConfig.formula} />
-            </div>
-          </div>
-          <div className="modal-section">
-            <div className="modal-code-header">
-              <span className="modal-section-label">Component</span>
-              <div style={{ display: 'flex', gap: 6 }}>
-                {showCode && (
-                  <button className="modal-code-btn" onClick={() => setShowCode(false)}>Hide</button>
-                )}
-                <button
-                  className="modal-code-btn"
-                  onClick={handleCopy}
-                  data-copied={isCopied}
-                >
-                  {isCopied ? '✓ Copied' : 'Copy'}
-                </button>
-                {!showCode && (
-                  <button className="modal-code-btn" onClick={() => setShowCode(true)}>Show</button>
-                )}
+          {/* Left column: Preview + Parameters */}
+          <div className="modal-left">
+            {/* ─── Preview ─── */}
+            <div className="modal-preview-wrap">
+              <div
+                className="modal-preview"
+                style={{ opacity: showPreview ? 1 : 0, transform: showPreview ? 'scale(1)' : 'scale(0.92)' }}
+              >
+                <curveConfig.component
+                  config={values}
+                  style={{ width: 200, height: 200, color: curveConfig.color }}
+                />
               </div>
             </div>
-            {showCode && <CodeBlock code={code} theme={theme} />}
+
+            {/* ─── Params Grid ─── */}
+            <div className="modal-controls">
+              <div className="modal-controls-header">
+                <h3>Parameters</h3>
+                <button className="modal-reset" onClick={handleReset}>Reset</button>
+              </div>
+              <div className="params-grid">
+                {curveConfig.controls.map((ctrl) => {
+                  const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                  return (
+                    <ParamControl
+                      key={ctrl.key}
+                      ctrl={ctrl}
+                      value={val}
+                      curveColor={curveColor}
+                      onChange={handleValueChange}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Right column: Formula + Code */}
+          <div className="modal-right">
+            <div className="modal-section">
+              <div className="modal-section-label">Formula</div>
+              <div className="modal-formula-wrap">
+                <MathFormula formula={curveConfig.formula} />
+              </div>
+            </div>
+            <div className="modal-section">
+              <div className="modal-code-header">
+                <span className="modal-section-label">Component</span>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  {showCode && (
+                    <button className="modal-code-btn" onClick={() => setShowCode(false)}>Hide</button>
+                  )}
+                  <button
+                    className="modal-code-btn"
+                    onClick={handleCopy}
+                    data-copied={isCopied}
+                  >
+                    {isCopied ? '✓ Copied' : 'Copy'}
+                  </button>
+                  {!showCode && (
+                    <button className="modal-code-btn" onClick={() => setShowCode(true)}>Show</button>
+                  )}
+                </div>
+              </div>
+              {showCode && <CodeBlock code={code} theme={theme} />}
+            </div>
           </div>
         </div>
       </div>

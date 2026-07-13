@@ -221,12 +221,9 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
           </button>
         </div>
 
-        {/* ─── Description (sub-header) ─── */}
-        <p className="modal-description">{curveConfig.description}</p>
-
         {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
-          {/* Left column: Preview + Code */}
+          {/* Left column: Header + Description + Preview + Code */}
           <div className="modal-left">
             {/* ─── Preview ─── */}
             <div className="modal-preview-wrap">
@@ -240,6 +237,9 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                 />
               </div>
             </div>
+
+            {/* ─── Description ─── */}
+            <p className="modal-body-description">{curveConfig.description}</p>
 
             {/* ─── Code ─── */}
             <div className="modal-section">

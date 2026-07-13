@@ -496,16 +496,13 @@ body::before {
   height: 18px;
 }
 
-/* ─── Description ─── */
+/* ─── Description (inside left column) ─── */
 
-.modal-description {
-  margin: 0;
-  padding: 16px 28px 20px;
+.modal-body-description {
+  margin: 0 0 20px;
   font-size: 14px;
   line-height: 1.6;
   color: var(--fg-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  flex-shrink: 0;
   letter-spacing: 0.005em;
 }
 
@@ -963,10 +960,8 @@ body::before {
   .modal-left { padding: 0 20px 16px; }
   .params-grid { grid-template-columns: repeat(2, 1fr); }
   .modal-header { padding: 20px 20px 12px; }
-  .modal-description { margin: 0 20px; padding: 8px 0 16px; }
   .modal-code-header { flex-wrap: wrap; gap: 6px; }
   .modal-code-wrap { max-height: 320px; }
-  .modal-code-wrap { max-height: 320px !important; }
 }
 
 @media (max-width: 768px) {
@@ -988,7 +983,6 @@ body::before {
   .modal-right { flex: none; border-left: none; border-top: 1px solid var(--border-subtle); padding: 0 16px 16px; }
   .modal-left { padding: 0 16px 16px; }
   .modal-header { padding: 16px; }
-  .modal-description { margin: 0 16px; padding: 8px 0 12px; }
   .params-grid { grid-template-columns: 1fr; }
 }
 

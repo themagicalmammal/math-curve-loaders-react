@@ -520,15 +520,15 @@ body::before {
 }
 
 .modal-left {
-  flex: 1 1 0;
+  flex: 0 0 40%;
   overflow-y: auto;
-  min-width: 0;
+  min-width: 320px;
   padding: 0 24px 20px;
   scrollbar-color: var(--scrollbar) transparent;
 }
 
 .modal-right {
-  flex: 1 1 0;
+  flex: 0 0 60%;
   overflow-y: auto;
   min-width: 0;
   border-left: 1px solid var(--border-subtle);

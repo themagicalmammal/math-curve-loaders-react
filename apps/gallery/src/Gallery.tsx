@@ -222,11 +222,9 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
         </div>
 
         {/* ─── Description ─── */}
-        <p className="modal-description">{curveConfig.description}</p>
-
         {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
-          {/* Left column: Preview + Parameters */}
+          {/* Left column: Preview + Description + Component */}
           <div className="modal-left">
             {/* ─── Preview ─── */}
             <div className="modal-preview-wrap">
@@ -241,37 +239,10 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
               </div>
             </div>
 
-            {/* ─── Params Grid ─── */}
-            <div className="modal-controls">
-              <div className="modal-controls-header">
-                <h3>Parameters</h3>
-                <button className="modal-reset" onClick={handleReset}>Reset</button>
-              </div>
-              <div className="params-grid">
-                {curveConfig.controls.map((ctrl) => {
-                  const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                  return (
-                    <ParamControl
-                      key={ctrl.key}
-                      ctrl={ctrl}
-                      value={val}
-                      curveColor={curveColor}
-                      onChange={handleValueChange}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            {/* ─── Description ─── */}
+            <p className="modal-body-description">{curveConfig.description}</p>
 
-          {/* Right column: Formula + Code */}
-          <div className="modal-right">
-            <div className="modal-section">
-              <div className="modal-section-label">Formula</div>
-              <div className="modal-formula-wrap">
-                <MathFormula formula={curveConfig.formula} />
-              </div>
-            </div>
+            {/* ─── Code ─── */}
             <div className="modal-section">
               <div className="modal-code-header">
                 <span className="modal-section-label">Component</span>
@@ -292,6 +263,36 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                 </div>
               </div>
               {showCode && <CodeBlock code={code} theme={theme} />}
+            </div>
+          </div>
+
+          {/* Right column: Formula + Parameters */}
+          <div className="modal-right">
+            <div className="modal-section">
+              <div className="modal-section-label">Formula</div>
+              <div className="modal-formula-wrap">
+                <MathFormula formula={curveConfig.formula} />
+              </div>
+            </div>
+            <div className="modal-controls">
+              <div className="modal-controls-header">
+                <h3>Parameters</h3>
+                <button className="modal-reset" onClick={handleReset}>Reset</button>
+              </div>
+              <div className="params-grid">
+                {curveConfig.controls.map((ctrl) => {
+                  const val = values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                  return (
+                    <ParamControl
+                      key={ctrl.key}
+                      ctrl={ctrl}
+                      value={val}
+                      curveColor={curveColor}
+                      onChange={handleValueChange}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

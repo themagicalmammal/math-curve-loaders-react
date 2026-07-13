@@ -510,6 +510,16 @@ body::before {
   letter-spacing: 0.005em;
 }
 
+/* ─── Modal body description (inside columns) ─── */
+
+.modal-body-description {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg-subtle);
+  letter-spacing: 0.005em;
+}
+
 /* ─── Modal body (two-column layout) ─── */
 
 .modal-body {
@@ -532,7 +542,7 @@ body::before {
   overflow-y: auto;
   min-width: 0;
   border-left: 1px solid var(--border-subtle);
-  padding: 0 24px 20px;
+  padding: 0 32px 20px 24px;
   scrollbar-color: var(--scrollbar) transparent;
 }
 

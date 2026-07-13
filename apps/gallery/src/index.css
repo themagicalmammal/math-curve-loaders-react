@@ -528,9 +528,9 @@ body::before {
 }
 
 .modal-right {
-  flex: 0 0 320px;
+  flex: 0 0 420px;
   overflow-y: auto;
-  min-width: 280px;
+  min-width: 340px;
   border-left: 1px solid var(--border-subtle);
   padding: 0 24px 20px;
   scrollbar-color: var(--scrollbar) transparent;
@@ -752,7 +752,7 @@ body::before {
   background: var(--card-color, var(--primary));
   border: 2px solid var(--bg);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
-  margin-top: -5px;
+  margin-top: -6px;
   cursor: pointer;
   transition: transform 0.12s, box-shadow 0.12s;
 }

@@ -57,29 +57,29 @@ export function App() {
 
 ## Available Curves (21)
 
-| Curve | Tag | Description |
-|-------|-----|-------------|
-| `OriginalThinking` | Custom Rose Trail | Base circle carved by a sevenfold cosine — rotating seven-petal ring |
-| `ThinkingFive` | Custom Rose Trail | Fivefold term for a cleaner five-petal rhythm |
-| `ThinkingNine` | Custom Rose Trail | Ninefold term for denser, finely-braided inner turns |
-| `RoseOrbit` | r = cos(kθ) | Radius breathes with cos(7t) — orbit pulses |
-| `RoseCurve` | r = a cos(kθ) | Five evenly spaced lobes with breathing animation |
-| `RoseTwo` | r = a cos(2θ) | Broad opposing petals, gentle pulse |
-| `RoseThree` | r = a cos(3θ) | Three rotating petals, classic rose curve |
-| `RoseFour` | r = a cos(4θ) | Balanced cross-like rose with four petals |
-| `LissajousDrift` | x = sin(at), y = sin(bt) | Different frequencies create self-intersecting patterns |
-| `LemniscateBloom` | Bernoulli Lemniscate | Figure-eight infinity symbol that pinches and blooms |
-| `HypotrochoidLoop` | Inner Spirograph | Rolling-circle terms create nested turning loops |
-| `ThreePetalSpiral` | R=3, r=1, d=3 | Three large looping petals from spirograph math |
-| `FourPetalSpiral` | R=4, r=1, d=3 | Four-leaf clover spirograph pattern |
-| `FivePetalSpiral` | R=5, r=1, d=3 | Five-fold spirograph spiral |
-| `SixPetalSpiral` | R=6, r=1, d=3 | Six-fold spirograph spiral |
-| `ButterflyPhase` | Butterfly Curve | Rich inner structure with phase animation |
-| `CardioidGlow` | Cardioid | Heart-shaped curve with breathing glow |
-| `CardioidHeart` | r = a(1+cosθ) | Classic cardioid heart shape |
-| `HeartWave` | f(x) Heart Wave | Wavy heart line drawing |
-| `SpiralSearch` | Archimedean Spiral | Expanding spiral that sweeps outward |
-| `FourierFlow` | Fourier Curve | Sum of sine/cosine terms creating complex flowing shapes |
+| Curve | Tag | Preview |
+|-------|-----|---------|
+| `OriginalThinking` | Custom Rose Trail | ![Original Thinking](./docs/gifs/originalthinking.gif) |
+| `ThinkingFive` | Custom Rose Trail | ![Thinking Five](./docs/gifs/thinkingfive.gif) |
+| `ThinkingNine` | Custom Rose Trail | ![Thinking Nine](./docs/gifs/thinkingnine.gif) |
+| `RoseOrbit` | r = cos(kθ) | ![Rose Orbit](./docs/gifs/roseorbit.gif) |
+| `RoseCurve` | r = a cos(kθ) | ![Rose Curve](./docs/gifs/rosecurve.gif) |
+| `RoseTwo` | r = a cos(2θ) | ![Rose Two](./docs/gifs/rosetwo.gif) |
+| `RoseThree` | r = a cos(3θ) | ![Rose Three](./docs/gifs/rosethree.gif) |
+| `RoseFour` | r = a cos(4θ) | ![Rose Four](./docs/gifs/rosefour.gif) |
+| `LissajousDrift` | x = sin(at), y = sin(bt) | ![Lissajous Drift](./docs/gifs/lissajousdrift.gif) |
+| `LemniscateBloom` | Bernoulli Lemniscate | ![Lemniscate Bloom](./docs/gifs/lemniscatebloom.gif) |
+| `HypotrochoidLoop` | Inner Spirograph | ![Hypotrochoid Loop](./docs/gifs/hypotrochoidloop.gif) |
+| `ThreePetalSpiral` | R = 3, r = 1, d = 3 | ![Three-Petal Spiral](./docs/gifs/threepetalspiral.gif) |
+| `FourPetalSpiral` | R = 4, r = 1, d = 3 | ![Four-Petal Spiral](./docs/gifs/fourpetalspiral.gif) |
+| `FivePetalSpiral` | R = 5, r = 1, d = 3 | ![Five-Petal Spiral](./docs/gifs/fivepetalspiral.gif) |
+| `SixPetalSpiral` | R = 6, r = 1, d = 3 | ![Six-Petal Spiral](./docs/gifs/sixpetalspiral.gif) |
+| `ButterflyPhase` | Butterfly Curve | ![Butterfly Phase](./docs/gifs/butterflyphase.gif) |
+| `CardioidGlow` | Cardioid | ![Cardioid Glow](./docs/gifs/cardioidglow.gif) |
+| `CardioidHeart` | r = a(1+cosθ) | ![Cardioid Heart](./docs/gifs/cardioidheart.gif) |
+| `HeartWave` | f(x) Heart Wave | ![Heart Wave](./docs/gifs/heartwave.gif) |
+| `SpiralSearch` | Archimedean Spiral | ![Spiral Search](./docs/gifs/spiralsearch.gif) |
+| `FourierFlow` | Fourier Curve | ![Fourier Flow](./docs/gifs/fourierflow.gif) |
 
 ## Props
 

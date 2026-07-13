@@ -2,6 +2,24 @@
 
 [Mathematical curve loading animations](https://github.com/Paidax01/math-curve-loaders) as reusable React components. Zero CSS overhead — color via CSS `currentColor`, sizing via `style` or `className`.
 
+<div>
+  <a href="https://www.npmjs.com/package/@math-curve-loaders/react">
+    <img src="https://img.shields.io/npm/v/@math-curve-loaders/react.svg?style=flat-square&color=blue" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@math-curve-loaders/react">
+    <img src="https://img.shields.io/npm/dm/@math-curve-loaders/react?style=flat-square&color=blue" alt="npm downloads" />
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/npm/l/@math-curve-loaders/react.svg?style=flat-square&color=blue" alt="MIT license" />
+  </a>
+  <a href="https://github.com/themagicalmammal/math-curve-loaders-react">
+    <img src="https://img.shields.io/github/stars/themagicalmammal/math-curve-loaders-react?style=flat-square&color=blue" alt="GitHub stars" />
+  </a>
+</div>
+
+> **Install via npm:** `npm install @math-curve-loaders/react`
+> **View on [npm](https://www.npmjs.com/package/@math-curve-loaders/react)**
+
 ## Installation
 
 ```bash

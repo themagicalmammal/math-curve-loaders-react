@@ -39,29 +39,29 @@ export function App() {
 
 ## Available Curves (21)
 
-| Curve | Tag | Description |
-|-------|-----|-------------|
-| `OriginalThinking` | Custom Rose Trail | Base circle carved by a sevenfold cosine — rotating seven-petal ring |
-| `ThinkingFive` | Custom Rose Trail | Fivefold term for a cleaner five-petal rhythm |
-| `ThinkingNine` | Custom Rose Trail | Ninefold term for denser, finely-braided inner turns |
-| `RoseOrbit` | r = cos(kθ) | Radius breathes with cos(7t) — orbit pulses |
-| `RoseCurve` | r = a cos(kθ) | Five evenly spaced lobes with breathing animation |
-| `RoseTwo` | r = a cos(2θ) | Broad opposing petals, gentle pulse |
-| `RoseThree` | r = a cos(3θ) | Three rotating petals, classic rose curve |
-| `RoseFour` | r = a cos(4θ) | Balanced cross-like rose with four petals |
-| `LissajousDrift` | x = sin(at), y = sin(bt) | Different frequencies create self-intersecting patterns |
-| `LemniscateBloom` | Bernoulli Lemniscate | Figure-eight infinity symbol that pinches and blooms |
-| `HypotrochoidLoop` | Inner Spirograph | Rolling-circle terms create nested turning loops |
-| `ThreePetalSpiral` | R=3, r=1, d=3 | Three large looping petals from spirograph math |
-| `FourPetalSpiral` | R=4, r=1, d=3 | Four-leaf clover spirograph pattern |
-| `FivePetalSpiral` | R=5, r=1, d=3 | Five-fold spirograph spiral |
-| `SixPetalSpiral` | R=6, r=1, d=3 | Six-fold spirograph spiral |
-| `ButterflyPhase` | Butterfly Curve | Rich inner structure with phase animation |
-| `CardioidGlow` | Cardioid | Heart-shaped curve with breathing glow |
-| `CardioidHeart` | r = a(1+cosθ) | Classic cardioid heart shape |
-| `HeartWave` | f(x) Heart Wave | Wavy heart line drawing |
-| `SpiralSearch` | Archimedean Spiral | Expanding spiral that sweeps outward |
-| `FourierFlow` | Fourier Curve | Sum of sine/cosine terms creating complex flowing shapes |
+| Curve | Preview | Tag | Description |
+|-------|---------|-----|-------------|
+| `OriginalThinking` | [![](docs/gifs/originalthinking.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/originalthinking.gif) | Custom Rose Trail | Base circle carved by a sevenfold cosine — rotating seven-petal ring |
+| `ThinkingFive` | [![](docs/gifs/thinkingfive.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/thinkingfive.gif) | Custom Rose Trail | Fivefold term for a cleaner five-petal rhythm |
+| `ThinkingNine` | [![](docs/gifs/thinkingnine.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/thinkingnine.gif) | Custom Rose Trail | Ninefold term for denser, finely-braided inner turns |
+| `RoseOrbit` | [![](docs/gifs/roseorbit.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/roseorbit.gif) | r = cos(kθ) | Radius breathes with cos(7t) — orbit pulses |
+| `RoseCurve` | [![](docs/gifs/rosecurve.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosecurve.gif) | r = a cos(kθ) | Five evenly spaced lobes with breathing animation |
+| `RoseTwo` | [![](docs/gifs/rosetwo.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosetwo.gif) | r = a cos(2θ) | Broad opposing petals, gentle pulse |
+| `RoseThree` | [![](docs/gifs/rosethree.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosethree.gif) | r = a cos(3θ) | Three rotating petals, classic rose curve |
+| `RoseFour` | [![](docs/gifs/rosefour.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosefour.gif) | r = a cos(4θ) | Balanced cross-like rose with four petals |
+| `LissajousDrift` | [![](docs/gifs/lissajousdrift.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/lissajousdrift.gif) | x = sin(at), y = sin(bt) | Different frequencies create self-intersecting patterns |
+| `LemniscateBloom` | [![](docs/gifs/lemniscatebloom.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/lemniscatebloom.gif) | Bernoulli Lemniscate | Figure-eight infinity symbol that pinches and blooms |
+| `HypotrochoidLoop` | [![](docs/gifs/hypotrochoidloop.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/hypotrochoidloop.gif) | Inner Spirograph | Rolling-circle terms create nested turning loops |
+| `ThreePetalSpiral` | [![](docs/gifs/threepetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/threepetalspiral.gif) | R=3, r=1, d=3 | Three large looping petals from spirograph math |
+| `FourPetalSpiral` | [![](docs/gifs/fourpetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fourpetalspiral.gif) | R=4, r=1, d=3 | Four-leaf clover spirograph pattern |
+| `FivePetalSpiral` | [![](docs/gifs/fivepetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fivepetalspiral.gif) | R=5, r=1, d=3 | Five-fold spirograph spiral |
+| `SixPetalSpiral` | [![](docs/gifs/sixpetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/sixpetalspiral.gif) | R=6, r=1, d=3 | Six-fold spirograph spiral |
+| `ButterflyPhase` | [![](docs/gifs/butterflyphase.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/butterflyphase.gif) | Butterfly Curve | Rich inner structure with phase animation |
+| `CardioidGlow` | [![](docs/gifs/cardioidglow.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/cardioidglow.gif) | Cardioid | Heart-shaped curve with breathing glow |
+| `CardioidHeart` | [![](docs/gifs/cardioidheart.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/cardioidheart.gif) | r = a(1+cosθ) | Classic cardioid heart shape |
+| `HeartWave` | [![](docs/gifs/heartwave.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/heartwave.gif) | f(x) Heart Wave | Wavy heart line drawing |
+| `SpiralSearch` | [![](docs/gifs/spiralsearch.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/spiralsearch.gif) | Archimedean Spiral | Expanding spiral that sweeps outward |
+| `FourierFlow` | [![](docs/gifs/fourierflow.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fourierflow.gif) | Fourier Curve | Sum of sine/cosine terms creating complex flowing shapes |
 
 ## Props
 

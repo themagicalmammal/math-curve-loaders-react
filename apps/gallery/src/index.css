@@ -441,7 +441,7 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 24px 28px 12px;
+  padding: 24px 24px 12px;
   flex-shrink: 0;
   gap: 16px;
 }

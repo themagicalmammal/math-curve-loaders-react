@@ -208,23 +208,23 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
         style={{ '--card-color': curveColor } as React.CSSProperties}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ─── Modal Header ─── */}
-        <div className="modal-header">
-          <div>
-            <h2 className="modal-title">{curveConfig.name}</h2>
-            <span className="modal-tag">{curveConfig.tag}</span>
-          </div>
-          <button className="modal-close" onClick={onClose} aria-label="Close">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
-        </div>
-
         {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
-          {/* Left column: Header + Description + Preview + Code */}
+          {/* Left column: Header → Preview → Description → Code */}
           <div className="modal-left">
+            {/* ─── Header ─── */}
+            <div className="modal-header">
+              <div>
+                <h2 className="modal-title">{curveConfig.name}</h2>
+                <span className="modal-tag">{curveConfig.tag}</span>
+              </div>
+              <button className="modal-close" onClick={onClose} aria-label="Close">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+
             {/* ─── Preview ─── */}
             <div className="modal-preview-wrap">
               <div

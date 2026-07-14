@@ -348,6 +348,8 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
   }));
   const [showCode, setShowCode] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
+  const [showImport, setShowImport] = useState(true);
+  const [isImportCopied, setIsImportCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
   // Trigger preview entrance animation on mount
@@ -403,6 +405,12 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   }, [code]);
+
+  const handleImportCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(curveConfig.importLabel);
+    setIsImportCopied(true);
+    setTimeout(() => setIsImportCopied(false), 2000);
+  }, [curveConfig.importLabel]);
 
   const curveColor = curveConfig.color;
 
@@ -460,33 +468,62 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
 
             {/* ─── Import Statement ─── */}
             <div className="modal-section" style={{ marginBottom: 16 }}>
-              <div className="modal-section-label">Import</div>
-              <Highlight
-                theme={vsDark}
-                code={curveConfig.importLabel}
-                language="tsx"
-              >
-                {({
-                  className: prismClassName,
-                  style: prismStyle,
-                  tokens,
-                  getLineProps,
-                  getTokenProps,
-                }) => (
-                  <pre
-                    className={`prism-code ${prismClassName}`}
-                    style={{ ...prismStyle, padding: "14px 16px", fontSize: 12, lineHeight: 1.6, overflowX: "auto", fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: "transparent", margin: 0 }}
+              <div className="modal-code-header">
+                <span className="modal-section-label">Import</span>
+                <div style={{ display: "flex", gap: 6 }}>
+                  {showImport && (
+                    <button
+                      className="modal-code-btn"
+                      onClick={() => setShowImport(false)}
+                    >
+                      Hide
+                    </button>
+                  )}
+                  <button
+                    className="modal-code-btn"
+                    onClick={handleImportCopy}
+                    data-copied={isImportCopied}
                   >
-                    {tokens.map((line, lineIndex) => (
-                      <div key={lineIndex} {...getLineProps({ line })} style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}>
-                        {line.map((token, tokenIndex) => (
-                          <span key={tokenIndex} {...getTokenProps({ token })} />
-                        ))}
-                      </div>
-                    ))}
-                  </pre>
-                )}
-              </Highlight>
+                    {isImportCopied ? "✓ Copied" : "Copy"}
+                  </button>
+                  {!showImport && (
+                    <button
+                      className="modal-code-btn"
+                      onClick={() => setShowImport(true)}
+                    >
+                      Show
+                    </button>
+                  )}
+                </div>
+              </div>
+              {showImport && (
+                <Highlight
+                  theme={vsDark}
+                  code={curveConfig.importLabel}
+                  language="tsx"
+                >
+                  {({
+                    className: prismClassName,
+                    style: prismStyle,
+                    tokens,
+                    getLineProps,
+                    getTokenProps,
+                  }) => (
+                    <pre
+                      className={`prism-code ${prismClassName}`}
+                      style={{ ...prismStyle, padding: "14px 16px", fontSize: 12, lineHeight: 1.6, overflowX: "auto", fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: "transparent", margin: 0 }}
+                    >
+                      {tokens.map((line, lineIndex) => (
+                        <div key={lineIndex} {...getLineProps({ line })} style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}>
+                          {line.map((token, tokenIndex) => (
+                            <span key={tokenIndex} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+              )}
             </div>
 
             {/* ─── Code ─── */}

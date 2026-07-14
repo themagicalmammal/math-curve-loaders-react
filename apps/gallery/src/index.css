@@ -653,22 +653,20 @@ body::before {
 .params-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
-.param-divider {
-  height: 1px;
-  margin: 16px 0;
-  background: var(--border);
+/* Force exactly 2 columns regardless of responsive breakpoints */
+.params-grid-2 {
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
-.param-section-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-dim);
-  margin-bottom: 12px;
+.param-section-group {
+  margin-bottom: 24px;
+}
+
+.param-section-group:last-child {
+  margin-bottom: 0;
 }
 
 /* ─── Parameter Card ─── */

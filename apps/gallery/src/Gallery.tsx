@@ -569,51 +569,79 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
               </div>
             </div>
             <div className="modal-controls">
-              <div className="modal-controls-header">
-                <h3>Parameters</h3>
-                <button className="modal-reset" onClick={handleReset}>
-                  Reset
-                </button>
+              {/* Formula params grid */}
+              <div className="param-section-group">
+                <div className="modal-controls-header">
+                  <h3>Parameters</h3>
+                  <button
+                    className="modal-reset"
+                    onClick={() => {
+                      const defaults = Object.fromEntries(
+                        curveConfig.controls
+                          .filter((c) => c.section === 'formula')
+                          .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                      );
+                      setValues((prev) => ({ ...prev, ...defaults }));
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
+                <div className="params-grid params-grid-2">
+                  {curveConfig.controls
+                    .filter((ctrl) => ctrl.section === 'formula')
+                    .map((ctrl) => {
+                      const val =
+                        values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                      return (
+                        <ParamControl
+                          key={ctrl.key}
+                          ctrl={ctrl}
+                          value={val}
+                          curveColor={curveColor}
+                          onChange={handleValueChange}
+                        />
+                      );
+                    })}
+                </div>
               </div>
-              <div className="params-grid">
-                {curveConfig.controls
-                  .filter((ctrl) => ctrl.section === 'formula')
-                  .map((ctrl) => {
-                    const val =
-                      values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                    return (
-                      <ParamControl
-                        key={ctrl.key}
-                        ctrl={ctrl}
-                        value={val}
-                        curveColor={curveColor}
-                        onChange={handleValueChange}
-                      />
-                    );
-                  })}
+
+              {/* Animation params grid */}
+              <div className="param-section-group">
+                <div className="modal-controls-header">
+                  <h3>Animation</h3>
+                  <button
+                    className="modal-reset"
+                    onClick={() => {
+                      const defaults = Object.fromEntries(
+                        curveConfig.controls
+                          .filter((c) => c.section === 'visual')
+                          .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                      );
+                      setValues((prev) => ({ ...prev, ...defaults }));
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
+                <div className="params-grid params-grid-2">
+                  {curveConfig.controls
+                    .filter((ctrl) => ctrl.section === 'visual')
+                    .map((ctrl) => {
+                      const val =
+                        values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                      return (
+                        <ParamControl
+                          key={ctrl.key}
+                          ctrl={ctrl}
+                          value={val}
+                          curveColor={curveColor}
+                          onChange={handleValueChange}
+                        />
+                      );
+                    })}
+                </div>
               </div>
-              {curveConfig.controls.some((c) => c.section === 'formula') &&
-               curveConfig.controls.some((c) => c.section === 'visual') && (
-                <>
-                  <div className="param-divider" />
-                  <div className="param-section-label">Animation & Appearance</div>
-                </>
-              )}
-              {curveConfig.controls
-                .filter((ctrl) => ctrl.section === 'visual')
-                .map((ctrl) => {
-                  const val =
-                    values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                  return (
-                    <ParamControl
-                      key={ctrl.key}
-                      ctrl={ctrl}
-                      value={val}
-                      curveColor={curveColor}
-                      onChange={handleValueChange}
-                    />
-                  );
-                })}
             </div>
           </div>
         </div>

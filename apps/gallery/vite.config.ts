@@ -6,4 +6,12 @@ export default defineConfig({
   resolve: {
     conditions: ['import', 'require', 'default'],
   },
+  build: {
+    rollupOptions: {
+      input: [
+        'index.html',
+        'capture.html',
+      ],
+    },
+  },
 });

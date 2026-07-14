@@ -12,7 +12,8 @@
     "lint": "oxlint"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "puppeteer": "^25.3.0"
   },
   "engines": {
     "pnpm": ">=8.0.0"

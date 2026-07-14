@@ -159,6 +159,14 @@ export interface CurveModalProps {
 }
 
 export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, totalCurves }: CurveModalProps) {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   const [theme, _setTheme] = useState<"dark" | "light">(() => {
     if (typeof document !== "undefined") {
       const stored = document.documentElement.getAttribute("data-theme");

@@ -425,6 +425,9 @@ body::before {
   padding: 24px;
   animation: backdrop-enter 0.2s ease forwards;
   overflow-y: auto;
+  /* Prevent scroll on iOS when modal is open */
+  overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 @keyframes backdrop-enter {
@@ -1123,28 +1126,41 @@ body::before {
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 
+/* ── 1120px: 4-column grid ── */
 @media (max-width: 1120px) {
   .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 32px 24px 48px;
   }
 }
 
+/* ── 960px: 3-column grid, modal goes stacked ── */
 @media (max-width: 960px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 28px 20px 40px;
+  }
   .modal {
     max-width: 98vw;
+    max-height: calc(100vh - 32px);
   }
   .modal-body {
     flex-direction: column;
+    overflow: hidden;
   }
   .modal-right {
     flex: none;
     border-left: none;
     border-top: 1px solid var(--border-subtle);
-    padding: 20px 20px 16px 20px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
   }
   .modal-left {
-    padding: 0 20px 16px;
+    flex: none;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
   }
   .params-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1156,65 +1172,164 @@ body::before {
     flex-wrap: wrap;
     gap: 6px;
   }
-  .modal-code-wrap {
-    max-height: 320px;
-  }
 }
 
+/* ── 768px: 2-column grid, bottom-sheet modal, mobile typography ── */
 @media (max-width: 768px) {
   .gallery-header {
-    padding: 48px 20px 24px;
+    padding: 56px 16px 20px;
+  }
+  .gallery-title-group {
+    max-width: 100%;
   }
   .gallery-title {
-    font-size: 32px;
+    font-size: 28px;
+  }
+  .gallery-subtitle {
+    font-size: 14px;
+  }
+  .header-divider {
+    margin-top: 20px;
   }
   .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 24px 20px 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 20px 16px 32px;
   }
   .curve-card {
-    padding: 20px 10px 16px;
+    padding: 16px 8px 14px;
+  }
+  .curve-card-name {
+    font-size: 11px;
+  }
+  .curve-card-tag {
+    font-size: 10px;
   }
 
+  /* Bottom-sheet modal on mobile */
   .modal-backdrop {
     padding: 0;
     align-items: flex-end;
   }
   .modal {
     border-radius: 16px 16px 0 0;
-    max-height: 92vh;
+    max-height: 90vh;
+    max-width: 100vw;
   }
   .modal-body {
     flex-direction: column;
-  }
-  .modal-right {
-    flex: none;
-    border-left: none;
-    border-top: 1px solid var(--border-subtle);
-    padding: 16px 16px 16px;
+    overflow: hidden;
   }
   .modal-left {
-    padding: 0 16px 16px;
+    flex: none;
+    overflow-y: auto;
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 0 12px 12px;
+  }
+  .modal-right {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    padding: 12px 12px 40px;
   }
   .modal-header {
-    padding: 16px;
+    padding: 12px 12px 8px;
+  }
+  .modal-title {
+    font-size: 18px;
+  }
+  .modal-tag {
+    font-size: 10px;
+  }
+  .modal-body-description {
+    margin: 0 12px 14px;
+    font-size: 13px;
+  }
+  .modal-preview {
+    padding: 20px 16px;
+  }
+  .modal-section {
+    margin-bottom: 16px;
   }
   .params-grid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 640px) {
-  .params-grid {
-    grid-template-columns: 1fr;
+  .param-section-group {
+    margin-bottom: 16px;
+  }
+  .modal-formula-wrap {
+    padding: 10px 12px;
+  }
+  .math-formula {
+    font-size: 11px;
+  }
+  /* Swipe-to-close hint area */
+  .modal::after {
+    content: "";
+    width: 36px;
+    height: 4px;
+    border-radius: 99px;
+    background: var(--fg-muted);
+    opacity: 0.3;
+    margin: 4px auto 0;
+    display: block;
   }
 }
 
-@media (max-width: 600px) {
+/* ── 540px: compact everything ── */
+@media (max-width: 540px) {
+  .gallery-header {
+    padding: 52px 12px 16px;
+  }
+  .gallery-title {
+    font-size: 24px;
+  }
+  .gallery-subtitle {
+    font-size: 13px;
+  }
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 24px 16px 32px;
+    gap: 6px;
+    padding: 16px 12px 24px;
+  }
+  .curve-card {
+    padding: 14px 6px 12px;
+  }
+  .curve-card-preview {
+    border-radius: 6px;
+  }
+  .curve-card-name {
+    font-size: 10px;
+  }
+  .curve-card-tag {
+    font-size: 9px;
+  }
+
+  /* Compact modal */
+  .modal {
+    max-height: 95vh;
+  }
+  .modal-header {
+    padding: 10px 10px 6px;
+  }
+  .modal-title {
+    font-size: 16px;
+  }
+  .modal-body-description {
+    margin: 0 10px 12px;
+    font-size: 12px;
+  }
+  .modal-left {
+    padding: 0 10px 10px;
+  }
+  .modal-right {
+    padding: 10px 10px 40px;
+  }
+  .modal-section {
+    margin-bottom: 12px;
   }
 }
 

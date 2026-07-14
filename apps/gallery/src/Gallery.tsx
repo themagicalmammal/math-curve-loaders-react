@@ -1,28 +1,5 @@
-import { useState, useCallback, useEffect, useMemo, useRef } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { Highlight, themes } from "prism-react-renderer";
-import {
-  OriginalThinking,
-  ThinkingFive,
-  ThinkingNine,
-  RoseOrbit,
-  RoseCurve,
-  RoseTwo,
-  RoseThree,
-  RoseFour,
-  LissajousDrift,
-  LemniscateBloom,
-  HypotrochoidLoop,
-  ThreePetalSpiral,
-  FourPetalSpiral,
-  FivePetalSpiral,
-  SixPetalSpiral,
-  ButterflyPhase,
-  CardioidGlow,
-  CardioidHeart,
-  HeartWave,
-  SpiralSearch,
-  FourierFlow,
-} from "@math-curve-loaders/react";
 import type { CurveConfig } from "@math-curve-loaders/react";
 import {
   CURVE_CONFIGS,
@@ -35,175 +12,15 @@ import {
 const { vsDark } = themes;
 const { github: githubTheme } = themes;
 
-/* ─── Types ─── */
-
-export interface CurveCardDef {
-  name: string;
-  tag: string;
-  description: string;
-  Component: React.FC<{
-    config?: Partial<CurveConfig>;
-    className?: string;
-    style?: React.CSSProperties;
-  }>;
-  color: string;
-}
-
 /* ─── Curve list (for grid cards) ─── */
 
-const CURVES: CurveCardDef[] = [
-  {
-    name: "Original Thinking",
-    tag: "Custom Rose Trail",
-    description:
-      "A base circle carved by a sevenfold cosine term blooms into a rotating seven-petal ring.",
-    Component: OriginalThinking,
-    color: "#6366f1",
-  },
-  {
-    name: "Thinking Five",
-    tag: "Custom Rose Trail",
-    description:
-      "Replacing the sevenfold term with fivefold gives a cleaner five-petal rhythm.",
-    Component: ThinkingFive,
-    color: "#8b5cf6",
-  },
-  {
-    name: "Thinking Nine",
-    tag: "Custom Rose Trail",
-    description:
-      "A ninefold term packs more inner turns into the same orbit, denser and finely braided.",
-    Component: ThinkingNine,
-    color: "#a855f7",
-  },
-  {
-    name: "Rose Orbit",
-    tag: "r = cos(kθ)",
-    description:
-      "The radius expands and contracts with cos(7t), orbiting in repeated petals.",
-    Component: RoseOrbit,
-    color: "#d946ef",
-  },
-  {
-    name: "Rose Curve",
-    tag: "r = a cos(kθ)",
-    description: "Five evenly spaced lobes breathing with a living pulse.",
-    Component: RoseCurve,
-    color: "#ec4899",
-  },
-  {
-    name: "Rose Two",
-    tag: "r = a cos(2θ)",
-    description: "Broad opposing petals with a breathing pulse.",
-    Component: RoseTwo,
-    color: "#f43f5e",
-  },
-  {
-    name: "Rose Three",
-    tag: "r = a cos(3θ)",
-    description: "Three rotating petals with organic breathing modulation.",
-    Component: RoseThree,
-    color: "#ef4444",
-  },
-  {
-    name: "Rose Four",
-    tag: "r = a cos(4θ)",
-    description: "A balanced cross-like rose with a gentle pulse.",
-    Component: RoseFour,
-    color: "#f97316",
-  },
-  {
-    name: "Lissajous Drift",
-    tag: "x = sin(at), y = sin(bt)",
-    description: "Different sine frequencies weave crossing patterns.",
-    Component: LissajousDrift,
-    color: "#f59e0b",
-  },
-  {
-    name: "Lemniscate Bloom",
-    tag: "Bernoulli Lemniscate",
-    description: "A blooming infinity symbol with a pinched center.",
-    Component: LemniscateBloom,
-    color: "#eab308",
-  },
-  {
-    name: "Hypotrochoid Loop",
-    tag: "Inner Spirograph",
-    description: "Nested turns and offsets like a compact spirograph.",
-    Component: HypotrochoidLoop,
-    color: "#84cc16",
-  },
-  {
-    name: "Three-Petal Spiral",
-    tag: "R = 3, r = 1, d = 3",
-    description: "Three large looping petals breathing together.",
-    Component: ThreePetalSpiral,
-    color: "#22c55e",
-  },
-  {
-    name: "Four-Petal Spiral",
-    tag: "R = 4, r = 1, d = 3",
-    description: "Four-lobe spirograph pattern with breathing life.",
-    Component: FourPetalSpiral,
-    color: "#10b981",
-  },
-  {
-    name: "Five-Petal Spiral",
-    tag: "R = 5, r = 1, d = 3",
-    description: "Five-fold spirograph spiral with living pulse.",
-    Component: FivePetalSpiral,
-    color: "#14b8a6",
-  },
-  {
-    name: "Six-Petal Spiral",
-    tag: "R = 6, r = 1, d = 3",
-    description: "Six-fold spirograph spiral — dense and symmetrical.",
-    Component: SixPetalSpiral,
-    color: "#06b6d4",
-  },
-  {
-    name: "Butterfly Phase",
-    tag: "Butterfly Curve",
-    description: "Exponential and cosine terms create fluttering wings.",
-    Component: ButterflyPhase,
-    color: "#0ea5e9",
-  },
-  {
-    name: "Cardioid Glow",
-    tag: "Cardioid",
-    description: "A heart-shaped cardioid with breathing glow.",
-    Component: CardioidGlow,
-    color: "#3b82f6",
-  },
-  {
-    name: "Cardioid Heart",
-    tag: "r = a(1+cosθ)",
-    description: "The classic cardioid heart with gentle pulse.",
-    Component: CardioidHeart,
-    color: "#7c3aed",
-  },
-  {
-    name: "Heart Wave",
-    tag: "f(x) Heart Wave",
-    description: "A wavy heart-shaped curve with organic motion.",
-    Component: HeartWave,
-    color: "#e11d48",
-  },
-  {
-    name: "Spiral Search",
-    tag: "Archimedean Spiral",
-    description: "An expanding spiral with breathing turns.",
-    Component: SpiralSearch,
-    color: "#6d28d8",
-  },
-  {
-    name: "Fourier Flow",
-    tag: "Fourier Curve",
-    description: "Sine and cosine harmonics creating a flowing shape.",
-    Component: FourierFlow,
-    color: "#4f46e5",
-  },
-];
+const CURVE_CARDS = CURVE_CONFIGS.map((c) => ({
+  name: c.name,
+  tag: c.tag,
+  description: c.description,
+  Component: c.component,
+  color: c.color,
+}));
 
 /* ─── Code Block ─── */
 
@@ -342,7 +159,7 @@ export interface CurveModalProps {
 }
 
 export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, totalCurves }: CurveModalProps) {
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
+  const [theme, _setTheme] = useState<"dark" | "light">(() => {
     if (typeof document !== "undefined") {
       const stored = document.documentElement.getAttribute("data-theme");
       if (stored === "light") return "light";
@@ -404,7 +221,7 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
     [curveConfig.controls],
   );
 
-  const handleReset = useCallback(() => {
+  const _handleReset = useCallback(() => {
     setValues({ ...curveConfig.defaults });
   }, [curveConfig]);
 
@@ -820,7 +637,7 @@ export default function Gallery({
       </header>
 
       <div className="gallery-grid">
-        {CURVES.map((curve, idx) => {
+        {CURVE_CARDS.map((curve, idx) => {
           const playgroundConfig = CURVE_CONFIGS.find(
             (c) => c.name === curve.name,
           );
@@ -845,7 +662,7 @@ export default function Gallery({
                   style={{
                     width: "64%",
                     height: "64%",
-                    color: hoveredName === curve.name ? curve.color : "#e0e0e0",
+                    color: hoveredName === curve.name ? curve.color : "var(--card-fg)",
                   }}
                 />
               </div>

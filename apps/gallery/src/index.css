@@ -36,6 +36,7 @@
   --accent-1: rgba(99, 102, 241, 0.06);
   --accent-2: rgba(168, 85, 247, 0.04);
   --slider-track: #1f1f23;
+  --card-fg: #fafafa;
 }
 
 /* LIGHT — clean, airy, bright */
@@ -69,6 +70,7 @@
   --accent-1: rgba(99, 102, 241, 0.04);
   --accent-2: rgba(168, 85, 247, 0.03);
   --slider-track: #e4e4e7;
+  --card-fg: #09090b;
 }
 
 /* ─── Reset & Base ─── */

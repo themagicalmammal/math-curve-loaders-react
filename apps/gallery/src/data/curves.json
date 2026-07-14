@@ -26,16 +26,16 @@
     {
       "key": "particleCount",
       "label": "Particles",
-      "description": "Number of particles in the animated trail — more creates a denser, fuller trail.",
+      "description": "Number of particles in the animated trail \u2014 more creates a denser, fuller trail.",
       "min": 24,
-      "max": 140,
+      "max": 250,
       "step": 1,
       "section": "visual"
     },
     {
       "key": "trailSpan",
       "label": "Trail",
-      "description": "How long the particle trail appears — longer trails create smoother, more continuous paths.",
+      "description": "How long the particle trail appears \u2014 longer trails create smoother, more continuous paths.",
       "min": 0.12,
       "max": 0.68,
       "step": 0.01,
@@ -44,7 +44,7 @@
     {
       "key": "durationMs",
       "label": "Loop",
-      "description": "Duration of one full animation loop cycle — controls the overall animation speed.",
+      "description": "Duration of one full animation loop cycle \u2014 controls the overall animation speed.",
       "min": 2400,
       "max": 12000,
       "step": 100,
@@ -53,7 +53,7 @@
     {
       "key": "pulseDurationMs",
       "label": "Pulse",
-      "description": "Speed of the breathing/pulse modulation — how fast the shape expands and contracts.",
+      "description": "Speed of the breathing/pulse modulation \u2014 how fast the shape expands and contracts.",
       "min": 1800,
       "max": 10000,
       "step": 100,
@@ -98,7 +98,7 @@
         {
           "key": "petalCount",
           "label": "Petals",
-          "description": "Number of petals or lobes in the rose curve — higher values create denser patterns.",
+          "description": "Number of petals or lobes in the rose curve \u2014 higher values create denser patterns.",
           "min": 3,
           "max": 12,
           "step": 1,
@@ -107,14 +107,14 @@
         {
           "key": "curveScale",
           "label": "Scale",
-          "description": "Overall scaling factor for the curve — larger values stretch the curve wider.",
+          "description": "Overall scaling factor for the curve \u2014 larger values stretch the curve wider.",
           "min": 2.5,
           "max": 5.5,
           "step": 0.1,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(7t)) × 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s × sin(7t)) × 3.5\ns = ε(t)",
+      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s \u00d7 cos(7t)) \u00d7 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s \u00d7 sin(7t)) \u00d7 3.5\ns = \u03b5(t)",
       "importLabel": "import { OriginalThinking } from \"@math-curve-loaders/react\";"
     },
     {
@@ -154,7 +154,7 @@
         {
           "key": "petalCount",
           "label": "Petals",
-          "description": "Number of petals or lobes in the rose curve — higher values create denser patterns.",
+          "description": "Number of petals or lobes in the rose curve \u2014 higher values create denser patterns.",
           "min": 3,
           "max": 12,
           "step": 1,
@@ -163,14 +163,14 @@
         {
           "key": "curveScale",
           "label": "Scale",
-          "description": "Overall scaling factor for the curve — larger values stretch the curve wider.",
+          "description": "Overall scaling factor for the curve \u2014 larger values stretch the curve wider.",
           "min": 2.5,
           "max": 5.5,
           "step": 0.1,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(5t)) × 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s × sin(5t)) × 3.5\ns = ε(t)",
+      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s \u00d7 cos(5t)) \u00d7 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s \u00d7 sin(5t)) \u00d7 3.5\ns = \u03b5(t)",
       "importLabel": "import { ThinkingFive } from \"@math-curve-loaders/react\";"
     },
     {
@@ -210,7 +210,7 @@
         {
           "key": "petalCount",
           "label": "Petals",
-          "description": "Number of petals or lobes in the rose curve — higher values create denser patterns.",
+          "description": "Number of petals or lobes in the rose curve \u2014 higher values create denser patterns.",
           "min": 3,
           "max": 12,
           "step": 1,
@@ -219,19 +219,19 @@
         {
           "key": "curveScale",
           "label": "Scale",
-          "description": "Overall scaling factor for the curve — larger values stretch the curve wider.",
+          "description": "Overall scaling factor for the curve \u2014 larger values stretch the curve wider.",
           "min": 2.5,
           "max": 5.5,
           "step": 0.1,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(9t)) × 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s × sin(9t)) × 3.5\ns = ε(t)",
+      "formula": "x(t) = 50 + (8.0 cos(t) - 4.0 s \u00d7 cos(9t)) \u00d7 3.5\ny(t) = 50 + (8.0 sin(t) - 4.0 s \u00d7 sin(9t)) \u00d7 3.5\ns = \u03b5(t)",
       "importLabel": "import { ThinkingNine } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Rose Orbit",
-      "tag": "r = cos(kθ)",
+      "tag": "r = cos(k\u03b8)",
       "description": "The radius expands and contracts with cos(7t), so the orbit breathes as it spins.",
       "component": "RoseOrbit",
       "defaults": {
@@ -266,7 +266,7 @@
         {
           "key": "petalCount",
           "label": "k",
-          "description": "The k parameter in cos(kθ) — controls the number of lobes.",
+          "description": "The k parameter in cos(k\u03b8) \u2014 controls the number of lobes.",
           "min": 3,
           "max": 12,
           "step": 1,
@@ -282,12 +282,12 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = 8.0 + 3.5 × cos(7 × t)\nx(t) = r(t) × cos(t) × 3.3 + 50\ny(t) = r(t) × sin(t) × 3.3 + 50",
+      "formula": "r(t) = 8.0 + 3.5 \u00d7 cos(7 \u00d7 t)\nx(t) = r(t) \u00d7 cos(t) \u00d7 3.3 + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 3.3 + 50",
       "importLabel": "import { RoseOrbit } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Rose Curve",
-      "tag": "r = a cos(kθ)",
+      "tag": "r = a cos(k\u03b8)",
       "description": "Using r = a cos(5t) creates five evenly spaced lobes, the breathing modulation gives them a living pulse.",
       "component": "RoseCurve",
       "defaults": {
@@ -306,7 +306,7 @@
         {
           "key": "roseA",
           "label": "a",
-          "description": "The \"a\" parameter in r = a cos(kθ) — sets the base size of the rose.",
+          "description": "The \"a\" parameter in r = a cos(k\u03b8) \u2014 sets the base size of the rose.",
           "min": 5,
           "max": 14,
           "step": 0.1,
@@ -315,7 +315,7 @@
         {
           "key": "roseABoost",
           "label": "a boost",
-          "description": "Sinusoidal modulation on \"a\" — adds organic variation to the radius.",
+          "description": "Sinusoidal modulation on \"a\" \u2014 adds organic variation to the radius.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -324,7 +324,7 @@
         {
           "key": "roseBreathBase",
           "label": "Base pulse",
-          "description": "Base breathing value — the minimum scale of the pulse animation.",
+          "description": "Base breathing value \u2014 the minimum scale of the pulse animation.",
           "min": 0.3,
           "max": 1.2,
           "step": 0.01,
@@ -333,7 +333,7 @@
         {
           "key": "roseBreathBoost",
           "label": "Pulse boost",
-          "description": "Amplitude of the breathing pulse — how much the shape expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the shape expands and contracts.",
           "min": 0,
           "max": 0.8,
           "step": 0.01,
@@ -342,7 +342,7 @@
         {
           "key": "roseK",
           "label": "k",
-          "description": "The \"k\" parameter in r = a cos(kθ) — controls the number of lobes.",
+          "description": "The \"k\" parameter in r = a cos(k\u03b8) \u2014 controls the number of lobes.",
           "min": 2,
           "max": 10,
           "step": 1,
@@ -358,12 +358,12 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = (roseA + roseABoost × sin(t)) × cos(roseK × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))\nx(t) = r(t) × cos(t) × roseScale + 50\ny(t) = r(t) × sin(t) × roseScale + 50",
+      "formula": "r(t) = (roseA + roseABoost \u00d7 sin(t)) \u00d7 cos(roseK \u00d7 t) \u00d7 (roseBreathBase + roseBreathBoost \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos(t) \u00d7 roseScale + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 roseScale + 50",
       "importLabel": "import { RoseCurve } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Rose Two",
-      "tag": "r = a cos(2θ)",
+      "tag": "r = a cos(2\u03b8)",
       "description": "With k = 2, the cosine radius forms broad opposing petals, the breathing adds life.",
       "component": "RoseTwo",
       "defaults": {
@@ -381,7 +381,7 @@
         {
           "key": "roseA",
           "label": "a",
-          "description": "The \"a\" parameter in r = a cos(kθ) — sets the base size of the rose.",
+          "description": "The \"a\" parameter in r = a cos(k\u03b8) \u2014 sets the base size of the rose.",
           "min": 5,
           "max": 14,
           "step": 0.1,
@@ -390,7 +390,7 @@
         {
           "key": "roseABoost",
           "label": "a boost",
-          "description": "Sinusoidal modulation on \"a\" — adds organic variation to the radius.",
+          "description": "Sinusoidal modulation on \"a\" \u2014 adds organic variation to the radius.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -399,7 +399,7 @@
         {
           "key": "roseBreathBase",
           "label": "Base pulse",
-          "description": "Base breathing value — the minimum scale of the pulse animation.",
+          "description": "Base breathing value \u2014 the minimum scale of the pulse animation.",
           "min": 0.3,
           "max": 1.2,
           "step": 0.01,
@@ -408,7 +408,7 @@
         {
           "key": "roseBreathBoost",
           "label": "Pulse boost",
-          "description": "Amplitude of the breathing pulse — how much the shape expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the shape expands and contracts.",
           "min": 0,
           "max": 0.8,
           "step": 0.01,
@@ -424,12 +424,12 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = (roseA + roseABoost × sin(t)) × cos(2 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))\nx(t) = r(t) × cos(t) × roseScale + 50\ny(t) = r(t) × sin(t) × roseScale + 50",
+      "formula": "r(t) = (roseA + roseABoost \u00d7 sin(t)) \u00d7 cos(2 \u00d7 t) \u00d7 (roseBreathBase + roseBreathBoost \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos(t) \u00d7 roseScale + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 roseScale + 50",
       "importLabel": "import { RoseTwo } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Rose Three",
-      "tag": "r = a cos(3θ)",
+      "tag": "r = a cos(3\u03b8)",
       "description": "With k = 3, the curve resolves into three rotating petals, the breathing modulation gives a living pulse.",
       "component": "RoseThree",
       "defaults": {
@@ -447,7 +447,7 @@
         {
           "key": "roseA",
           "label": "a",
-          "description": "The \"a\" parameter in r = a cos(kθ) — sets the base size of the rose.",
+          "description": "The \"a\" parameter in r = a cos(k\u03b8) \u2014 sets the base size of the rose.",
           "min": 5,
           "max": 14,
           "step": 0.1,
@@ -456,7 +456,7 @@
         {
           "key": "roseABoost",
           "label": "a boost",
-          "description": "Sinusoidal modulation on \"a\" — adds organic variation to the radius.",
+          "description": "Sinusoidal modulation on \"a\" \u2014 adds organic variation to the radius.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -465,7 +465,7 @@
         {
           "key": "roseBreathBase",
           "label": "Base pulse",
-          "description": "Base breathing value — the minimum scale of the pulse animation.",
+          "description": "Base breathing value \u2014 the minimum scale of the pulse animation.",
           "min": 0.3,
           "max": 1.2,
           "step": 0.01,
@@ -474,7 +474,7 @@
         {
           "key": "roseBreathBoost",
           "label": "Pulse boost",
-          "description": "Amplitude of the breathing pulse — how much the shape expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the shape expands and contracts.",
           "min": 0,
           "max": 0.8,
           "step": 0.01,
@@ -490,12 +490,12 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = (roseA + roseABoost × sin(t)) × cos(3 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))\nx(t) = r(t) × cos(t) × roseScale + 50\ny(t) = r(t) × sin(t) × roseScale + 50",
+      "formula": "r(t) = (roseA + roseABoost \u00d7 sin(t)) \u00d7 cos(3 \u00d7 t) \u00d7 (roseBreathBase + roseBreathBoost \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos(t) \u00d7 roseScale + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 roseScale + 50",
       "importLabel": "import { RoseThree } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Rose Four",
-      "tag": "r = a cos(4θ)",
+      "tag": "r = a cos(4\u03b8)",
       "description": "With k = 4, the petals settle into a balanced cross-like rose, the breathing gives it life.",
       "component": "RoseFour",
       "defaults": {
@@ -513,7 +513,7 @@
         {
           "key": "roseA",
           "label": "a",
-          "description": "The \"a\" parameter in r = a cos(kθ) — sets the base size of the rose.",
+          "description": "The \"a\" parameter in r = a cos(k\u03b8) \u2014 sets the base size of the rose.",
           "min": 5,
           "max": 14,
           "step": 0.1,
@@ -522,7 +522,7 @@
         {
           "key": "roseABoost",
           "label": "a boost",
-          "description": "Sinusoidal modulation on \"a\" — adds organic variation to the radius.",
+          "description": "Sinusoidal modulation on \"a\" \u2014 adds organic variation to the radius.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -531,7 +531,7 @@
         {
           "key": "roseBreathBase",
           "label": "Base pulse",
-          "description": "Base breathing value — the minimum scale of the pulse animation.",
+          "description": "Base breathing value \u2014 the minimum scale of the pulse animation.",
           "min": 0.3,
           "max": 1.2,
           "step": 0.01,
@@ -540,7 +540,7 @@
         {
           "key": "roseBreathBoost",
           "label": "Pulse boost",
-          "description": "Amplitude of the breathing pulse — how much the shape expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the shape expands and contracts.",
           "min": 0,
           "max": 0.8,
           "step": 0.01,
@@ -556,7 +556,7 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = (roseA + roseABoost × sin(t)) × cos(4 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))\nx(t) = r(t) × cos(t) × roseScale + 50\ny(t) = r(t) × sin(t) × roseScale + 50",
+      "formula": "r(t) = (roseA + roseABoost \u00d7 sin(t)) \u00d7 cos(4 \u00d7 t) \u00d7 (roseBreathBase + roseBreathBoost \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos(t) \u00d7 roseScale + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 roseScale + 50",
       "importLabel": "import { RoseFour } from \"@math-curve-loaders/react\";"
     },
     {
@@ -580,7 +580,7 @@
         {
           "key": "lissajousAmp",
           "label": "Amplitude",
-          "description": "Base amplitude of the Lissajous curve — controls the overall size.",
+          "description": "Base amplitude of the Lissajous curve \u2014 controls the overall size.",
           "min": 8,
           "max": 36,
           "step": 0.5,
@@ -589,7 +589,7 @@
         {
           "key": "lissajousAmpBoost",
           "label": "Amp pulse",
-          "description": "Pulsing modulation on the amplitude — adds a breathing effect.",
+          "description": "Pulsing modulation on the amplitude \u2014 adds a breathing effect.",
           "min": 0,
           "max": 12,
           "step": 0.1,
@@ -616,20 +616,20 @@
         {
           "key": "lissajousYScale",
           "label": "Y scale",
-          "description": "Vertical scaling factor — stretches or compresses the y-axis.",
+          "description": "Vertical scaling factor \u2014 stretches or compresses the y-axis.",
           "min": 0.4,
           "max": 1.4,
           "step": 0.01,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (lissajousAmp + lissajousAmpBoost × sin(pulseTime)) × sin(lissajousAX × t + lissajousPhase) + 50\ny(t) = x(t) × sin(lissajousBY × t) + 50",
+      "formula": "x(t) = (lissajousAmp + lissajousAmpBoost \u00d7 sin(pulseTime)) \u00d7 sin(lissajousAX \u00d7 t + lissajousPhase) + 50\ny(t) = x(t) \u00d7 sin(lissajousBY \u00d7 t) + 50",
       "importLabel": "import { LissajousDrift } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Lemniscate Bloom",
       "tag": "Bernoulli Lemniscate",
-      "description": "The 1 + sin²t denominator pinches the center while preserving the figure-eight shape, creating a blooming infinity symbol.",
+      "description": "The 1 + sin\u00b2t denominator pinches the center while preserving the figure-eight shape, creating a blooming infinity symbol.",
       "component": "LemniscateBloom",
       "defaults": {
         "lemniscateA": 24,
@@ -643,7 +643,7 @@
         {
           "key": "lemniscateA",
           "label": "a",
-          "description": "The \"a\" parameter of the Bernoulli lemniscate — sets the size of the figure-eight.",
+          "description": "The \"a\" parameter of the Bernoulli lemniscate \u2014 sets the size of the figure-eight.",
           "min": 8,
           "max": 30,
           "step": 0.5,
@@ -652,14 +652,14 @@
         {
           "key": "lemniscateBoost",
           "label": "Pulse",
-          "description": "Sinusoidal pulse added to the radius — creates the blooming animation.",
+          "description": "Sinusoidal pulse added to the radius \u2014 creates the blooming animation.",
           "min": 0,
           "max": 12,
           "step": 0.1,
           "section": "formula"
         }
       ],
-      "formula": "r(t) = lemniscateA × cos(t) / (1 + sin²(t)) + lemniscateBoost × sin(pulseTime)\nx(t) = r(t) × cos(t) + 50\ny(t) = r(t) × sin(t) + 50",
+      "formula": "r(t) = lemniscateA \u00d7 cos(t) / (1 + sin\u00b2(t)) + lemniscateBoost \u00d7 sin(pulseTime)\nx(t) = r(t) \u00d7 cos(t) + 50\ny(t) = r(t) \u00d7 sin(t) + 50",
       "importLabel": "import { LemniscateBloom } from \"@math-curve-loaders/react\";"
     },
     {
@@ -692,7 +692,7 @@
         {
           "key": "spiror",
           "label": "r",
-          "description": "Radius of the rolling inner circle — together with R determines the pattern.",
+          "description": "Radius of the rolling inner circle \u2014 together with R determines the pattern.",
           "min": 1,
           "max": 5,
           "step": 0.1,
@@ -717,7 +717,7 @@
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (spiroR - spiror) × cos(t) + spirod × cos((spiroR - spiror) / spiror × t)\ny(t) = (spiroR - spiror) × sin(t) - spirod × sin((spiroR - spiror) / spiror × t)\nx' = (x + spirodBoost × sin(pulseTime)) × spiroScale + 50\ny' = (y + spirodBoost × sin(pulseTime)) × spiroScale + 50",
+      "formula": "x(t) = (spiroR - spiror) \u00d7 cos(t) + spirod \u00d7 cos((spiroR - spiror) / spiror \u00d7 t)\ny(t) = (spiroR - spiror) \u00d7 sin(t) - spirod \u00d7 sin((spiroR - spiror) / spiror \u00d7 t)\nx' = (x + spirodBoost \u00d7 sin(pulseTime)) \u00d7 spiroScale + 50\ny' = (y + spirodBoost \u00d7 sin(pulseTime)) \u00d7 spiroScale + 50",
       "importLabel": "import { HypotrochoidLoop } from \"@math-curve-loaders/react\";"
     },
     {
@@ -776,20 +776,20 @@
         {
           "key": "spiralBreath",
           "label": "Pulse",
-          "description": "Breathing modulation amplitude on the y-axis — adds a living pulse.",
+          "description": "Breathing modulation amplitude on the y-axis \u2014 adds a living pulse.",
           "min": 0,
           "max": 1,
           "step": 0.05,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (spiralR - spiralr) × cos(t) + spirald × cos((spiralR - spiralr) / spiralr × t)\ny(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))\nx' = x × spiralScale + 50\ny' = y × spiralScale + 50",
+      "formula": "x(t) = (spiralR - spiralr) \u00d7 cos(t) + spirald \u00d7 cos((spiralR - spiralr) / spiralr \u00d7 t)\ny(t) = (spiralR - spiralr) \u00d7 sin(t) - spirald \u00d7 sin((spiralR - spiralr) / spiralr \u00d7 t) \u00d7 (1 + spiralBreath \u00d7 sin(pulseTime))\nx' = x \u00d7 spiralScale + 50\ny' = y \u00d7 spiralScale + 50",
       "importLabel": "import { ThreePetalSpiral } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Four-Petal Spiral",
       "tag": "R = 4, r = 1, d = 3",
-      "description": "Four-lobe spirograph pattern from R=4, r=1, d=3 — the breathing adds life to each petal.",
+      "description": "Four-lobe spirograph pattern from R=4, r=1, d=3 \u2014 the breathing adds life to each petal.",
       "component": "FourPetalSpiral",
       "defaults": {
         "spiralR": 4,
@@ -842,20 +842,20 @@
         {
           "key": "spiralBreath",
           "label": "Pulse",
-          "description": "Breathing modulation amplitude on the y-axis — adds a living pulse.",
+          "description": "Breathing modulation amplitude on the y-axis \u2014 adds a living pulse.",
           "min": 0,
           "max": 1,
           "step": 0.05,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (spiralR - spiralr) × cos(t) + spirald × cos((spiralR - spiralr) / spiralr × t)\ny(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))\nx' = x × spiralScale + 50\ny' = y × spiralScale + 50",
+      "formula": "x(t) = (spiralR - spiralr) \u00d7 cos(t) + spirald \u00d7 cos((spiralR - spiralr) / spiralr \u00d7 t)\ny(t) = (spiralR - spiralr) \u00d7 sin(t) - spirald \u00d7 sin((spiralR - spiralr) / spiralr \u00d7 t) \u00d7 (1 + spiralBreath \u00d7 sin(pulseTime))\nx' = x \u00d7 spiralScale + 50\ny' = y \u00d7 spiralScale + 50",
       "importLabel": "import { FourPetalSpiral } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Five-Petal Spiral",
       "tag": "R = 5, r = 1, d = 3",
-      "description": "Five-fold spirograph spiral — the breathing modulation gives each petal a living pulse.",
+      "description": "Five-fold spirograph spiral \u2014 the breathing modulation gives each petal a living pulse.",
       "component": "FivePetalSpiral",
       "defaults": {
         "spiralR": 5,
@@ -908,20 +908,20 @@
         {
           "key": "spiralBreath",
           "label": "Pulse",
-          "description": "Breathing modulation amplitude on the y-axis — adds a living pulse.",
+          "description": "Breathing modulation amplitude on the y-axis \u2014 adds a living pulse.",
           "min": 0,
           "max": 1,
           "step": 0.05,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (spiralR - spiralr) × cos(t) + spirald × cos((spiralR - spiralr) / spiralr × t)\ny(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))\nx' = x × spiralScale + 50\ny' = y × spiralScale + 50",
+      "formula": "x(t) = (spiralR - spiralr) \u00d7 cos(t) + spirald \u00d7 cos((spiralR - spiralr) / spiralr \u00d7 t)\ny(t) = (spiralR - spiralr) \u00d7 sin(t) - spirald \u00d7 sin((spiralR - spiralr) / spiralr \u00d7 t) \u00d7 (1 + spiralBreath \u00d7 sin(pulseTime))\nx' = x \u00d7 spiralScale + 50\ny' = y \u00d7 spiralScale + 50",
       "importLabel": "import { FivePetalSpiral } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Six-Petal Spiral",
       "tag": "R = 6, r = 1, d = 3",
-      "description": "Six-fold spirograph spiral — dense, symmetrical, with breathing modulation.",
+      "description": "Six-fold spirograph spiral \u2014 dense, symmetrical, with breathing modulation.",
       "component": "SixPetalSpiral",
       "defaults": {
         "spiralR": 6,
@@ -974,20 +974,20 @@
         {
           "key": "spiralBreath",
           "label": "Pulse",
-          "description": "Breathing modulation amplitude on the y-axis — adds a living pulse.",
+          "description": "Breathing modulation amplitude on the y-axis \u2014 adds a living pulse.",
           "min": 0,
           "max": 1,
           "step": 0.05,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = (spiralR - spiralr) × cos(t) + spirald × cos((spiralR - spiralr) / spiralr × t)\ny(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))\nx' = x × spiralScale + 50\ny' = y × spiralScale + 50",
+      "formula": "x(t) = (spiralR - spiralr) \u00d7 cos(t) + spirald \u00d7 cos((spiralR - spiralr) / spiralr \u00d7 t)\ny(t) = (spiralR - spiralr) \u00d7 sin(t) - spirald \u00d7 sin((spiralR - spiralr) / spiralr \u00d7 t) \u00d7 (1 + spiralBreath \u00d7 sin(pulseTime))\nx' = x \u00d7 spiralScale + 50\ny' = y \u00d7 spiralScale + 50",
       "importLabel": "import { SixPetalSpiral } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Butterfly Phase",
       "tag": "Butterfly Curve",
-      "description": "A rich butterfly curve with exponential decay creating delicate wings — phase animation adds depth.",
+      "description": "A rich butterfly curve with exponential decay creating delicate wings \u2014 phase animation adds depth.",
       "component": "ButterflyPhase",
       "defaults": {
         "butterflyTurns": 14,
@@ -995,7 +995,7 @@
         "butterflyPulse": 0.55,
         "butterflyCosWeight": 2.5,
         "butterflyPower": 4,
-        "particleCount": 88,
+        "particleCount": 110,
         "trailSpan": 0.12,
         "durationMs": 9000,
         "pulseDurationMs": 7000
@@ -1004,7 +1004,7 @@
         {
           "key": "butterflyTurns",
           "label": "Turns",
-          "description": "Number of turns in the butterfly wing pattern — higher values add more detail.",
+          "description": "Number of turns in the butterfly wing pattern \u2014 higher values add more detail.",
           "min": 6,
           "max": 18,
           "step": 0.5,
@@ -1022,7 +1022,7 @@
         {
           "key": "butterflyPulse",
           "label": "Pulse",
-          "description": "Breathing modulation amplitude — how much the butterfly expands and contracts.",
+          "description": "Breathing modulation amplitude \u2014 how much the butterfly expands and contracts.",
           "min": 0,
           "max": 1.2,
           "step": 0.01,
@@ -1031,7 +1031,7 @@
         {
           "key": "butterflyCosWeight",
           "label": "Cos weight",
-          "description": "Weight of the secondary cosine term — controls wing complexity.",
+          "description": "Weight of the secondary cosine term \u2014 controls wing complexity.",
           "min": 0.5,
           "max": 4,
           "step": 0.05,
@@ -1040,20 +1040,20 @@
         {
           "key": "butterflyPower",
           "label": "Power",
-          "description": "Power of the inner cosine modulation — affects wing pattern density.",
+          "description": "Power of the inner cosine modulation \u2014 affects wing pattern density.",
           "min": 2,
           "max": 8,
           "step": 1,
           "section": "formula"
         }
       ],
-      "formula": "r(t) = e^cos(t) - 2cos(4×turns×t) + sin³t + butterflyCosWeight × cos(6×butterflyPower×t)\nx(t) = r(t) × cos t × butterflyScale + 50\ny(t) = r(t) × sin t × butterflyScale + 50\npulse = 1 + butterflyPulse × sin(pulseTime)",
+      "formula": "r(t) = e^cos(t) - 2cos(4\u00d7turns\u00d7t) + sin\u00b3t + butterflyCosWeight \u00d7 cos(6\u00d7butterflyPower\u00d7t)\nx(t) = r(t) \u00d7 cos t \u00d7 butterflyScale + 50\ny(t) = r(t) \u00d7 sin t \u00d7 butterflyScale + 50\npulse = 1 + butterflyPulse \u00d7 sin(pulseTime)",
       "importLabel": "import { ButterflyPhase } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Cardioid Glow",
       "tag": "Cardioid",
-      "description": "A heart-shaped cardioid curve with breathing glow — the pulse modulation gives it life.",
+      "description": "A heart-shaped cardioid curve with breathing glow \u2014 the pulse modulation gives it life.",
       "component": "CardioidGlow",
       "defaults": {
         "cardioidA": 9.2,
@@ -1068,7 +1068,7 @@
         {
           "key": "cardioidA",
           "label": "a",
-          "description": "The \"a\" parameter in the cardioid equation — sets the base size.",
+          "description": "The \"a\" parameter in the cardioid equation \u2014 sets the base size.",
           "min": 4,
           "max": 14,
           "step": 0.1,
@@ -1077,7 +1077,7 @@
         {
           "key": "cardioidPulse",
           "label": "Pulse",
-          "description": "Amplitude of the breathing pulse — how much the cardioid expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the cardioid expands and contracts.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -1093,13 +1093,13 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = cardioidA × (1 - cos(t)) × (1 + cardioidPulse × sin(pulseTime))\nx(t) = r(t) × cos t × cardioidScale + 50\ny(t) = r(t) × sin t × cardioidScale + 50",
+      "formula": "r(t) = cardioidA \u00d7 (1 - cos(t)) \u00d7 (1 + cardioidPulse \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos t \u00d7 cardioidScale + 50\ny(t) = r(t) \u00d7 sin t \u00d7 cardioidScale + 50",
       "importLabel": "import { CardioidGlow } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Cardioid Heart",
-      "tag": "r = a(1+cosθ)",
-      "description": "The classic cardioid heart shape — the breathing adds a gentle pulse.",
+      "tag": "r = a(1+cos\u03b8)",
+      "description": "The classic cardioid heart shape \u2014 the breathing adds a gentle pulse.",
       "component": "CardioidHeart",
       "defaults": {
         "cardioidA": 9.2,
@@ -1114,7 +1114,7 @@
         {
           "key": "cardioidA",
           "label": "a",
-          "description": "The \"a\" parameter in r = a(1+cosθ) — sets the size of the heart.",
+          "description": "The \"a\" parameter in r = a(1+cos\u03b8) \u2014 sets the size of the heart.",
           "min": 4,
           "max": 14,
           "step": 0.1,
@@ -1123,7 +1123,7 @@
         {
           "key": "cardioidPulse",
           "label": "Pulse",
-          "description": "Amplitude of the breathing pulse — how much the heart expands and contracts.",
+          "description": "Amplitude of the breathing pulse \u2014 how much the heart expands and contracts.",
           "min": 0,
           "max": 2,
           "step": 0.05,
@@ -1139,13 +1139,13 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = cardioidA × (1 + cos(t)) × (1 + cardioidPulse × sin(pulseTime))\nx(t) = r(t) × cos t × cardioidScale + 50\ny(t) = r(t) × sin t × cardioidScale + 50",
+      "formula": "r(t) = cardioidA \u00d7 (1 + cos(t)) \u00d7 (1 + cardioidPulse \u00d7 sin(pulseTime))\nx(t) = r(t) \u00d7 cos t \u00d7 cardioidScale + 50\ny(t) = r(t) \u00d7 sin t \u00d7 cardioidScale + 50",
       "importLabel": "import { CardioidHeart } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Heart Wave",
       "tag": "f(x) Heart Wave",
-      "description": "A wavy heart-shaped curve drawn by a parametric function — the wave amplitude adds organic motion.",
+      "description": "A wavy heart-shaped curve drawn by a parametric function \u2014 the wave amplitude adds organic motion.",
       "component": "HeartWave",
       "defaults": {
         "heartWaveB": 8,
@@ -1162,7 +1162,7 @@
         {
           "key": "heartWaveB",
           "label": "b",
-          "description": "The \"b\" parameter — scales the heart wave amplitude.",
+          "description": "The \"b\" parameter \u2014 scales the heart wave amplitude.",
           "min": 2,
           "max": 12,
           "step": 0.1,
@@ -1171,7 +1171,7 @@
         {
           "key": "heartWaveRoot",
           "label": "Root span",
-          "description": "Span of the square root term — controls the heart tip sharpness.",
+          "description": "Span of the square root term \u2014 controls the heart tip sharpness.",
           "min": 2.2,
           "max": 4.2,
           "step": 0.05,
@@ -1180,7 +1180,7 @@
         {
           "key": "heartWaveAmp",
           "label": "Wave amp",
-          "description": "Amplitude of the wave modulation — adds organic wavy motion.",
+          "description": "Amplitude of the wave modulation \u2014 adds organic wavy motion.",
           "min": 0.3,
           "max": 1.6,
           "step": 0.05,
@@ -1205,13 +1205,13 @@
           "section": "formula"
         }
       ],
-      "formula": "x(t) = heartWaveB × Sin(t) × √(|cos(t)|) / (Sin(t) + 1.4) × heartWaveScaleX + 50\ny(t) = (heartWaveB × cos(t) - heartWaveB × sin(t) - 2 × cos(t) - √(|cos(t)|)) × heartWaveAmp × heartWaveScaleY + 50",
+      "formula": "x(t) = heartWaveB \u00d7 Sin(t) \u00d7 \u221a(|cos(t)|) / (Sin(t) + 1.4) \u00d7 heartWaveScaleX + 50\ny(t) = (heartWaveB \u00d7 cos(t) - heartWaveB \u00d7 sin(t) - 2 \u00d7 cos(t) - \u221a(|cos(t)|)) \u00d7 heartWaveAmp \u00d7 heartWaveScaleY + 50",
       "importLabel": "import { HeartWave } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Spiral Search",
       "tag": "Archimedean Spiral",
-      "description": "An expanding Archimedean spiral that sweeps outward — the pulse adds breathing motion to the turns.",
+      "description": "An expanding Archimedean spiral that sweeps outward \u2014 the pulse adds breathing motion to the turns.",
       "component": "SpiralSearch",
       "defaults": {
         "searchTurns": 5,
@@ -1228,7 +1228,7 @@
         {
           "key": "searchTurns",
           "label": "Turns",
-          "description": "Number of spiral turns — more turns create a denser spiral.",
+          "description": "Number of spiral turns \u2014 more turns create a denser spiral.",
           "min": 2,
           "max": 8,
           "step": 0.1,
@@ -1255,7 +1255,7 @@
         {
           "key": "searchPulse",
           "label": "Pulse",
-          "description": "Breathing modulation on the radius — adds a living pulse to the spiral.",
+          "description": "Breathing modulation on the radius \u2014 adds a living pulse to the spiral.",
           "min": 0,
           "max": 6,
           "step": 0.1,
@@ -1271,13 +1271,13 @@
           "section": "formula"
         }
       ],
-      "formula": "r(t) = searchBaseRadius + searchRadiusAmp × t / (2π × searchTurns) + searchPulse × sin(pulseTime)\nx(t) = r(t) × cos(t) × searchScale + 50\ny(t) = r(t) × sin(t) × searchScale + 50",
+      "formula": "r(t) = searchBaseRadius + searchRadiusAmp \u00d7 t / (2\u03c0 \u00d7 searchTurns) + searchPulse \u00d7 sin(pulseTime)\nx(t) = r(t) \u00d7 cos(t) \u00d7 searchScale + 50\ny(t) = r(t) \u00d7 sin(t) \u00d7 searchScale + 50",
       "importLabel": "import { SpiralSearch } from \"@math-curve-loaders/react\";"
     },
     {
       "name": "Fourier Flow",
       "tag": "Fourier Curve",
-      "description": "A sum of sine and cosine terms creating a complex flowing shape — the mix pulse modulates the phase.",
+      "description": "A sum of sine and cosine terms creating a complex flowing shape \u2014 the mix pulse modulates the phase.",
       "component": "FourierFlow",
       "defaults": {
         "fourierX1": 18,
@@ -1297,7 +1297,7 @@
         {
           "key": "fourierX1",
           "label": "x cos1",
-          "description": "Coefficient of cos(t) in the x equation — primary horizontal harmonic.",
+          "description": "Coefficient of cos(t) in the x equation \u2014 primary horizontal harmonic.",
           "min": 4,
           "max": 24,
           "step": 0.1,
@@ -1306,7 +1306,7 @@
         {
           "key": "fourierX3",
           "label": "x cos3",
-          "description": "Coefficient of cos(3t) in the x equation — third harmonic.",
+          "description": "Coefficient of cos(3t) in the x equation \u2014 third harmonic.",
           "min": 0,
           "max": 14,
           "step": 0.1,
@@ -1315,7 +1315,7 @@
         {
           "key": "fourierX5",
           "label": "x sin5",
-          "description": "Coefficient of sin(5t) in the x equation — fifth harmonic.",
+          "description": "Coefficient of sin(5t) in the x equation \u2014 fifth harmonic.",
           "min": 0,
           "max": 10,
           "step": 0.1,
@@ -1324,7 +1324,7 @@
         {
           "key": "fourierY1",
           "label": "y sin1",
-          "description": "Coefficient of sin(t) in the y equation — primary vertical harmonic.",
+          "description": "Coefficient of sin(t) in the y equation \u2014 primary vertical harmonic.",
           "min": 4,
           "max": 24,
           "step": 0.1,
@@ -1333,7 +1333,7 @@
         {
           "key": "fourierY2",
           "label": "y sin2",
-          "description": "Coefficient of sin(2t) in the y equation — second harmonic.",
+          "description": "Coefficient of sin(2t) in the y equation \u2014 second harmonic.",
           "min": 0,
           "max": 14,
           "step": 0.1,
@@ -1342,7 +1342,7 @@
         {
           "key": "fourierY4",
           "label": "y cos4",
-          "description": "Coefficient of cos(4t) in the y equation — fourth harmonic.",
+          "description": "Coefficient of cos(4t) in the y equation \u2014 fourth harmonic.",
           "min": 0,
           "max": 10,
           "step": 0.1,
@@ -1351,14 +1351,14 @@
         {
           "key": "fourierMixPulse",
           "label": "Mix pulse",
-          "description": "Phase modulation pulse — adds organic variation to the shape.",
+          "description": "Phase modulation pulse \u2014 adds organic variation to the shape.",
           "min": 0,
           "max": 0.8,
           "step": 0.01,
           "section": "formula"
         }
       ],
-      "formula": "x(t) = fourierX1 × cos(t) + fourierX3 × cos(3t) + fourierX5 × sin(5t) + 50\ny(t) = fourierY1 × sin(t) + fourierY2 × sin(2t) + fourierY4 × cos(4t) + 50\nmix = fourierMixBase + fourierMixPulse × sin(pulseTime)",
+      "formula": "x(t) = fourierX1 \u00d7 cos(t) + fourierX3 \u00d7 cos(3t) + fourierX5 \u00d7 sin(5t) + 50\ny(t) = fourierY1 \u00d7 sin(t) + fourierY2 \u00d7 sin(2t) + fourierY4 \u00d7 cos(4t) + 50\nmix = fourierMixBase + fourierMixPulse \u00d7 sin(pulseTime)",
       "importLabel": "import { FourierFlow } from \"@math-curve-loaders/react\";"
     }
   ]

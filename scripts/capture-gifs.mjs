@@ -21,8 +21,8 @@ const ROOT = join(__dirname, "..");
 const DIST = join(ROOT, "apps/gallery/dist");
 const GIF_DIR = join(ROOT, "docs/gifs");
 const FRAMES_DIR = join(ROOT, "tmp/gif-frames");
-const FRAME_COUNT = 10;
-const FRAME_MS = 100; // 10fps
+const FRAME_COUNT = 30;
+const FRAME_MS = 250; // 4fps
 const SIZE = 160;
 
 // Curve name → filename (lowercase, no spaces)

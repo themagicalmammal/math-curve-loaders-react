@@ -332,9 +332,12 @@ function ParamControl({
 export interface CurveModalProps {
   curveConfig: CurvePlaygroundConfig;
   onClose: () => void;
+  onNavigate?: (config: CurvePlaygroundConfig) => void;
+  currentIndex: number;
+  totalCurves: number;
 }
 
-export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
+export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, totalCurves }: CurveModalProps) {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof document !== "undefined") {
       const stored = document.documentElement.getAttribute("data-theme");
@@ -366,14 +369,22 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Close on Escape
+  // Close on Escape; navigate on arrow keys
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (onNavigate) {
+        if (e.key === "ArrowLeft" && currentIndex > 0) {
+          onNavigate(CURVE_CONFIGS[currentIndex - 1]);
+        }
+        if (e.key === "ArrowRight" && currentIndex < totalCurves - 1) {
+          onNavigate(CURVE_CONFIGS[currentIndex + 1]);
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  }, [onClose, onNavigate, currentIndex, totalCurves]);
 
   const handleValueChange = useCallback((key: string, value: number) => {
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -427,15 +438,38 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
           <div className="modal-left">
             {/* ─── Header ─── */}
             <div className="modal-header">
-              <div>
+              {onNavigate && currentIndex > 0 && (
+                <button
+                  className="modal-nav-btn"
+                  onClick={() => onNavigate(CURVE_CONFIGS[currentIndex - 1])}
+                  aria-label="Previous curve"
+                >
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+              <div className="modal-header-title">
                 <h2 className="modal-title">{curveConfig.name}</h2>
                 <span className="modal-tag">{curveConfig.tag}</span>
               </div>
-              <button
-                className="modal-close"
-                onClick={onClose}
-                aria-label="Close"
-              >
+              <div className="modal-header-actions">
+                {onNavigate && currentIndex < totalCurves - 1 && (
+                  <button
+                    className="modal-nav-btn"
+                    onClick={() => onNavigate(CURVE_CONFIGS[currentIndex + 1])}
+                    aria-label="Next curve"
+                  >
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                      <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                )}
+                <button
+                  className="modal-close"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                   <path
                     d="M18 6L6 18M6 6l12 12"
@@ -445,6 +479,7 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                   />
                 </svg>
               </button>
+              </div>
             </div>
 
             {/* ─── Description ─── */}

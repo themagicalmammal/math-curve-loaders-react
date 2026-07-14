@@ -487,7 +487,19 @@ body::before {
   align-items: flex-start;
   padding: 24px 4px 12px;
   flex-shrink: 0;
-  gap: 16px;
+}
+
+.modal-header-title {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .modal-title {
@@ -536,6 +548,37 @@ body::before {
 }
 
 .modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ─── Navigation Buttons ─── */
+
+.modal-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--fg-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.modal-nav-btn:hover {
+  background: var(--bg-raised);
+  color: var(--fg);
+}
+
+.modal-nav-btn:active {
+  transform: scale(0.93);
+}
+
+.modal-nav-btn svg {
   width: 18px;
   height: 18px;
 }

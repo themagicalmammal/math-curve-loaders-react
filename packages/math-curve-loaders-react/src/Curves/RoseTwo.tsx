@@ -21,9 +21,6 @@ export default function RoseTwo({
   const merged = mergeConfig(config, overrideConfig);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#888', whiteSpace: 'pre-wrap' }}>
-        {`import { RoseTwo } from '@math-curve-loaders/react';`}
-      </div>
       <CurveLoader
         config={merged}
         className={className}

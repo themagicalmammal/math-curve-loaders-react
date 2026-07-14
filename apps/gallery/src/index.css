@@ -656,6 +656,21 @@ body::before {
   gap: 12px;
 }
 
+.param-divider {
+  height: 1px;
+  margin: 16px 0;
+  background: var(--border);
+}
+
+.param-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 12px;
+}
+
 /* ─── Parameter Card ─── */
 
 .param-card {

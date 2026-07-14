@@ -576,7 +576,32 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                 </button>
               </div>
               <div className="params-grid">
-                {curveConfig.controls.map((ctrl) => {
+                {curveConfig.controls
+                  .filter((ctrl) => ctrl.section === 'formula')
+                  .map((ctrl) => {
+                    const val =
+                      values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                    return (
+                      <ParamControl
+                        key={ctrl.key}
+                        ctrl={ctrl}
+                        value={val}
+                        curveColor={curveColor}
+                        onChange={handleValueChange}
+                      />
+                    );
+                  })}
+              </div>
+              {curveConfig.controls.some((c) => c.section === 'formula') &&
+               curveConfig.controls.some((c) => c.section === 'visual') && (
+                <>
+                  <div className="param-divider" />
+                  <div className="param-section-label">Animation & Appearance</div>
+                </>
+              )}
+              {curveConfig.controls
+                .filter((ctrl) => ctrl.section === 'visual')
+                .map((ctrl) => {
                   const val =
                     values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
                   return (
@@ -589,7 +614,6 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                     />
                   );
                 })}
-              </div>
             </div>
           </div>
         </div>

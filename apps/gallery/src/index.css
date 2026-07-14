@@ -947,7 +947,7 @@ body::before {
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  padding: 28px 20px;
+  padding: 16px 20px;
   overflow-x: auto;
   display: flex;
   align-items: center;

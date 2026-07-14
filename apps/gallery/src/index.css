@@ -746,41 +746,42 @@ body::before {
 
 .param-card-slider {
   position: relative;
-  height: 4px;
-  margin: 0 -4px 8px;
+  height: 24px;
+  margin: 0 -2px;
+  display: flex;
+  align-items: center;
 }
 
 .param-card-track {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 4px;
-  border-radius: 4px;
+  left: 6px;
+  right: 6px;
+  height: 3px;
+  border-radius: 99px;
   background: var(--slider-track);
   pointer-events: none;
+  overflow: visible;
 }
 
 .param-card-fill {
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 4px;
-  border-radius: 4px;
+  top: 0;
+  height: 100%;
+  border-radius: 99px;
   background: var(--card-color, var(--primary));
-  opacity: 0.3;
+  opacity: 0.25;
   pointer-events: none;
-  transition: width 0.05s ease-out, opacity 0.2s ease;
+  transition: width 0.08s ease-out, opacity 0.2s ease;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--card-color, var(--primary)) 30%, transparent);
 }
 
 .param-card-slider:hover .param-card-fill {
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
 .param-card-slider:active .param-card-fill {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .param-card-slider input[type="range"] {
@@ -797,51 +798,57 @@ body::before {
 
 .param-card-slider input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--card-color, var(--primary));
-  border: 2.5px solid var(--bg);
+  background: var(--bg);
+  border: 2.5px solid var(--card-color, var(--primary));
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
+    0 0 0 2px color-mix(in srgb, var(--card-color, var(--primary)) 12%, transparent),
+    0 1px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  cursor: grab;
   transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease;
+  margin-left: -7px;
 }
 
 .param-card-slider input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.25);
+  transform: scale(1.2);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    0 2px 6px rgba(0, 0, 0, 0.2);
+    0 0 0 3px color-mix(in srgb, var(--card-color, var(--primary)) 20%, transparent),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .param-card-slider input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(1.1);
+  transform: scale(1.15);
+  cursor: grabbing;
 }
 
 .param-card-slider input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--card-color, var(--primary));
-  border: 2.5px solid var(--bg);
+  background: var(--bg);
+  border: 2.5px solid var(--card-color, var(--primary));
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
+    0 0 0 2px color-mix(in srgb, var(--card-color, var(--primary)) 12%, transparent),
+    0 1px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  cursor: grab;
   transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease;
 }
 
 .param-card-slider input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.25);
+  transform: scale(1.2);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    0 2px 6px rgba(0, 0, 0, 0.2);
+    0 0 0 3px color-mix(in srgb, var(--card-color, var(--primary)) 20%, transparent),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .param-card-desc {

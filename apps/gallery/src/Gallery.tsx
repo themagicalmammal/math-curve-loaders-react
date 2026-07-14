@@ -355,6 +355,8 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
   }));
   const [showCode, setShowCode] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
+  const [showSource, setShowSource] = useState(false);
+  const [isSourceCopied, setIsSourceCopied] = useState(false);
   const [showImport, setShowImport] = useState(true);
   const [isImportCopied, setIsImportCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -428,6 +430,12 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   }, [code]);
+
+  const handleSourceCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(curveConfig.source ?? "");
+    setIsSourceCopied(true);
+    setTimeout(() => setIsSourceCopied(false), 2000);
+  }, [curveConfig.source]);
 
   const handleImportCopy = useCallback(async () => {
     await navigator.clipboard.writeText(curveConfig.importLabel);
@@ -605,6 +613,41 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
               </div>
               {showCode && <CodeBlock code={code} theme={theme} />}
             </div>
+
+            {/* ─── Source Code ─── */}
+            {curveConfig.source && (
+              <div className="modal-section">
+                <div className="modal-code-header">
+                  <span className="modal-section-label">Source</span>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {showSource && (
+                      <button
+                        className="modal-code-btn"
+                        onClick={() => setShowSource(false)}
+                      >
+                        Hide
+                      </button>
+                    )}
+                    <button
+                      className="modal-code-btn"
+                      onClick={handleSourceCopy}
+                      data-copied={isSourceCopied}
+                    >
+                      {isSourceCopied ? "✓ Copied" : "Copy"}
+                    </button>
+                    {!showSource && (
+                      <button
+                        className="modal-code-btn"
+                        onClick={() => setShowSource(true)}
+                      >
+                        Show
+                      </button>
+                    )}
+                  </div>
+                </div>
+                {showSource && <CodeBlock code={curveConfig.source} theme={theme} />}
+              </div>
+            )}
           </div>
 
           {/* Right column: Formula + Parameters */}

@@ -30,6 +30,7 @@ export interface CurvePlaygroundConfig {
   defaults: Record<string, number>;
   importLabel: string;
   formula: string;
+  source?: string;
 }
 
 /* ─── Global controls ─── */
@@ -59,6 +60,7 @@ export const CURVE_CONFIGS: CurvePlaygroundConfig[] = [
     formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(7t)) × 3.5
 y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(7t)) × 3.5
 s = ε(t)`,
+    source: makeComponentSource('OriginalThinking', 0),
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1, section: 'formula' },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the inner cosine term that carves the petal details.', min: 1, max: 5, step: 0.1, section: 'formula' },
@@ -80,6 +82,7 @@ s = ε(t)`,
     formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(5t)) × 3.5
 y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(5t)) × 3.5
 s = ε(t)`,
+    source: makeComponentSource('ThinkingFive', 1),
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1, section: 'formula' },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the inner cosine term that carves the petal details.', min: 1, max: 5, step: 0.1, section: 'formula' },
@@ -101,6 +104,7 @@ s = ε(t)`,
     formula: `x(t) = 50 + (8.0 cos(t) - 4.0 s × cos(9t)) × 3.5
 y(t) = 50 + (8.0 sin(t) - 4.0 s × sin(9t)) × 3.5
 s = ε(t)`,
+    source: makeComponentSource('ThinkingNine', 2),
     controls: [
       { key: 'baseRadius', label: 'Base radius', description: 'Radius of the base circle that the curve orbits around.', min: 4, max: 10, step: 0.1, section: 'formula' },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the inner cosine term that carves the petal details.', min: 1, max: 5, step: 0.1, section: 'formula' },
@@ -122,6 +126,7 @@ s = ε(t)`,
     formula: `r(t) = 8.0 + 3.5 × cos(7 × t)
 x(t) = r(t) × cos(t) × 3.3 + 50
 y(t) = r(t) × sin(t) × 3.3 + 50`,
+    source: makeComponentSource('RoseOrbit', 3),
     controls: [
       { key: 'orbitRadius', label: 'Base radius', description: 'Base radius of the orbiting rose curve.', min: 4, max: 10, step: 0.1 },
       { key: 'detailAmplitude', label: 'Detail', description: 'Amplitude of the modulating cosine that creates the petal shape.', min: 1, max: 5, step: 0.1 },
@@ -143,6 +148,7 @@ y(t) = r(t) × sin(t) × 3.3 + 50`,
     formula: `r(t) = (roseA + roseABoost × sin(t)) × cos(roseK × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))
 x(t) = r(t) × cos(t) × roseScale + 50
 y(t) = r(t) × sin(t) × roseScale + 50`,
+    source: makeComponentSource('RoseCurve', 4),
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1, section: 'formula' },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05, section: 'formula' },
@@ -166,6 +172,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     formula: `r(t) = (roseA + roseABoost × sin(t)) × cos(2 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))
 x(t) = r(t) × cos(t) × roseScale + 50
 y(t) = r(t) × sin(t) × roseScale + 50`,
+    source: makeComponentSource('RoseTwo', 5),
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1, section: 'formula' },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05, section: 'formula' },
@@ -188,6 +195,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     formula: `r(t) = (roseA + roseABoost × sin(t)) × cos(3 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))
 x(t) = r(t) × cos(t) × roseScale + 50
 y(t) = r(t) × sin(t) × roseScale + 50`,
+    source: makeComponentSource('RoseThree', 6),
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1, section: 'formula' },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05, section: 'formula' },
@@ -210,6 +218,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     formula: `r(t) = (roseA + roseABoost × sin(t)) × cos(4 × t) × (roseBreathBase + roseBreathBoost × sin(pulseTime))
 x(t) = r(t) × cos(t) × roseScale + 50
 y(t) = r(t) × sin(t) × roseScale + 50`,
+    source: makeComponentSource('RoseFour', 7),
     controls: [
       { key: 'roseA', label: 'a', description: 'The "a" parameter in r = a cos(kθ) — sets the base size of the rose.', min: 5, max: 14, step: 0.1, section: 'formula' },
       { key: 'roseABoost', label: 'a boost', description: 'Sinusoidal modulation on "a" — adds organic variation to the radius.', min: 0, max: 2, step: 0.05, section: 'formula' },
@@ -231,6 +240,7 @@ y(t) = r(t) × sin(t) × roseScale + 50`,
     },
     formula: `x(t) = (lissajousAmp + lissajousAmpBoost × sin(pulseTime)) × sin(lissajousAX × t + lissajousPhase) + 50
 y(t) = x(t) × sin(lissajousBY × t) + 50`,
+    source: makeComponentSource('LissajousDrift', 8),
     controls: [
       { key: 'lissajousAmp', label: 'Amplitude', description: 'Base amplitude of the Lissajous curve — controls the overall size.', min: 8, max: 36, step: 0.5, section: 'formula' },
       { key: 'lissajousAmpBoost', label: 'Amp pulse', description: 'Pulsing modulation on the amplitude — adds a breathing effect.', min: 0, max: 12, step: 0.1, section: 'formula' },
@@ -253,6 +263,7 @@ y(t) = x(t) × sin(lissajousBY × t) + 50`,
     formula: `r(t) = lemniscateA × cos(t) / (1 + sin²(t)) + lemniscateBoost × sin(pulseTime)
 x(t) = r(t) × cos(t) + 50
 y(t) = r(t) × sin(t) + 50`,
+    source: makeComponentSource('LemniscateBloom', 9),
     controls: [
       { key: 'lemniscateA', label: 'a', description: 'The "a" parameter of the Bernoulli lemniscate — sets the size of the figure-eight.', min: 8, max: 30, step: 0.5, section: 'formula' },
       { key: 'lemniscateBoost', label: 'Pulse', description: 'Sinusoidal pulse added to the radius — creates the blooming animation.', min: 0, max: 12, step: 0.1, section: 'formula' },
@@ -273,6 +284,7 @@ y(t) = r(t) × sin(t) + 50`,
 y(t) = (spiroR - spiror) × sin(t) - spirod × sin((spiroR - spiror) / spiror × t)
 x' = (x + spirodBoost × sin(pulseTime)) × spiroScale + 50
 y' = (y + spirodBoost × sin(pulseTime)) × spiroScale + 50`,
+    source: makeComponentSource('HypotrochoidLoop', 10),
     controls: [
       { key: 'spiroR', label: 'R', description: 'Radius of the fixed outer circle in the rolling-circle spirograph.', min: 4, max: 12, step: 0.1, section: 'formula' },
       { key: 'spiror', label: 'r', description: 'Radius of the rolling inner circle — together with R determines the pattern.', min: 1, max: 5, step: 0.1, section: 'formula' },
@@ -295,6 +307,7 @@ y' = (y + spirodBoost × sin(pulseTime)) × spiroScale + 50`,
 y(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))
 x' = x × spiralScale + 50
 y' = y × spiralScale + 50`,
+    source: makeComponentSource('ThreePetalSpiral', 11),
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1, section: 'formula' },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1, section: 'formula' },
@@ -318,6 +331,7 @@ y' = y × spiralScale + 50`,
 y(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))
 x' = x × spiralScale + 50
 y' = y × spiralScale + 50`,
+    source: makeComponentSource('FourPetalSpiral', 12),
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1, section: 'formula' },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1, section: 'formula' },
@@ -341,6 +355,7 @@ y' = y × spiralScale + 50`,
 y(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))
 x' = x × spiralScale + 50
 y' = y × spiralScale + 50`,
+    source: makeComponentSource('FivePetalSpiral', 13),
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1, section: 'formula' },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1, section: 'formula' },
@@ -364,6 +379,7 @@ y' = y × spiralScale + 50`,
 y(t) = (spiralR - spiralr) × sin(t) - spirald × sin((spiralR - spiralr) / spiralr × t) × (1 + spiralBreath × sin(pulseTime))
 x' = x × spiralScale + 50
 y' = y × spiralScale + 50`,
+    source: makeComponentSource('SixPetalSpiral', 14),
     controls: [
       { key: 'spiralR', label: 'R', description: 'Radius of the fixed outer circle.', min: 2, max: 8, step: 1, section: 'formula' },
       { key: 'spiralr', label: 'r', description: 'Radius of the rolling inner circle.', min: 1, max: 3, step: 0.1, section: 'formula' },
@@ -387,6 +403,7 @@ y' = y × spiralScale + 50`,
 x(t) = r(t) × cos t × butterflyScale + 50
 y(t) = r(t) × sin t × butterflyScale + 50
 pulse = 1 + butterflyPulse × sin(pulseTime)`,
+    source: makeComponentSource('ButterflyPhase', 15),
     controls: [
       { key: 'butterflyTurns', label: 'Turns', description: 'Number of turns in the butterfly wing pattern — higher values add more detail.', min: 6, max: 18, step: 0.5, section: 'formula' },
       { key: 'butterflyScale', label: 'Scale', description: 'Overall scaling factor for the butterfly curve.', min: 2.5, max: 7, step: 0.05, section: 'formula' },
@@ -409,6 +426,7 @@ pulse = 1 + butterflyPulse × sin(pulseTime)`,
     formula: `r(t) = cardioidA × (1 - cos(t)) × (1 + cardioidPulse × sin(pulseTime))
 x(t) = r(t) × cos t × cardioidScale + 50
 y(t) = r(t) × sin t × cardioidScale + 50`,
+    source: makeComponentSource('CardioidGlow', 16),
     controls: [
       { key: 'cardioidA', label: 'a', description: 'The "a" parameter in the cardioid equation — sets the base size.', min: 4, max: 14, step: 0.1, section: 'formula' },
       { key: 'cardioidPulse', label: 'Pulse', description: 'Amplitude of the breathing pulse — how much the cardioid expands and contracts.', min: 0, max: 2, step: 0.05, section: 'formula' },
@@ -429,6 +447,7 @@ y(t) = r(t) × sin t × cardioidScale + 50`,
     formula: `r(t) = cardioidA × (1 + cos(t)) × (1 + cardioidPulse × sin(pulseTime))
 x(t) = r(t) × cos t × cardioidScale + 50
 y(t) = r(t) × sin t × cardioidScale + 50`,
+    source: makeComponentSource('CardioidHeart', 17),
     controls: [
       { key: 'cardioidA', label: 'a', description: 'The "a" parameter in r = a(1+cosθ) — sets the size of the heart.', min: 4, max: 14, step: 0.1 },
       { key: 'cardioidPulse', label: 'Pulse', description: 'Amplitude of the breathing pulse — how much the heart expands and contracts.', min: 0, max: 2, step: 0.05 },
@@ -448,6 +467,7 @@ y(t) = r(t) × sin t × cardioidScale + 50`,
     },
     formula: `x(t) = heartWaveB × Sin(t) × √(|cos(t)|) / (Sin(t) + 1.4) × heartWaveScaleX + 50
 y(t) = (heartWaveB × cos(t) - heartWaveB × sin(t) - 2 × cos(t) - √(|cos(t)|)) × heartWaveAmp × heartWaveScaleY + 50`,
+    source: makeComponentSource('HeartWave', 18),
     controls: [
       { key: 'heartWaveB', label: 'b', description: 'The "b" parameter — scales the heart wave amplitude.', min: 2, max: 12, step: 0.1, section: 'formula' },
       { key: 'heartWaveRoot', label: 'Root span', description: 'Span of the square root term — controls the heart tip sharpness.', min: 2.2, max: 4.2, step: 0.05, section: 'formula' },
@@ -470,6 +490,7 @@ y(t) = (heartWaveB × cos(t) - heartWaveB × sin(t) - 2 × cos(t) - √(|cos(t)|
     formula: `r(t) = searchBaseRadius + searchRadiusAmp × t / (2π × searchTurns) + searchPulse × sin(pulseTime)
 x(t) = r(t) × cos(t) × searchScale + 50
 y(t) = r(t) × sin(t) × searchScale + 50`,
+    source: makeComponentSource('SpiralSearch', 19),
     controls: [
       { key: 'searchTurns', label: 'Turns', description: 'Number of spiral turns — more turns create a denser spiral.', min: 2, max: 8, step: 0.1, section: 'formula' },
       { key: 'searchBaseRadius', label: 'Base radius', description: 'Inner starting radius of the spiral.', min: 2, max: 16, step: 0.1, section: 'formula' },
@@ -492,6 +513,7 @@ y(t) = r(t) × sin(t) × searchScale + 50`,
     formula: `x(t) = fourierX1 × cos(t) + fourierX3 × cos(3t) + fourierX5 × sin(5t) + 50
 y(t) = fourierY1 × sin(t) + fourierY2 × sin(2t) + fourierY4 × cos(4t) + 50
 mix = fourierMixBase + fourierMixPulse × sin(pulseTime)`,
+    source: makeComponentSource('FourierFlow', 20),
     controls: [
       { key: 'fourierX1', label: 'x cos1', description: 'Coefficient of cos(t) in the x equation — primary horizontal harmonic.', min: 4, max: 24, step: 0.1, section: 'formula' },
       { key: 'fourierX3', label: 'x cos3', description: 'Coefficient of cos(3t) in the x equation — third harmonic.', min: 0, max: 14, step: 0.1, section: 'formula' },
@@ -506,6 +528,44 @@ mix = fourierMixBase + fourierMixPulse × sin(pulseTime)`,
 ];
 
 /* ─── Helpers ─── */
+
+function makeComponentSource(componentName: string, curveIndex: number): string {
+  return `import CurveLoader from '../components/CurveLoader';
+import { curves, mergeConfig } from '../data/curves';
+import type { CurveConfig } from '../data/curves';
+
+const config = curves[${curveIndex}];
+
+export interface ${componentName}Props {
+  /** Override specific curve parameters */
+  config?: Partial<Omit<CurveConfig, 'name' | 'tag' | 'description' | 'point' | 'formula'>>;
+  /** Additional CSS class name */
+  className?: string;
+  /** Inline styles (width, height, etc.) */
+  style?: React.CSSProperties;
+}
+
+export default function ${componentName}({
+  config: overrideConfig,
+  className,
+  style,
+}: ${componentName}Props) {
+  const merged = mergeConfig(config, overrideConfig);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+      <CurveLoader
+        config={merged}
+        className={className}
+        style={style}
+      />
+    </div>
+  );
+}
+
+/** Default configuration for this curve. */
+${componentName}.config = config;
+`;
+}
 
 export function toPascal(name: string): string {
   return name.replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\s/g, '');

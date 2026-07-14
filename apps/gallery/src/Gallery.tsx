@@ -283,7 +283,9 @@ function ParamControl({
         <div className="param-card-value">
           <button
             className="param-card-btn"
-            onClick={() => onChange(ctrl.key, value - ctrl.step)}
+            onClick={() =>
+              onChange(ctrl.key, Math.max(ctrl.min, value - ctrl.step))
+            }
           >
             −
           </button>
@@ -295,7 +297,9 @@ function ParamControl({
           </span>
           <button
             className="param-card-btn"
-            onClick={() => onChange(ctrl.key, value + ctrl.step)}
+            onClick={() =>
+              onChange(ctrl.key, Math.min(ctrl.max, value + ctrl.step))
+            }
           >
             +
           </button>
@@ -386,9 +390,17 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose, onNavigate, currentIndex, totalCurves]);
 
-  const handleValueChange = useCallback((key: string, value: number) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
-  }, []);
+  const handleValueChange = useCallback(
+    (key: string, value: number) => {
+      setValues((prev) => {
+        const ctrl = curveConfig.controls.find((c) => c.key === key);
+        if (!ctrl) return { ...prev, [key]: value };
+        const clamped = Math.min(ctrl.max, Math.max(ctrl.min, value));
+        return { ...prev, [key]: clamped };
+      });
+    },
+    [curveConfig.controls],
+  );
 
   const handleReset = useCallback(() => {
     setValues({ ...curveConfig.defaults });

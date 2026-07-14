@@ -386,6 +386,18 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
     [curveConfig, values],
   );
 
+  // Dynamic formula: merges base config with current values so parameters show in the formula
+  const baseConfig = curveConfig.component.config as Record<string, unknown>;
+  const dynamicFormula = useMemo(() => {
+    try {
+      const merged = { ...baseConfig, ...values };
+      const formulaFn = (baseConfig.formula as (c: CurveConfig) => string) ?? curveConfig.formula;
+      return typeof formulaFn === "function" ? formulaFn(merged as CurveConfig) : curveConfig.formula;
+    } catch {
+      return curveConfig.formula;
+    }
+  }, [baseConfig, values, curveConfig.formula]);
+
   const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(code);
     setIsCopied(true);
@@ -446,6 +458,13 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
               </div>
             </div>
 
+            {/* ─── Import Statement ─── */}
+            <div className="modal-import-block">
+              <pre>
+                <code>{curveConfig.importLabel}</code>
+              </pre>
+            </div>
+
             {/* ─── Code ─── */}
             <div className="modal-section">
               <div className="modal-code-header">
@@ -485,7 +504,7 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
             <div className="modal-section">
               <div className="modal-section-label">Formula</div>
               <div className="modal-formula-wrap">
-                <MathFormula formula={curveConfig.formula} />
+                <MathFormula formula={dynamicFormula} />
               </div>
             </div>
             <div className="modal-controls">

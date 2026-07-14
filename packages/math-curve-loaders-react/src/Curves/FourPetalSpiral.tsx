@@ -29,9 +29,6 @@ export default function FourPetalSpiral({
         className={className}
         style={style}
       />
-      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#888', whiteSpace: 'pre-wrap' }}>
-        {merged.formula(merged)}
-      </div>
     </div>
   );
 }

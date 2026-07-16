@@ -6,9 +6,14 @@ interface NavbarProps {
 export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   return (
     <header className="navbar">
-      <div className="navbar-title-group">
-        <h1 className="navbar-title">Math Curve Loaders</h1>
+      <div className="navbar-left">
+        <span className="navbar-dot" />
+        <h1 className="navbar-title">
+          Math Curve Loaders
+          <span className="navbar-subtitle">Mathematical Loading Animations</span>
+        </h1>
       </div>
+
       <div className="navbar-actions">
         <button
           className="theme-toggle"

@@ -371,51 +371,6 @@ body::before {
   flex-shrink: 0;
 }
 
-/* ─── Hero (below navbar) ─── */
-
-.hero {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 84px 40px 24px;
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
-.hero-title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-width: 560px;
-}
-
-.hero-title {
-  font-size: 40px;
-  font-weight: 700;
-  margin: 0;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  color: var(--fg);
-}
-
-.hero-subtitle {
-  font-size: 15px;
-  color: var(--fg-subtle);
-  margin: 0;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-}
-
-.hero-divider {
-  width: 100%;
-  height: 1px;
-  background: var(--border-subtle);
-  margin-top: 20px;
-}
 
 /* ═══════════════════════════════════════════════════════════
    GALLERY GRID
@@ -427,7 +382,7 @@ body::before {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
-  padding: 16px 40px 64px;
+  padding: 28px 40px 64px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -1315,17 +1270,8 @@ body::before {
   .github-link span {
     display: none;
   }
-  .hero {
-    padding: 68px 16px 16px;
-  }
-  .hero-title {
-    font-size: 24px;
-  }
-  .hero-subtitle {
-    font-size: 13px;
-  }
-  .hero-divider {
-    margin-top: 16px;
+  .gallery-grid {
+    padding: 20px 16px 32px;
   }
   .mobile-hidden {
     display: none !important;
@@ -1448,18 +1394,9 @@ body::before {
     width: 5px;
     height: 5px;
   }
-  .hero {
-    padding: 62px 12px 12px;
-  }
-  .hero-title {
-    font-size: 20px;
-  }
-  .hero-subtitle {
-    font-size: 12px;
-  }
   .gallery-grid {
     gap: 6px;
-    padding: 16px 12px 24px;
+    padding: 12px 12px 24px;
   }
   .curve-card {
     padding: 14px 6px 12px;

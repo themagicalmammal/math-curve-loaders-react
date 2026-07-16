@@ -629,15 +629,6 @@ export default function Gallery({
   return (
     <>
       <Navbar theme={theme} onToggleTheme={onToggleTheme} />
-      <section className="hero">
-        <div className="hero-title-group">
-          <h1 className="hero-title">Math Curve Loaders</h1>
-          <p className="hero-subtitle">
-            A Gallery of Mathematical Loading Animations
-          </p>
-        </div>
-        <div className="hero-divider" />
-      </section>
 
       <div className="gallery-grid">
         {CURVE_CARDS.map((curve, idx) => {

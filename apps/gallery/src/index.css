@@ -386,9 +386,9 @@ body::before {
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
-  padding: 76px 24px 48px;
-  max-width: 960px;
+  gap: 12px;
+  padding: 76px 40px 64px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -400,10 +400,10 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 16px 8px 14px;
+  gap: 12px;
+  padding: 24px 12px 20px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--card);
   cursor: pointer;
   font-family: inherit;
@@ -451,8 +451,8 @@ body::before {
 }
 
 .curve-card-loader {
-  width: 55%;
-  height: 55%;
+  width: 60%;
+  height: 60%;
   color: var(--fg-muted);
   transition: color 0.2s;
 }
@@ -1209,8 +1209,7 @@ body::before {
 @media (max-width: 1120px) {
   .gallery-grid {
     grid-template-columns: repeat(4, 1fr);
-    padding: 76px 24px 48px;
-    max-width: 100%;
+    padding: 32px 24px 48px;
   }
 }
 
@@ -1218,8 +1217,7 @@ body::before {
 @media (max-width: 960px) {
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
-    padding: 76px 20px 40px;
-    max-width: 100%;
+    padding: 28px 20px 40px;
   }
   .modal {
     max-width: 98vw;
@@ -1281,7 +1279,7 @@ body::before {
     display: none;
   }
   .gallery-grid {
-    padding: 76px 16px 32px;
+    padding: 20px 16px 32px;
   }
   .mobile-hidden {
     display: none !important;
@@ -1289,12 +1287,10 @@ body::before {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    padding: 76px 16px 32px;
-    max-width: 100%;
+    padding: 20px 16px 32px;
   }
   .curve-card {
-    padding: 14px 8px 12px;
-    gap: 6px;
+    padding: 16px 8px 14px;
   }
   .curve-card-name {
     font-size: 11px;
@@ -1410,11 +1406,10 @@ body::before {
   }
   .gallery-grid {
     gap: 6px;
-    padding: 76px 12px 24px;
-    max-width: 100%;
+    padding: 12px 12px 24px;
   }
   .curve-card {
-    padding: 12px 6px 10px;
+    padding: 14px 6px 12px;
   }
   .curve-card-preview {
     border-radius: 6px;

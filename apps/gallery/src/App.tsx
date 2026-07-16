@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Gallery, { CurveModal } from './Gallery';
 import type { CurvePlaygroundConfig } from './CurvesConfig';
+import { CURVE_CONFIGS } from './CurvesConfig';
 
 export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -12,6 +14,7 @@ export default function App() {
   });
 
   const [selectedCurve, setSelectedCurve] = useState<CurvePlaygroundConfig | null>(null);
+  const [selectedCurveIndex, setSelectedCurveIndex] = useState<number>(0);
 
   // Apply theme globally
   useEffect(() => {
@@ -23,21 +26,34 @@ export default function App() {
   }, []);
 
   const handleCurveSelect = useCallback((curve: CurvePlaygroundConfig) => {
+    const idx = CURVE_CONFIGS.findIndex((c) => c.name === curve.name);
     setSelectedCurve(curve);
+    setSelectedCurveIndex(idx >= 0 ? idx : 0);
   }, []);
 
   const handleCloseModal = useCallback(() => {
     setSelectedCurve(null);
   }, []);
 
+  const handleNavigate = useCallback((curve: CurvePlaygroundConfig) => {
+    const idx = CURVE_CONFIGS.findIndex((c) => c.name === curve.name);
+    setSelectedCurve(curve);
+    setSelectedCurveIndex(idx >= 0 ? idx : 0);
+  }, []);
+
   return (
     <>
-      {selectedCurve && (
-        <CurveModal
-          curveConfig={selectedCurve}
-          onClose={handleCloseModal}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {selectedCurve && (
+          <CurveModal
+            curveConfig={selectedCurve}
+            onClose={handleCloseModal}
+            onNavigate={handleNavigate}
+            currentIndex={selectedCurveIndex}
+            totalCurves={CURVE_CONFIGS.length}
+          />
+        )}
+      </AnimatePresence>
       <Gallery
         onCurveSelect={handleCurveSelect}
         theme={theme}

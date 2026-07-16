@@ -1,28 +1,7 @@
-import { useState, useCallback, useEffect, useMemo, useRef } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
+import Navbar from "./Navbar";
 import { Highlight, themes } from "prism-react-renderer";
-import {
-  OriginalThinking,
-  ThinkingFive,
-  ThinkingNine,
-  RoseOrbit,
-  RoseCurve,
-  RoseTwo,
-  RoseThree,
-  RoseFour,
-  LissajousDrift,
-  LemniscateBloom,
-  HypotrochoidLoop,
-  ThreePetalSpiral,
-  FourPetalSpiral,
-  FivePetalSpiral,
-  SixPetalSpiral,
-  ButterflyPhase,
-  CardioidGlow,
-  CardioidHeart,
-  HeartWave,
-  SpiralSearch,
-  FourierFlow,
-} from "@math-curve-loaders/react";
 import type { CurveConfig } from "@math-curve-loaders/react";
 import {
   CURVE_CONFIGS,
@@ -35,175 +14,15 @@ import {
 const { vsDark } = themes;
 const { github: githubTheme } = themes;
 
-/* ─── Types ─── */
-
-export interface CurveCardDef {
-  name: string;
-  tag: string;
-  description: string;
-  Component: React.FC<{
-    config?: Partial<CurveConfig>;
-    className?: string;
-    style?: React.CSSProperties;
-  }>;
-  color: string;
-}
-
 /* ─── Curve list (for grid cards) ─── */
 
-const CURVES: CurveCardDef[] = [
-  {
-    name: "Original Thinking",
-    tag: "Custom Rose Trail",
-    description:
-      "A base circle carved by a sevenfold cosine term blooms into a rotating seven-petal ring.",
-    Component: OriginalThinking,
-    color: "#6366f1",
-  },
-  {
-    name: "Thinking Five",
-    tag: "Custom Rose Trail",
-    description:
-      "Replacing the sevenfold term with fivefold gives a cleaner five-petal rhythm.",
-    Component: ThinkingFive,
-    color: "#8b5cf6",
-  },
-  {
-    name: "Thinking Nine",
-    tag: "Custom Rose Trail",
-    description:
-      "A ninefold term packs more inner turns into the same orbit, denser and finely braided.",
-    Component: ThinkingNine,
-    color: "#a855f7",
-  },
-  {
-    name: "Rose Orbit",
-    tag: "r = cos(kθ)",
-    description:
-      "The radius expands and contracts with cos(7t), orbiting in repeated petals.",
-    Component: RoseOrbit,
-    color: "#d946ef",
-  },
-  {
-    name: "Rose Curve",
-    tag: "r = a cos(kθ)",
-    description: "Five evenly spaced lobes breathing with a living pulse.",
-    Component: RoseCurve,
-    color: "#ec4899",
-  },
-  {
-    name: "Rose Two",
-    tag: "r = a cos(2θ)",
-    description: "Broad opposing petals with a breathing pulse.",
-    Component: RoseTwo,
-    color: "#f43f5e",
-  },
-  {
-    name: "Rose Three",
-    tag: "r = a cos(3θ)",
-    description: "Three rotating petals with organic breathing modulation.",
-    Component: RoseThree,
-    color: "#ef4444",
-  },
-  {
-    name: "Rose Four",
-    tag: "r = a cos(4θ)",
-    description: "A balanced cross-like rose with a gentle pulse.",
-    Component: RoseFour,
-    color: "#f97316",
-  },
-  {
-    name: "Lissajous Drift",
-    tag: "x = sin(at), y = sin(bt)",
-    description: "Different sine frequencies weave crossing patterns.",
-    Component: LissajousDrift,
-    color: "#f59e0b",
-  },
-  {
-    name: "Lemniscate Bloom",
-    tag: "Bernoulli Lemniscate",
-    description: "A blooming infinity symbol with a pinched center.",
-    Component: LemniscateBloom,
-    color: "#eab308",
-  },
-  {
-    name: "Hypotrochoid Loop",
-    tag: "Inner Spirograph",
-    description: "Nested turns and offsets like a compact spirograph.",
-    Component: HypotrochoidLoop,
-    color: "#84cc16",
-  },
-  {
-    name: "Three-Petal Spiral",
-    tag: "R = 3, r = 1, d = 3",
-    description: "Three large looping petals breathing together.",
-    Component: ThreePetalSpiral,
-    color: "#22c55e",
-  },
-  {
-    name: "Four-Petal Spiral",
-    tag: "R = 4, r = 1, d = 3",
-    description: "Four-lobe spirograph pattern with breathing life.",
-    Component: FourPetalSpiral,
-    color: "#10b981",
-  },
-  {
-    name: "Five-Petal Spiral",
-    tag: "R = 5, r = 1, d = 3",
-    description: "Five-fold spirograph spiral with living pulse.",
-    Component: FivePetalSpiral,
-    color: "#14b8a6",
-  },
-  {
-    name: "Six-Petal Spiral",
-    tag: "R = 6, r = 1, d = 3",
-    description: "Six-fold spirograph spiral — dense and symmetrical.",
-    Component: SixPetalSpiral,
-    color: "#06b6d4",
-  },
-  {
-    name: "Butterfly Phase",
-    tag: "Butterfly Curve",
-    description: "Exponential and cosine terms create fluttering wings.",
-    Component: ButterflyPhase,
-    color: "#0ea5e9",
-  },
-  {
-    name: "Cardioid Glow",
-    tag: "Cardioid",
-    description: "A heart-shaped cardioid with breathing glow.",
-    Component: CardioidGlow,
-    color: "#3b82f6",
-  },
-  {
-    name: "Cardioid Heart",
-    tag: "r = a(1+cosθ)",
-    description: "The classic cardioid heart with gentle pulse.",
-    Component: CardioidHeart,
-    color: "#7c3aed",
-  },
-  {
-    name: "Heart Wave",
-    tag: "f(x) Heart Wave",
-    description: "A wavy heart-shaped curve with organic motion.",
-    Component: HeartWave,
-    color: "#e11d48",
-  },
-  {
-    name: "Spiral Search",
-    tag: "Archimedean Spiral",
-    description: "An expanding spiral with breathing turns.",
-    Component: SpiralSearch,
-    color: "#6d28d8",
-  },
-  {
-    name: "Fourier Flow",
-    tag: "Fourier Curve",
-    description: "Sine and cosine harmonics creating a flowing shape.",
-    Component: FourierFlow,
-    color: "#4f46e5",
-  },
-];
+const CURVE_CARDS = CURVE_CONFIGS.map((c) => ({
+  name: c.name,
+  tag: c.tag,
+  description: c.description,
+  Component: c.component,
+  color: c.color,
+}));
 
 /* ─── Code Block ─── */
 
@@ -272,6 +91,7 @@ function ParamControl({
   curveColor,
   onChange,
 }: ParamControlProps) {
+  const [showDesc, setShowDesc] = useState(false);
   const percentage = ((value - ctrl.min) / (ctrl.max - ctrl.min)) * 100;
   return (
     <div
@@ -279,11 +99,28 @@ function ParamControl({
       style={{ "--card-color": curveColor } as React.CSSProperties}
     >
       <div className="param-card-header">
-        <span className="param-card-label">{ctrl.label}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span className="param-card-label">{ctrl.label}</span>
+          {ctrl.description && (
+            <button
+              className="param-info-btn"
+              onClick={() => setShowDesc(!showDesc)}
+              aria-label="Show description"
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </button>
+          )}
+        </div>
         <div className="param-card-value">
           <button
             className="param-card-btn"
-            onClick={() => onChange(ctrl.key, value - ctrl.step)}
+            onClick={() =>
+              onChange(ctrl.key, Math.max(ctrl.min, value - ctrl.step))
+            }
           >
             −
           </button>
@@ -295,7 +132,9 @@ function ParamControl({
           </span>
           <button
             className="param-card-btn"
-            onClick={() => onChange(ctrl.key, value + ctrl.step)}
+            onClick={() =>
+              onChange(ctrl.key, Math.min(ctrl.max, value + ctrl.step))
+            }
           >
             +
           </button>
@@ -318,10 +157,8 @@ function ParamControl({
           aria-label={ctrl.label}
         />
       </div>
-      {ctrl.description && (
-        <div className="param-card-desc" title={ctrl.description}>
-          {ctrl.description}
-        </div>
+      {ctrl.description && showDesc && (
+        <div className="param-card-desc">{ctrl.description}</div>
       )}
     </div>
   );
@@ -332,10 +169,21 @@ function ParamControl({
 export interface CurveModalProps {
   curveConfig: CurvePlaygroundConfig;
   onClose: () => void;
+  onNavigate?: (config: CurvePlaygroundConfig) => void;
+  currentIndex: number;
+  totalCurves: number;
 }
 
-export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
+export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, totalCurves }: CurveModalProps) {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  const [theme, _setTheme] = useState<"dark" | "light">(() => {
     if (typeof document !== "undefined") {
       const stored = document.documentElement.getAttribute("data-theme");
       if (stored === "light") return "light";
@@ -348,7 +196,13 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
   }));
   const [showCode, setShowCode] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
+  const [showSource, setShowSource] = useState(false);
+  const [isSourceCopied, setIsSourceCopied] = useState(false);
+  const [showImport, setShowImport] = useState(true);
+  const [isImportCopied, setIsImportCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [showFormula, setShowFormula] = useState(true);
+  const [showParams, setShowParams] = useState(true);
 
   // Trigger preview entrance animation on mount
   useEffect(() => {
@@ -364,20 +218,36 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Close on Escape
+  // Close on Escape; navigate on arrow keys
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (onNavigate) {
+        if (e.key === "ArrowLeft" && currentIndex > 0) {
+          onNavigate(CURVE_CONFIGS[currentIndex - 1]);
+        }
+        if (e.key === "ArrowRight" && currentIndex < totalCurves - 1) {
+          onNavigate(CURVE_CONFIGS[currentIndex + 1]);
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  }, [onClose, onNavigate, currentIndex, totalCurves]);
 
-  const handleValueChange = useCallback((key: string, value: number) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
-  }, []);
+  const handleValueChange = useCallback(
+    (key: string, value: number) => {
+      setValues((prev) => {
+        const ctrl = curveConfig.controls.find((c) => c.key === key);
+        if (!ctrl) return { ...prev, [key]: value };
+        const clamped = Math.min(ctrl.max, Math.max(ctrl.min, value));
+        return { ...prev, [key]: clamped };
+      });
+    },
+    [curveConfig.controls],
+  );
 
-  const handleReset = useCallback(() => {
+  const _handleReset = useCallback(() => {
     setValues({ ...curveConfig.defaults });
   }, [curveConfig]);
 
@@ -404,14 +274,35 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
     setTimeout(() => setIsCopied(false), 2000);
   }, [code]);
 
+  const handleSourceCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(curveConfig.source ?? "");
+    setIsSourceCopied(true);
+    setTimeout(() => setIsSourceCopied(false), 2000);
+  }, [curveConfig.source]);
+
+  const handleImportCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(curveConfig.importLabel);
+    setIsImportCopied(true);
+    setTimeout(() => setIsImportCopied(false), 2000);
+  }, [curveConfig.importLabel]);
+
   const curveColor = curveConfig.color;
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div
+    <motion.div
+      className="modal-backdrop"
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      <motion.div
         className="modal"
         style={{ "--card-color": curveColor } as React.CSSProperties}
         onClick={(e) => e.stopPropagation()}
+        layoutId={`modal-${curveConfig.name}`}
+        transition={{ type: "spring", stiffness: 300, damping: 30, duration: 0.3 }}
       >
         {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
@@ -419,15 +310,38 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
           <div className="modal-left">
             {/* ─── Header ─── */}
             <div className="modal-header">
-              <div>
+              {onNavigate && currentIndex > 0 && (
+                <button
+                  className="modal-nav-btn"
+                  onClick={() => onNavigate(CURVE_CONFIGS[currentIndex - 1])}
+                  aria-label="Previous curve"
+                >
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+              <div className="modal-header-title">
                 <h2 className="modal-title">{curveConfig.name}</h2>
                 <span className="modal-tag">{curveConfig.tag}</span>
               </div>
-              <button
-                className="modal-close"
-                onClick={onClose}
-                aria-label="Close"
-              >
+              <div className="modal-header-actions">
+                {onNavigate && currentIndex < totalCurves - 1 && (
+                  <button
+                    className="modal-nav-btn"
+                    onClick={() => onNavigate(CURVE_CONFIGS[currentIndex + 1])}
+                    aria-label="Next curve"
+                  >
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                      <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                )}
+                <button
+                  className="modal-close"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                   <path
                     d="M18 6L6 18M6 6l12 12"
@@ -437,6 +351,7 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                   />
                 </svg>
               </button>
+              </div>
             </div>
 
             {/* ─── Description ─── */}
@@ -444,8 +359,10 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
 
             {/* ─── Preview ─── */}
             <div className="modal-preview-wrap">
-              <div
+              <motion.div
                 className="modal-preview"
+                layoutId={`preview-${curveConfig.name}`}
+                transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.35 }}
                 style={{
                   opacity: showPreview ? 1 : 0,
                   transform: showPreview ? "scale(1)" : "scale(0.92)",
@@ -455,18 +372,71 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
                   config={values}
                   style={{ width: 200, height: 200, color: curveConfig.color }}
                 />
-              </div>
+              </motion.div>
             </div>
 
             {/* ─── Import Statement ─── */}
-            <div className="modal-import-block">
-              <pre>
-                <code>{curveConfig.importLabel}</code>
-              </pre>
+            <div className="modal-section mobile-hidden" style={{ marginBottom: 16 }}>
+              <div className="modal-code-header">
+                <span className="modal-section-label">Import</span>
+                <div style={{ display: "flex", gap: 6 }}>
+                  {showImport && (
+                    <button
+                      className="modal-code-btn"
+                      onClick={() => setShowImport(false)}
+                    >
+                      Hide
+                    </button>
+                  )}
+                  <button
+                    className="modal-code-btn"
+                    onClick={handleImportCopy}
+                    data-copied={isImportCopied}
+                  >
+                    {isImportCopied ? "✓ Copied" : "Copy"}
+                  </button>
+                  {!showImport && (
+                    <button
+                      className="modal-code-btn"
+                      onClick={() => setShowImport(true)}
+                    >
+                      Show
+                    </button>
+                  )}
+                </div>
+              </div>
+              {showImport && (
+                <Highlight
+                  theme={vsDark}
+                  code={curveConfig.importLabel}
+                  language="tsx"
+                >
+                  {({
+                    className: prismClassName,
+                    style: prismStyle,
+                    tokens,
+                    getLineProps,
+                    getTokenProps,
+                  }) => (
+                    <pre
+                      className={`prism-code ${prismClassName}`}
+                      style={{ ...prismStyle, padding: "14px 16px", fontSize: 12, lineHeight: 1.6, overflowX: "auto", fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: "transparent", margin: 0 }}
+                    >
+                      {tokens.map((line, lineIndex) => (
+                        <div key={lineIndex} {...getLineProps({ line })} style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}>
+                          {line.map((token, tokenIndex) => (
+                            <span key={tokenIndex} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+              )}
             </div>
 
             {/* ─── Code ─── */}
-            <div className="modal-section">
+            <div className="modal-section mobile-hidden">
               <div className="modal-code-header">
                 <span className="modal-section-label">Component</span>
                 <div style={{ display: "flex", gap: 6 }}>
@@ -497,43 +467,147 @@ export function CurveModal({ curveConfig, onClose }: CurveModalProps) {
               </div>
               {showCode && <CodeBlock code={code} theme={theme} />}
             </div>
+
+            {/* ─── Source Code ─── */}
+            {curveConfig.source && (
+              <div className="modal-section">
+                <div className="modal-code-header">
+                  <span className="modal-section-label">Source</span>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {showSource && (
+                      <button
+                        className="modal-code-btn"
+                        onClick={() => setShowSource(false)}
+                      >
+                        Hide
+                      </button>
+                    )}
+                    <button
+                      className="modal-code-btn"
+                      onClick={handleSourceCopy}
+                      data-copied={isSourceCopied}
+                    >
+                      {isSourceCopied ? "✓ Copied" : "Copy"}
+                    </button>
+                    {!showSource && (
+                      <button
+                        className="modal-code-btn"
+                        onClick={() => setShowSource(true)}
+                      >
+                        Show
+                      </button>
+                    )}
+                  </div>
+                </div>
+                {showSource && <CodeBlock code={curveConfig.source} theme={theme} />}
+              </div>
+            )}
           </div>
 
           {/* Right column: Formula + Parameters */}
           <div className="modal-right">
-            <div className="modal-section">
-              <div className="modal-section-label">Formula</div>
-              <div className="modal-formula-wrap">
-                <MathFormula formula={dynamicFormula} />
-              </div>
-            </div>
-            <div className="modal-controls">
-              <div className="modal-controls-header">
-                <h3>Parameters</h3>
-                <button className="modal-reset" onClick={handleReset}>
-                  Reset
+            <div className="modal-section mobile-hidden">
+              <div className="modal-code-header">
+                <span className="modal-section-label">Formula</span>
+                <button
+                  className="modal-code-btn"
+                  onClick={() => setShowFormula(!showFormula)}
+                >
+                  {showFormula ? "Hide" : "Show"}
                 </button>
               </div>
-              <div className="params-grid">
-                {curveConfig.controls.map((ctrl) => {
-                  const val =
-                    values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                  return (
-                    <ParamControl
-                      key={ctrl.key}
-                      ctrl={ctrl}
-                      value={val}
-                      curveColor={curveColor}
-                      onChange={handleValueChange}
-                    />
-                  );
-                })}
+              {showFormula && (
+                <div className="modal-formula-wrap">
+                  <MathFormula formula={dynamicFormula} />
+                </div>
+              )}
+            </div>
+            <div className="modal-controls">
+              <div className="param-section-group">
+                <div className="modal-controls-header">
+                  <h3>Parameters</h3>
+                  <button
+                    className="modal-code-btn"
+                    onClick={() => setShowParams(!showParams)}
+                  >
+                    {showParams ? "Hide" : "Show"}
+                  </button>
+                  <button
+                    className="modal-reset"
+                    onClick={() => {
+                      const defaults = Object.fromEntries(
+                        curveConfig.controls
+                          .filter((c) => c.section === 'formula')
+                          .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                      );
+                      setValues((prev) => ({ ...prev, ...defaults }));
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
+                {showParams && (
+                  <div className="params-grid params-grid-2">
+                    {curveConfig.controls
+                      .filter((ctrl) => ctrl.section === 'formula')
+                      .map((ctrl) => {
+                        const val =
+                          values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                        return (
+                          <ParamControl
+                            key={ctrl.key}
+                            ctrl={ctrl}
+                            value={val}
+                            curveColor={curveColor}
+                            onChange={handleValueChange}
+                          />
+                        );
+                      })}
+                  </div>
+                )}
+                {showParams && (
+                <div className="param-section-group">
+                  <div className="modal-controls-header">
+                    <h3>Animation</h3>
+                    <button
+                      className="modal-reset"
+                      onClick={() => {
+                        const defaults = Object.fromEntries(
+                          curveConfig.controls
+                            .filter((c) => c.section === 'visual')
+                            .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                        );
+                        setValues((prev) => ({ ...prev, ...defaults }));
+                      }}
+                    >
+                      Reset
+                    </button>
+                  </div>
+                  <div className="params-grid params-grid-2">
+                    {curveConfig.controls
+                      .filter((ctrl) => ctrl.section === 'visual')
+                      .map((ctrl) => {
+                        const val =
+                          values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                        return (
+                          <ParamControl
+                            key={ctrl.key}
+                            ctrl={ctrl}
+                            value={val}
+                            curveColor={curveColor}
+                            onChange={handleValueChange}
+                          />
+                        );
+                      })}
+                  </div>
+                </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -554,103 +628,63 @@ export default function Gallery({
 
   return (
     <>
-      <header className="gallery-header">
-        <div className="gallery-title-group">
-          <h1 className="gallery-title">Math Curve Loaders</h1>
-          <p className="gallery-subtitle">
+      <Navbar theme={theme} onToggleTheme={onToggleTheme} />
+      <section className="hero">
+        <div className="hero-title-group">
+          <h1 className="hero-title">Math Curve Loaders</h1>
+          <p className="hero-subtitle">
             A Gallery of Mathematical Loading Animations
           </p>
         </div>
-        <div className="header-divider" />
-        <div className="header-actions">
-          <button
-            className="theme-toggle"
-            onClick={onToggleTheme}
-            title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-          >
-            {theme === "dark" ? (
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                <path
-                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            ) : (
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            )}
-          </button>
-          <a
-            className="github-link"
-            href="https://github.com/themagicalmammal/math-curve-loaders-react"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-            </svg>
-            GitHub
-          </a>
-        </div>
-      </header>
+        <div className="hero-divider" />
+      </section>
 
       <div className="gallery-grid">
-        {CURVES.map((curve, idx) => {
+        {CURVE_CARDS.map((curve, idx) => {
           const playgroundConfig = CURVE_CONFIGS.find(
             (c) => c.name === curve.name,
           );
           if (!playgroundConfig) return null;
           return (
-            <button
+            <motion.button
               key={curve.name}
               className="curve-card"
               style={
                 {
                   "--card-color": curve.color,
-                  "--delay": `${idx * 40}ms`,
                 } as React.CSSProperties
               }
+              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: idx * 0.04, duration: 0.4, ease: "easeOut" }}
               onClick={() => onCurveSelect(playgroundConfig)}
               onMouseEnter={() => setHoveredName(curve.name)}
               onMouseLeave={() => setHoveredName(null)}
             >
-              <div className="curve-card-preview">
-                <curve.Component
+              <div className="curve-card-preview"
+                style={{ "--card-color": curve.color } as React.CSSProperties}
+              >
+                <motion.div
                   className="curve-card-loader"
+                  layoutId={`preview-${curve.name}`}
+                  transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.35 }}
                   style={{
                     width: "64%",
                     height: "64%",
-                    color: hoveredName === curve.name ? curve.color : "#e0e0e0",
+                    color: hoveredName === curve.name ? curve.color : "var(--card-fg)",
                   }}
-                />
+                >
+                  <curve.Component
+                    className="curve-card-loader"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </motion.div>
               </div>
               <div className="curve-card-info">
                 <span className="curve-card-name">{curve.name}</span>
                 <span className="curve-card-tag">{curve.tag}</span>
               </div>
-            </button>
+            </motion.button>
           );
         })}
       </div>

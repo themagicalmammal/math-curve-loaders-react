@@ -686,7 +686,7 @@ body::before {
   min-width: 0;
   max-height: 100%;
   border-left: 1px solid var(--border-subtle);
-  padding: 24px 44px 24px 20px;
+  padding: 24px 28px 24px 20px;
   scrollbar-color: var(--scrollbar) transparent;
 }
 

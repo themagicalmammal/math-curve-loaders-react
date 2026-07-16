@@ -91,7 +91,7 @@ function ParamControl({
   curveColor,
   onChange,
 }: ParamControlProps) {
-  const [showDesc, setShowDesc] = useState(false);
+  const [showDesc, setShowDesc] = useState(true);
   const percentage = ((value - ctrl.min) / (ctrl.max - ctrl.min)) * 100;
   return (
     <div
@@ -470,7 +470,7 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
 
             {/* ─── Source Code ─── */}
             {curveConfig.source && (
-              <div className="modal-section">
+              <div className="modal-section mobile-hidden">
                 <div className="modal-code-header">
                   <span className="modal-section-label">Source</span>
                   <div style={{ display: "flex", gap: 6 }}>
@@ -526,14 +526,15 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
               <div className="param-section-group">
                 <div className="modal-controls-header">
                   <h3>Parameters</h3>
-                  <button
-                    className="modal-code-btn"
-                    onClick={() => setShowParams(!showParams)}
-                  >
-                    {showParams ? "Hide" : "Show"}
-                  </button>
-                  <button
-                    className="modal-reset"
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <button
+                      className="modal-code-btn"
+                      onClick={() => setShowParams(!showParams)}
+                    >
+                      {showParams ? "Hide" : "Show"}
+                    </button>
+                    <button
+                      className="modal-reset"
                     onClick={() => {
                       const defaults = Object.fromEntries(
                         curveConfig.controls
@@ -544,7 +545,8 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                     }}
                   >
                     Reset
-                  </button>
+                    </button>
+                  </div>
                 </div>
                 {showParams && (
                   <div className="params-grid params-grid-2">
@@ -566,7 +568,7 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                   </div>
                 )}
                 {showParams && (
-                <div className="param-section-group">
+                <div className="param-section-group" style={{ marginTop: 16 }}>
                   <div className="modal-controls-header">
                     <h3>Animation</h3>
                     <button

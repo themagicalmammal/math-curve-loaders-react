@@ -280,44 +280,49 @@ body::before {
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 28px;
-  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  gap: 12px;
+  padding: 10px 20px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg-elevated) 85%, transparent);
+  border: 1px solid var(--border-subtle);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--border-subtle);
 }
 
 .navbar::after {
   content: "";
   position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 1px;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
   background: linear-gradient(
-    90deg,
-    transparent,
-    var(--primary) 20%,
-    #a855f7 40%,
-    #ec4899 60%,
-    var(--primary) 80%,
-    transparent
+    135deg,
+    var(--primary) 0%,
+    #a855f7 25%,
+    #ec4899 50%,
+    #a855f7 75%,
+    var(--primary) 100%
   );
-  background-size: 200% 100%;
-  animation: navbar-shimmer 8s linear infinite;
+  background-size: 300% 100%;
+  animation: navbar-gradient 10s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
   opacity: 0.5;
 }
 
-@keyframes navbar-shimmer {
-  from { background-position: 200% 0; }
-  to   { background-position: -200% 0; }
+@keyframes navbar-gradient {
+  from { background-position: 100% 0; }
+  to   { background-position: -100% 0; }
 }
 
 .navbar-left {
@@ -382,7 +387,7 @@ body::before {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
-  padding: 28px 40px 64px;
+  padding: 76px 40px 64px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -1255,10 +1260,13 @@ body::before {
 /* ── 768px: 2-column grid, bottom-sheet modal, mobile typography ── */
 @media (max-width: 768px) {
   .navbar {
-    padding: 10px 16px;
+    top: 10px;
+    padding: 8px 14px;
+    gap: 8px;
+    border-radius: 14px;
   }
   .navbar-title {
-    font-size: 13.5px;
+    font-size: 13px;
   }
   .navbar-subtitle {
     display: none;
@@ -1379,16 +1387,18 @@ body::before {
 /* ── 540px: compact everything ── */
 @media (max-width: 540px) {
   .navbar {
-    padding: 8px 12px;
+    top: 8px;
+    padding: 7px 12px;
+    border-radius: 12px;
   }
   .navbar-left {
-    gap: 6px;
+    gap: 5px;
   }
   .navbar-title {
     font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 160px;
   }
   .navbar-dot {
     width: 5px;

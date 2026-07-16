@@ -107,7 +107,14 @@ function ParamControl({
               onClick={() => setShowDesc(!showDesc)}
               aria-label="Show description"
             >
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="16" x2="12" y2="12" />
                 <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -174,7 +181,13 @@ export interface CurveModalProps {
   totalCurves: number;
 }
 
-export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, totalCurves }: CurveModalProps) {
+export function CurveModal({
+  curveConfig,
+  onClose,
+  onNavigate,
+  currentIndex,
+  totalCurves,
+}: CurveModalProps) {
   // Lock body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -261,8 +274,12 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
   const dynamicFormula = useMemo(() => {
     try {
       const merged = { ...baseConfig, ...values };
-      const formulaFn = (baseConfig.formula as (c: CurveConfig) => string) ?? curveConfig.formula;
-      return typeof formulaFn === "function" ? formulaFn(merged as CurveConfig) : curveConfig.formula;
+      const formulaFn =
+        (baseConfig.formula as (c: CurveConfig) => string) ??
+        curveConfig.formula;
+      return typeof formulaFn === "function"
+        ? formulaFn(merged as CurveConfig)
+        : curveConfig.formula;
     } catch {
       return curveConfig.formula;
     }
@@ -302,7 +319,12 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
         style={{ "--card-color": curveColor } as React.CSSProperties}
         onClick={(e) => e.stopPropagation()}
         layoutId={`modal-${curveConfig.name}`}
-        transition={{ type: "spring", stiffness: 300, damping: 30, duration: 0.3 }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 30,
+          duration: 0.3,
+        }}
       >
         {/* ─── Modal Body: Two-Column Layout ─── */}
         <div className="modal-body">
@@ -317,7 +339,13 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                   aria-label="Previous curve"
                 >
                   <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                    <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M15 18l-6-6 6-6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               )}
@@ -333,7 +361,13 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                     aria-label="Next curve"
                   >
                     <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                      <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path
+                        d="M9 18l6-6-6-6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </button>
                 )}
@@ -342,15 +376,15 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                   onClick={onClose}
                   aria-label="Close"
                 >
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                  <path
-                    d="M18 6L6 18M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                    <path
+                      d="M18 6L6 18M6 6l12 12"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -358,25 +392,33 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
             <p className="modal-body-description">{curveConfig.description}</p>
 
             {/* ─── Preview ─── */}
-            <div className="modal-preview-wrap">
-              <motion.div
-                className="modal-preview"
-                layoutId={`preview-${curveConfig.name}`}
-                transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.35 }}
-                style={{
-                  opacity: showPreview ? 1 : 0,
-                  transform: showPreview ? "scale(1)" : "scale(0.92)",
-                }}
-              >
+            <motion.div
+              className="modal-preview"
+              layoutId={`preview-${curveConfig.name}`}
+              transition={{
+                type: "spring",
+                stiffness: 250,
+                damping: 25,
+                duration: 0.35,
+              }}
+              style={{
+                opacity: showPreview ? 1 : 0,
+                transform: showPreview ? "scale(1)" : "scale(0.92)",
+              }}
+            >
+              <div className="preview-inner">
                 <curveConfig.component
                   config={values}
                   style={{ width: 200, height: 200, color: curveConfig.color }}
                 />
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
             {/* ─── Import Statement ─── */}
-            <div className="modal-section mobile-hidden" style={{ marginBottom: 16 }}>
+            <div
+              className="modal-section mobile-hidden"
+              style={{ marginBottom: 16 }}
+            >
               <div className="modal-code-header">
                 <span className="modal-section-label">Import</span>
                 <div style={{ display: "flex", gap: 6 }}>
@@ -420,12 +462,30 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                   }) => (
                     <pre
                       className={`prism-code ${prismClassName}`}
-                      style={{ ...prismStyle, padding: "14px 16px", fontSize: 12, lineHeight: 1.6, overflowX: "auto", fontFamily: "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace", tabSize: 2, background: "transparent", margin: 0 }}
+                      style={{
+                        ...prismStyle,
+                        padding: "14px 16px",
+                        fontSize: 12,
+                        lineHeight: 1.6,
+                        overflowX: "auto",
+                        fontFamily:
+                          "'SF Mono', 'JetBrains Mono', 'Fira Code', Consolas, monospace",
+                        tabSize: 2,
+                        background: "transparent",
+                        margin: 0,
+                      }}
                     >
                       {tokens.map((line, lineIndex) => (
-                        <div key={lineIndex} {...getLineProps({ line })} style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}>
+                        <div
+                          key={lineIndex}
+                          {...getLineProps({ line })}
+                          style={{ paddingLeft: lineIndex === 0 ? 0 : 2 }}
+                        >
                           {line.map((token, tokenIndex) => (
-                            <span key={tokenIndex} {...getTokenProps({ token })} />
+                            <span
+                              key={tokenIndex}
+                              {...getTokenProps({ token })}
+                            />
                           ))}
                         </div>
                       ))}
@@ -499,7 +559,9 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                     )}
                   </div>
                 </div>
-                {showSource && <CodeBlock code={curveConfig.source} theme={theme} />}
+                {showSource && (
+                  <CodeBlock code={curveConfig.source} theme={theme} />
+                )}
               </div>
             )}
           </div>
@@ -526,7 +588,9 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
               <div className="param-section-group">
                 <div className="modal-controls-header">
                   <h3>Parameters</h3>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 8 }}
+                  >
                     <button
                       className="modal-code-btn"
                       onClick={() => setShowParams(!showParams)}
@@ -535,23 +599,23 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                     </button>
                     <button
                       className="modal-reset"
-                    onClick={() => {
-                      const defaults = Object.fromEntries(
-                        curveConfig.controls
-                          .filter((c) => c.section === 'formula')
-                          .map((c) => [c.key, curveConfig.defaults[c.key]]),
-                      );
-                      setValues((prev) => ({ ...prev, ...defaults }));
-                    }}
-                  >
-                    Reset
+                      onClick={() => {
+                        const defaults = Object.fromEntries(
+                          curveConfig.controls
+                            .filter((c) => c.section === "formula")
+                            .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                        );
+                        setValues((prev) => ({ ...prev, ...defaults }));
+                      }}
+                    >
+                      Reset
                     </button>
                   </div>
                 </div>
                 {showParams && (
                   <div className="params-grid params-grid-2">
                     {curveConfig.controls
-                      .filter((ctrl) => ctrl.section === 'formula')
+                      .filter((ctrl) => ctrl.section === "formula")
                       .map((ctrl) => {
                         const val =
                           values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
@@ -568,41 +632,44 @@ export function CurveModal({ curveConfig, onClose, onNavigate, currentIndex, tot
                   </div>
                 )}
                 {showParams && (
-                <div className="param-section-group" style={{ marginTop: 16 }}>
-                  <div className="modal-controls-header">
-                    <h3>Animation</h3>
-                    <button
-                      className="modal-reset"
-                      onClick={() => {
-                        const defaults = Object.fromEntries(
-                          curveConfig.controls
-                            .filter((c) => c.section === 'visual')
-                            .map((c) => [c.key, curveConfig.defaults[c.key]]),
-                        );
-                        setValues((prev) => ({ ...prev, ...defaults }));
-                      }}
-                    >
-                      Reset
-                    </button>
+                  <div
+                    className="param-section-group"
+                    style={{ marginTop: 16 }}
+                  >
+                    <div className="modal-controls-header">
+                      <h3>Animation</h3>
+                      <button
+                        className="modal-reset"
+                        onClick={() => {
+                          const defaults = Object.fromEntries(
+                            curveConfig.controls
+                              .filter((c) => c.section === "visual")
+                              .map((c) => [c.key, curveConfig.defaults[c.key]]),
+                          );
+                          setValues((prev) => ({ ...prev, ...defaults }));
+                        }}
+                      >
+                        Reset
+                      </button>
+                    </div>
+                    <div className="params-grid params-grid-2">
+                      {curveConfig.controls
+                        .filter((ctrl) => ctrl.section === "visual")
+                        .map((ctrl) => {
+                          const val =
+                            values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
+                          return (
+                            <ParamControl
+                              key={ctrl.key}
+                              ctrl={ctrl}
+                              value={val}
+                              curveColor={curveColor}
+                              onChange={handleValueChange}
+                            />
+                          );
+                        })}
+                    </div>
                   </div>
-                  <div className="params-grid params-grid-2">
-                    {curveConfig.controls
-                      .filter((ctrl) => ctrl.section === 'visual')
-                      .map((ctrl) => {
-                        const val =
-                          values[ctrl.key] ?? curveConfig.defaults[ctrl.key];
-                        return (
-                          <ParamControl
-                            key={ctrl.key}
-                            ctrl={ctrl}
-                            value={val}
-                            curveColor={curveColor}
-                            onChange={handleValueChange}
-                          />
-                        );
-                      })}
-                  </div>
-                </div>
                 )}
               </div>
             </div>
@@ -654,17 +721,26 @@ export default function Gallery({
               onMouseEnter={() => setHoveredName(curve.name)}
               onMouseLeave={() => setHoveredName(null)}
             >
-              <div className="curve-card-preview"
+              <div
+                className="curve-card-preview"
                 style={{ "--card-color": curve.color } as React.CSSProperties}
               >
                 <motion.div
                   className="curve-card-loader"
                   layoutId={`preview-${curve.name}`}
-                  transition={{ type: "spring", stiffness: 250, damping: 25, duration: 0.35 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 250,
+                    damping: 25,
+                    duration: 0.35,
+                  }}
                   style={{
                     width: "64%",
                     height: "64%",
-                    color: hoveredName === curve.name ? curve.color : "var(--card-fg)",
+                    color:
+                      hoveredName === curve.name
+                        ? curve.color
+                        : "var(--card-fg)",
                   }}
                 >
                   <curve.Component

@@ -387,7 +387,7 @@ body::before {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
-  padding: 76px 40px 64px;
+  padding: 100px 40px 64px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -1209,7 +1209,7 @@ body::before {
 @media (max-width: 1120px) {
   .gallery-grid {
     grid-template-columns: repeat(4, 1fr);
-    padding: 32px 24px 48px;
+    padding: 100px 24px 48px;
   }
 }
 
@@ -1217,7 +1217,7 @@ body::before {
 @media (max-width: 960px) {
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
-    padding: 28px 20px 40px;
+    padding: 100px 20px 40px;
   }
   .modal {
     max-width: 98vw;
@@ -1279,7 +1279,7 @@ body::before {
     display: none;
   }
   .gallery-grid {
-    padding: 20px 16px 32px;
+    padding: 100px 16px 32px;
   }
   .mobile-hidden {
     display: none !important;
@@ -1287,7 +1287,7 @@ body::before {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    padding: 20px 16px 32px;
+    padding: 100px 16px 32px;
   }
   .curve-card {
     padding: 16px 8px 14px;
@@ -1406,7 +1406,7 @@ body::before {
   }
   .gallery-grid {
     gap: 6px;
-    padding: 12px 12px 24px;
+    padding: 100px 12px 24px;
   }
   .curve-card {
     padding: 14px 6px 12px;

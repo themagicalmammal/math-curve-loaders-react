@@ -1,47 +1,66 @@
-import { useState, useCallback, useEffect } from 'react';
-import Gallery, { CurveModal } from './Gallery';
-import type { CurvePlaygroundConfig } from './CurvesConfig';
+import { AnimatePresence } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+
+import { CURVE_CONFIGS } from "./CurvesConfig";
+import Gallery, { CurveModal } from "./Gallery";
+
+import type { CurvePlaygroundConfig } from "./CurvesConfig";
 
 export default function App() {
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof document !== 'undefined') {
-      const stored = document.documentElement.getAttribute('data-theme');
-      if (stored === 'light') return 'light';
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof document !== "undefined") {
+      const stored = document.documentElement.getAttribute("data-theme");
+      if (stored === "light") return "light";
     }
-    return 'dark';
+    return "dark";
   });
 
-  const [selectedCurve, setSelectedCurve] = useState<CurvePlaygroundConfig | null>(null);
+  const [selectedCurve, setSelectedCurve] =
+    useState<CurvePlaygroundConfig | null>(null);
+  const [selectedCurveIndex, setSelectedCurveIndex] = useState<number>(0);
 
   // Apply theme globally
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const handleToggleTheme = useCallback(() => {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
   }, []);
 
   const handleCurveSelect = useCallback((curve: CurvePlaygroundConfig) => {
+    const idx = CURVE_CONFIGS.findIndex((c) => c.name === curve.name);
     setSelectedCurve(curve);
+    setSelectedCurveIndex(idx >= 0 ? idx : 0);
   }, []);
 
   const handleCloseModal = useCallback(() => {
     setSelectedCurve(null);
   }, []);
 
+  const handleNavigate = useCallback((curve: CurvePlaygroundConfig) => {
+    const idx = CURVE_CONFIGS.findIndex((c) => c.name === curve.name);
+    setSelectedCurve(curve);
+    setSelectedCurveIndex(idx >= 0 ? idx : 0);
+  }, []);
+
   return (
     <>
-      {selectedCurve && (
-        <CurveModal
-          curveConfig={selectedCurve}
-          onClose={handleCloseModal}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {selectedCurve && (
+          <CurveModal
+            currentIndex={selectedCurveIndex}
+            curveConfig={selectedCurve}
+            onClose={handleCloseModal}
+            onNavigate={handleNavigate}
+            totalCurves={CURVE_CONFIGS.length}
+          />
+        )}
+      </AnimatePresence>
       <Gallery
         onCurveSelect={handleCurveSelect}
-        theme={theme}
         onToggleTheme={handleToggleTheme}
+        theme={theme}
       />
     </>
   );

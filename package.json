@@ -1,6 +1,7 @@
 {
   "name": "math-curve-loaders-react-monorepo",
   "private": true,
+  "type": "module",
   "version": "1.0.0",
   "description": "A collection of mathematical curve loading animations as reusable React components",
   "scripts": {
@@ -8,11 +9,21 @@
     "build:lib": "pnpm --filter @math-curve-loaders/react build",
     "dev:gallery": "pnpm --filter @math-curve-loaders/gallery dev",
     "build:gallery": "pnpm --filter @math-curve-loaders/gallery build",
+    "build:capture": "pnpm --filter @math-curve-loaders/capture build",
     "dev:all": "concurrently \"pnpm --filter @math-curve-loaders/react dev\" \"pnpm --filter @math-curve-loaders/gallery dev\"",
-    "lint": "oxlint"
+    "lint": "eslint"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.64.0",
+    "@typescript-eslint/parser": "^8.64.0",
+    "concurrently": "^9.2.4",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-perfectionist": "^5.10.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.5",
+    "puppeteer": "^25.3.0"
   },
   "engines": {
     "pnpm": ">=8.0.0"

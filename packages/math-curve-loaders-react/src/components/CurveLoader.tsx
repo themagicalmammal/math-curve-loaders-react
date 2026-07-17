@@ -1,34 +1,48 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
+
 import type { CurveConfig } from "../data/curves";
 
 export interface CurveLoaderProps {
+  /** Additional CSS class name */
+  className?: string;
   /** The curve configuration (math, particle count, timing, etc.) */
   config: CurveConfig;
   /** Override particle count */
   particleCount?: number;
-  /** Override trail span (0–1) */
-  trailSpan?: number;
   /** Override stroke width */
   strokeWidth?: number;
-  /** Additional CSS class name */
-  className?: string;
   /** Inline styles (width, height, etc.) */
   style?: React.CSSProperties;
+  /** Override trail span (0–1) */
+  trailSpan?: number;
 }
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-function getDetailScale(time: number, pulseDurationMs: number, phaseOffset: number) {
-  const pulseProgress = ((time + phaseOffset * pulseDurationMs) % pulseDurationMs) / pulseDurationMs;
+function getDetailScale(
+  time: number,
+  pulseDurationMs: number,
+  phaseOffset: number,
+) {
+  const pulseProgress =
+    ((time + phaseOffset * pulseDurationMs) % pulseDurationMs) /
+    pulseDurationMs;
   const pulseAngle = pulseProgress * Math.PI * 2;
   return 0.52 + ((Math.sin(pulseAngle + 0.55) + 1) / 2) * 0.48;
 }
 
-function getRotation(time: number, rotate: boolean, rotationDurationMs: number, phaseOffset: number) {
+function getRotation(
+  time: number,
+  rotate: boolean,
+  rotationDurationMs: number,
+  phaseOffset: number,
+) {
   if (!rotate) return 0;
   return (
-    -((time + phaseOffset * rotationDurationMs) % rotationDurationMs) / rotationDurationMs
-  ) * 360;
+    (-((time + phaseOffset * rotationDurationMs) % rotationDurationMs) /
+      rotationDurationMs) *
+    360
+  );
 }
 
 function buildPath(config: CurveConfig, detailScale: number, steps = 480) {
@@ -44,34 +58,37 @@ function getParticle(
   config: CurveConfig,
   index: number,
   progress: number,
-  detailScale: number
+  detailScale: number,
 ) {
   const tailOffset = index / (config.particleCount - 1);
   const pt = config.point(
-    ((progress - tailOffset * config.trailSpan) % 1 + 1) % 1,
+    (((progress - tailOffset * config.trailSpan) % 1) + 1) % 1,
     detailScale,
-    config
+    config,
   );
   const fade = Math.pow(1 - tailOffset, 0.56);
   return {
+    opacity: 0.04 + fade * 0.96,
+    radius: 0.9 + fade * 2.7,
     x: pt.x,
     y: pt.y,
-    radius: 0.9 + fade * 2.7,
-    opacity: 0.04 + fade * 0.96,
   };
 }
 
 export default function CurveLoader({
+  className,
   config,
   particleCount: propParticles,
-  trailSpan: _propTrail,
   strokeWidth: propStroke,
-  className,
   style,
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  // @ts-expect-error intentionally unused — matches CurveLoaderProps interface for future use
+  trailSpan,
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 }: CurveLoaderProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const pathRef = useRef<SVGPathElement | null>(null);
-  const groupRef = useRef<SVGGElement | null>(null);
+  const pathRef = useRef<null | SVGPathElement>(null);
+  const groupRef = useRef<null | SVGGElement>(null);
   const startTimeRef = useRef(performance.now());
   const phaseRef = useRef(Math.random());
   const particleElementsRef = useRef<SVGCircleElement[]>([]);
@@ -81,7 +98,8 @@ export default function CurveLoader({
 
   // Keep refs in sync with latest props (animation loop reads from refs)
   if (configRef.current !== config) configRef.current = config;
-  if (propParticlesRef.current !== propParticles) propParticlesRef.current = propParticles;
+  if (propParticlesRef.current !== propParticles)
+    propParticlesRef.current = propParticles;
   if (propStrokeRef.current !== propStroke) propStrokeRef.current = propStroke;
 
   useEffect(() => {
@@ -101,7 +119,10 @@ export default function CurveLoader({
 
     // Add path element
     path.setAttribute("stroke", "currentColor");
-    path.setAttribute("stroke-width", String(propStrokeRef.current ?? configRef.current.strokeWidth));
+    path.setAttribute(
+      "stroke-width",
+      String(propStrokeRef.current ?? configRef.current.strokeWidth),
+    );
     path.setAttribute("stroke-linecap", "round");
     path.setAttribute("stroke-linejoin", "round");
     path.setAttribute("opacity", "0.1");
@@ -167,12 +188,12 @@ export default function CurveLoader({
 
   return (
     <svg
-      ref={svgRef}
-      className={className}
-      viewBox="0 0 100 100"
-      fill="none"
-      style={style}
       aria-hidden="true"
+      className={className}
+      fill="none"
+      ref={svgRef}
+      style={style}
+      viewBox="0 0 100 100"
     >
       <g ref={groupRef}>
         <path ref={pathRef} />

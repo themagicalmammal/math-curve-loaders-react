@@ -1,6 +1,19 @@
-# @math-curve-loaders/react
+# Math Curve Loaders React
 
-[Mathematical curve loading animations](https://github.com/Paidax01/math-curve-loaders) as reusable React components. Zero CSS overhead — color via CSS `currentColor`, sizing via `style` or `className`.
+<div align="center">
+
+[![npm version](https://img.shields.io/npm/v/@math-curve-loaders/react.svg)](https://www.npmjs.com/package/@math-curve-loaders/react)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6.svg)](https://www.typescriptlang.org/)
+[![React 18+](https://img.shields.io/badge/React-18%20%7C%2019-%61?style?flat&logo=react)](https://react.dev/)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@math-curve-loaders/react?label=zip)](https://bundlephobia.com/package/@math-curve-loaders/react)
+[![Downloads](https://img.shields.io/npm/dw/@math-curve-loaders/react.svg)](https://www.npmjs.com/package/@math-curve-loaders/react)
+
+Beautiful mathematical curve loading animations as lightweight React components. Zero CSS overhead. Fully typed. CSS `currentColor`-driven.
+
+[**Live Gallery**](https://math-curve-loaders.vercel.app) &middot; [**Report a Bug**](https://github.com/themagicalmammal/math-curve-loaders-react/issues) &middot; [**Request a Feature**](https://github.com/themagicalmammal/math-curve-loaders-react/issues)
+
+</div>
 
 ## Installation
 
@@ -37,93 +50,78 @@ export function App() {
 }
 ```
 
-## Available Curves (21)
+## 21 Mathematical Curves
 
-| Curve | Preview | Tag | Description |
-|-------|---------|-----|-------------|
-| `OriginalThinking` | [![](docs/gifs/originalthinking.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/originalthinking.gif) | Custom Rose Trail | Base circle carved by a sevenfold cosine — rotating seven-petal ring |
-| `ThinkingFive` | [![](docs/gifs/thinkingfive.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/thinkingfive.gif) | Custom Rose Trail | Fivefold term for a cleaner five-petal rhythm |
-| `ThinkingNine` | [![](docs/gifs/thinkingnine.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/thinkingnine.gif) | Custom Rose Trail | Ninefold term for denser, finely-braided inner turns |
-| `RoseOrbit` | [![](docs/gifs/roseorbit.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/roseorbit.gif) | r = cos(kθ) | Radius breathes with cos(7t) — orbit pulses |
-| `RoseCurve` | [![](docs/gifs/rosecurve.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosecurve.gif) | r = a cos(kθ) | Five evenly spaced lobes with breathing animation |
-| `RoseTwo` | [![](docs/gifs/rosetwo.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosetwo.gif) | r = a cos(2θ) | Broad opposing petals, gentle pulse |
-| `RoseThree` | [![](docs/gifs/rosethree.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosethree.gif) | r = a cos(3θ) | Three rotating petals, classic rose curve |
-| `RoseFour` | [![](docs/gifs/rosefour.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/rosefour.gif) | r = a cos(4θ) | Balanced cross-like rose with four petals |
-| `LissajousDrift` | [![](docs/gifs/lissajousdrift.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/lissajousdrift.gif) | x = sin(at), y = sin(bt) | Different frequencies create self-intersecting patterns |
-| `LemniscateBloom` | [![](docs/gifs/lemniscatebloom.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/lemniscatebloom.gif) | Bernoulli Lemniscate | Figure-eight infinity symbol that pinches and blooms |
-| `HypotrochoidLoop` | [![](docs/gifs/hypotrochoidloop.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/hypotrochoidloop.gif) | Inner Spirograph | Rolling-circle terms create nested turning loops |
-| `ThreePetalSpiral` | [![](docs/gifs/threepetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/threepetalspiral.gif) | R=3, r=1, d=3 | Three large looping petals from spirograph math |
-| `FourPetalSpiral` | [![](docs/gifs/fourpetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fourpetalspiral.gif) | R=4, r=1, d=3 | Four-leaf clover spirograph pattern |
-| `FivePetalSpiral` | [![](docs/gifs/fivepetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fivepetalspiral.gif) | R=5, r=1, d=3 | Five-fold spirograph spiral |
-| `SixPetalSpiral` | [![](docs/gifs/sixpetalspiral.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/sixpetalspiral.gif) | R=6, r=1, d=3 | Six-fold spirograph spiral |
-| `ButterflyPhase` | [![](docs/gifs/butterflyphase.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/butterflyphase.gif) | Butterfly Curve | Rich inner structure with phase animation |
-| `CardioidGlow` | [![](docs/gifs/cardioidglow.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/cardioidglow.gif) | Cardioid | Heart-shaped curve with breathing glow |
-| `CardioidHeart` | [![](docs/gifs/cardioidheart.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/cardioidheart.gif) | r = a(1+cosθ) | Classic cardioid heart shape |
-| `HeartWave` | [![](docs/gifs/heartwave.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/heartwave.gif) | f(x) Heart Wave | Wavy heart line drawing |
-| `SpiralSearch` | [![](docs/gifs/spiralsearch.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/spiralsearch.gif) | Archimedean Spiral | Expanding spiral that sweeps outward |
-| `FourierFlow` | [![](docs/gifs/fourierflow.gif)](https://github.com/themagicalmammal/math-curve-loaders-react/blob/main/docs/gifs/fourierflow.gif) | Fourier Curve | Sum of sine/cosine terms creating complex flowing shapes |
+Each component is a self-contained SVG animation. No CSS, no dependencies beyond React.
+
+| Curve | Math | Curve | Math |
+|-------|------|-------|------|
+| **OriginalThinking** | Custom Rose Trail | **RoseOrbit** | `r = cos(7t)` |
+| **ThinkingFive** | Custom Rose Trail | **RoseCurve** | `r = a cos(kθ)` |
+| **ThinkingNine** | Custom Rose Trail | **RoseTwo** | `r = a cos(2θ)` |
+| **RoseCurve** | `r = a cos(kθ)` | **RoseThree** | `r = a cos(3θ)` |
+| **RoseTwo** | `r = a cos(2θ)` | **RoseFour** | `r = a cos(4θ)` |
+| **RoseThree** | `r = a cos(3θ)` | **LissajousDrift** | `x=sin(at), y=sin(bt)` |
+| **RoseFour** | `r = a cos(4θ)` | **LemniscateBloom** | Bernoulli Lemniscate |
+| **LissajousDrift** | `x=sin(at), y=sin(bt)` | **HypotrochoidLoop** | Inner Spirograph |
+| **LemniscateBloom** | Bernoulli Lemniscate | **Three/Four/Five/SixPetalSpiral** | Spirograph (R, r, d) |
+| **HypotrochoidLoop** | Inner Spirograph | **ButterflyPhase** | Butterfly Curve |
+| **ThreePetalSpiral** | R=3, r=1, d=3 | **CardioidGlow / CardioidHeart** | Cardioid |
+| **FourPetalSpiral** | R=4, r=1, d=3 | **HeartWave** | f(x) Heart Wave |
+| **FivePetalSpiral** | R=5, r=1, d=3 | **SpiralSearch** | Archimedean Spiral |
+| **SixPetalSpiral** | R=6, r=1, d=3 | **FourierFlow** | Fourier Series |
+
+> Full list with animated previews: [**View all 21 curves**](https://math-curve-loaders.vercel.app)
 
 ## Props
 
-Each curve component accepts:
-
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `config` | `Partial<CurveConfig>` | — | Override any curve parameter (see [Parameter Reference](#parameter-reference)) |
-| `className` | `string` | — | Additional CSS class for styling |
+| `config` | `Partial<CurveConfig>` | — | Override any curve parameter (see below) |
+| `className` | `string` | — | Additional CSS class |
 | `style` | `React.CSSProperties` | — | Inline styles (`width`, `height`, `color`, etc.) |
 
-### Overriding Parameters
+### Custom Parameters
 
-Pass a `config` object to tweak any parameter:
+Pass a `config` object to tweak animation behavior:
 
 ```tsx
 <OriginalThinking
   config={{
-    particleCount: 100,   // More particles
-    trailSpan: 0.5,       // Longer trails
-    strokeWidth: 3,       // Thinner strokes
+    particleCount: 100,   // More particles on the trail
+    trailSpan: 0.5,       // Longer trail length
+    strokeWidth: 3,       // Thinner stroke
+    durationMs: 6000,     // Slower animation cycle
   }}
   style={{ width: 80, height: 80, color: '#ef4444' }}
 />
 ```
 
-### Static `.config` Property
-
-Access each curve's default configuration programmatically:
-
-```tsx
-// Read the default config
-const cfg = OriginalThinking.config;
-console.log(cfg.name);      // "Original Thinking"
-console.log(cfg.tag);       // "Custom Rose Trail"
-console.log(cfg.formula());
-// "x(t) = 50 + (7.0 cos t - 3.0s cos 7t) * 3.9"
-// "y(t) = 50 + (7.0 sin t - 3.0s sin 7t) * 3.9"
-```
-
-## Parameter Reference
-
-These parameters are available on **all** curves via the `config` prop:
+### Available Parameters
 
 | Parameter | Type | Default Range | Description |
 |-----------|------|---------------|-------------|
-| `particleCount` | `number` | 24–140 | Number of animated particles on the trail |
-| `trailSpan` | `number` | 0.12–0.68 | How long the particle trail appears |
-| `durationMs` | `number` | 2400–12000 | Duration of one animation loop cycle |
-| `pulseDurationMs` | `number` | 1800–10000 | Speed of the breathing/pulse animation |
-| `rotationDurationMs` | `number` | 6000–60000 | Speed of full rotation (if enabled) |
-| `strokeWidth` | `number` | 2.5–7.5 | Thickness of the curve stroke |
+| `particleCount` | `number` | 24--140 | Number of particles on the trail |
+| `trailSpan` | `number` | 0.12--0.68 | Trail length |
+| `durationMs` | `number` | 2400--12000 | Animation cycle duration |
+| `pulseDurationMs` | `number` | 1800--10000 | Breathing/pulse animation speed |
+| `rotationDurationMs` | `number` | 6000--60000 | Full rotation speed |
+| `strokeWidth` | `number` | 2.5--7.5 | Curve stroke thickness |
 
-Each curve may have additional curve-specific parameters. Check the individual component's `.config` for the full list.
+Each curve may define additional parameters. Access defaults via the static `.config` property:
+
+```tsx
+const cfg = OriginalThinking.config;
+console.log(cfg.name);      // "Original Thinking"
+console.log(cfg.tag);       // "Custom Rose Trail"
+console.log(cfg.formula()); // "x(t) = 50 + ..."
+```
 
 ## CSS Strategy
 
-Components render **pure SVG** with no bundled CSS. There is no styling overhead — you control everything.
+Components render pure SVG with **zero bundled CSS**. You control everything.
 
-### Color
-
-Color is inherited via CSS `currentColor`:
+### Color via `currentColor`
 
 ```css
 .my-loader {
@@ -133,53 +131,44 @@ Color is inherited via CSS `currentColor`:
 
 ### Sizing
 
-Set width and height directly:
-
 ```tsx
 <OriginalThinking style={{ width: 200, height: 200 }} />
 ```
 
-Or via CSS:
+### Dark Mode
 
-```css
-.my-loader {
-  width: 100px;
-  height: 100px;
-  color: #ef4444;
-}
-```
-
-```tsx
-<OriginalThinking className="my-loader" />
-```
-
-### Background
-
-The SVG is transparent by default. Add a background to the container:
+The SVG is transparent by default. Wrap in a dark container:
 
 ```tsx
 <div style={{ background: '#0f172a', padding: 24, borderRadius: 12 }}>
-  <OriginalThinking style={{ width: 120, height: 120 }} />
+  <RoseCurve style={{ width: 120, height: 120 }} />
 </div>
 ```
 
 ## TypeScript
 
-All components are fully typed. Import `CurveConfig` for type-safe overrides:
+Fully typed out of the box:
 
 ```tsx
-import { OriginalThinking } from '@math-curve-loaders/react';
-import type { CurveConfig } from '@math-curve-loaders/react';
+import { OriginalThinking, type CurveConfig } from '@math-curve-loaders/react';
 
-const customConfig: Partial<CurveConfig> = {
+const config: Partial<CurveConfig> = {
   particleCount: 120,
   trailSpan: 0.5,
   durationMs: 6000,
 };
 
-<OriginalThinking config={customConfig} />
+<OriginalThinking config={config} />
 ```
+
+## Framework Compatibility
+
+| Framework | Status |
+|-----------|--------|
+| React 18+ | Native |
+| Next.js | Works (static export compatible) |
+| Vite / Remix | Works out of the box |
 
 ## Source
 
-Original vanilla JS by [Paidax01/math-curve-loaders](https://github.com/Paidax01/math-curve-loaders) — a gallery of 21 mathematical curve loading animations.
+Original vanilla JS animations by [Paidax01/math-curve-loaders](https://github.com/Paidax01/math-curve-loaders) -- a gallery of 21 mathematical curve loading animations.

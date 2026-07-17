@@ -211,7 +211,7 @@ body::before {
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--card);
-  color: var(--fg-muted);
+  color: var(--navbar-fg);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -241,18 +241,16 @@ body::before {
 /* ─── GitHub Link ─── */
 
 .github-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 13px;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--card);
-  color: var(--fg-muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: inherit;
+  color: var(--navbar-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -276,7 +274,48 @@ body::before {
   transform: translateY(-1px);
 }
 
+/* ─── Support Link ─── */
+
+.support-link {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--navbar-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.support-link:hover {
+  color: #ec4899;
+  border-color: #ec4899;
+  background: rgba(236, 72, 153, 0.08);
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.15);
+}
+
+.support-link:active {
+  transform: scale(0.96);
+}
+
+.support-link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.support-link:hover svg {
+  transform: translateY(-1px) scale(1.1);
+}
+
 /* ─── Navbar ─── */
+
+/* Navbar foreground color — used by icons to inherit white (dark) / black (light) */
+[data-theme="dark"] .navbar { --navbar-fg: #fafafa; }
+[data-theme="light"] .navbar { --navbar-fg: #09090b; }
 
 .navbar {
   position: fixed;
@@ -291,13 +330,30 @@ body::before {
   width: min(100%, 1200px);
   padding: 10px 28px;
   border-radius: 20px;
-  background: color-mix(in srgb, var(--bg-elevated) 85%, transparent);
-  border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  color: var(--navbar-fg);
+  background: rgba(15, 15, 17, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
   box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.2),
-    0 0 0 1px var(--border-subtle);
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(250, 250, 250, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.navbar-hidden {
+  transform: translateX(-50%) translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navbar::after {
@@ -1290,8 +1346,7 @@ body::before {
     top: 10px;
     padding: 8px 16px;
     gap: 8px;
-    width: min(100%, 100%);
-    border-radius: 16px;
+    width: calc(100% - 32px);
   }
   .navbar-title {
     font-size: 13px;
@@ -1433,8 +1488,7 @@ body::before {
   .navbar {
     top: 8px;
     padding: 7px 12px;
-    width: min(100%, 100%);
-    border-radius: 14px;
+    width: calc(100% - 24px);
   }
   .navbar-left {
     gap: 5px;

@@ -1,70 +1,87 @@
+import { useState, useRef, useEffect } from "react";
+import GithubIcon from "./components/icons/GithubIcon";
+import SunIcon from "./components/icons/SunIcon";
+import MoonIcon from "./components/icons/MoonIcon";
+import HeartIcon from "./components/icons/HeartIcon";
+
 interface NavbarProps {
   theme: "dark" | "light";
   onToggleTheme: () => void;
 }
 
 export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const threshold = 10;
+          if (currentScrollY > lastScrollY.current + threshold) {
+            setIsHidden(true);
+          } else if (currentScrollY < lastScrollY.current - threshold) {
+            setIsHidden(false);
+          }
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="navbar">
+    <header className={`navbar${isHidden ? " navbar-hidden" : ""}`}>
       <div className="navbar-left">
         <span className="navbar-dot" />
         <h1 className="navbar-title">
           Math Curve Loaders
-          <span className="navbar-subtitle">Mathematical Loading Animations</span>
+          <span className="navbar-subtitle">
+            Mathematical Loading Animations
+          </span>
         </h1>
       </div>
 
       <div className="navbar-actions">
+        <button
+          type="button"
+          className="github-link"
+          onClick={() =>
+            window.open(
+              "https://github.com/themagicalmammal/math-curve-loaders-react",
+              "_blank",
+            )
+          }
+          aria-label="GitHub"
+        >
+          <GithubIcon size={16} color="currentColor" />
+        </button>
+        <button
+          type="button"
+          className="support-link"
+          onClick={() =>
+            window.open("https://themagicallinks.vercel.app/", "_blank")
+          }
+          aria-label="Support"
+        >
+          <HeartIcon size={18} color="currentColor" />
+        </button>
         <button
           className="theme-toggle"
           onClick={onToggleTheme}
           title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
         >
           {theme === "dark" ? (
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-              <path
-                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <MoonIcon size={14} color="currentColor" />
           ) : (
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path
-                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+            <SunIcon size={18} color="currentColor" />
           )}
         </button>
-        <a
-          className="github-link"
-          href="https://github.com/themagicalmammal/math-curve-loaders-react"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            viewBox="0 0 16 16"
-            width="16"
-            height="16"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-          </svg>
-          GitHub
-        </a>
       </div>
     </header>
   );
